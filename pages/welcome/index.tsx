@@ -16,6 +16,7 @@ export default function Welcome() {
     return (
         <>
             <Head>
+                <meta name="color-scheme" content="light only"/>
                 <title>FooTweet</title>
             </Head>
             <UnAuthRoute>
