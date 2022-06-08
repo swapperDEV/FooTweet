@@ -1,8 +1,13 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+import Firebase from '../components/Firebase/Firebase'
+import Wrapper from '../components/Wrapper/Wrapper'
+function MyApp({ Component, pageProps }:any) {
+  return (
+  <Wrapper>
+    <Firebase>
+      <Component {...pageProps} />
+    </Firebase>
+  </Wrapper>
+  )
 }
 
 export default MyApp
