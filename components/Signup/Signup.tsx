@@ -3,7 +3,7 @@ import signup from './signup.module.scss'
 import { useRef, useContext, useState} from 'react'
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
 import { FirebaseContext } from '../../store/firebase-context'
-import { Router } from 'next/dist/client/router'
+import Router from 'next/dist/client/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../assets/logo.png'
@@ -46,12 +46,15 @@ const SignupComponent = () => {
             setError("Password didn't match.")
         }
     }
+    const redirectWelcome = () => {
+        Router.push('/welcome')
+    }
     return (
         <>
         <div className={signup.wrapper}>
             <div className={signup.card}>
                 <div className={signup.form}>
-                    <h2 className={signup.top}>                
+                    <h2 className={signup.top} onClick={() => redirectWelcome()}>                
                         <Image
                         src={logo}
                         alt="photo logo"

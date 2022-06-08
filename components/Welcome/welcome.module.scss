@@ -31,6 +31,7 @@
             .logo {
                 margin-bottom: 20px;
                 padding-left: 30px;
+                animation: logo 15s infinite 15s;
             }
             .text {
                 padding-left: 30px;
@@ -136,6 +137,7 @@
                     img {
                         width: 90px!important;
                     }
+                    animation: none;
                 }
                 .text {
                     padding-left: 0px!important;
@@ -158,5 +160,24 @@
     }
     .copy {
         display: block!important;
+    }
+}
+
+@keyframes logo {
+    0% {
+        transform: translate(0%, 0%);
+        transform: rotate(-30%);
+    }   
+    30% {
+        transform: translate(20%, -20%);
+    }
+    35% {
+        transform: translate(20%, -20%) rotate(30deg) scale(1.5);
+    }
+    40% {
+        transform: translate(20%, -20%);
+    }
+    60% {
+        transform: translate(0%, 0%);
     }
 }

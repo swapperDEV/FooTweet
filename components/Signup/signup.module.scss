@@ -29,6 +29,9 @@
     .form {
         flex: 1 1 auto;
         padding: 1rem 1rem;
+        .top:hover {
+            cursor: pointer;
+        }
         .captcha {
             margin-top: 10px;
             height: 74px;

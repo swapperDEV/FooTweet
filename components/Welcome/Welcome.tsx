@@ -3,6 +3,10 @@ import welcomeStyle from './welcome.module.scss'
 import Image from 'next/image'
 import logo from '../../assets/logo.png'
 import Router from 'next/router'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faNewspaper } from '@fortawesome/free-solid-svg-icons'
+import { faAngleRight} from '@fortawesome/free-solid-svg-icons'
+
 const Welcome = () => {
     const signupRedirect = () => {
         Router.push('/signup')
@@ -25,18 +29,18 @@ const Welcome = () => {
                         />
                     </div>
                     <div className={welcomeStyle.text}>
-                        The best news from<br/> football world
+                        The best news from<br/> football world  <FontAwesomeIcon icon={faNewspaper} />
                     </div>
                     <div className={welcomeStyle.enter}>
                         Join to us.
                     </div>
                     <div className={welcomeStyle.buttonWrapper}>
-                        <button onClick={() => signupRedirect()} className={welcomeStyle.button}>Signup</button>
+                        <button onClick={() => signupRedirect()} className={welcomeStyle.button}>Signup <FontAwesomeIcon icon={faAngleRight} /></button>
                     </div>
 
                     <div className={welcomeStyle.loginWrapper}>
                         Have account? <br/>
-                        <button onClick={() => loginRedirect()} className={welcomeStyle.buttonMini}>Login</button>
+                        <button onClick={() => loginRedirect()} className={welcomeStyle.buttonMini}>Login <FontAwesomeIcon icon={faAngleRight} /></button>
                     </div>
                 </div>
             </div>
@@ -44,5 +48,7 @@ const Welcome = () => {
         </div>
     )
 }
+
+//na login i signup ikonka przekierowuje do welcome oraz animacja ikonki na welcome i ikonki na welcome 
 
 export default Welcome;

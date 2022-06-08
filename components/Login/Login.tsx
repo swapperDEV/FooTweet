@@ -2,7 +2,7 @@ import React, {useRef, useState, useContext} from 'react'
 import login from './login.module.scss'
 import { FirebaseContext } from '../../store/firebase-context'
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth"
-import { Router } from 'next/router'
+import Router from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../assets/logo.png'
@@ -25,10 +25,6 @@ const LoginComponent = () => {
             const errorCode = error.code;
             setError('Invalid.')
         });
-    }
-    const redirectToSignup = () => {
-        //@ts-ignore
-        Router.push('/signup')
     }
     const resetPasswordMode = () => {
         setResetPass(!resetPass)
@@ -54,12 +50,15 @@ const LoginComponent = () => {
             submitLogin()
         }
     }
+    const redirectWelcome = () => {
+        Router.push('/welcome')
+    }
     return (
     <>
     <div className={login.wrapper}>
         <div className={login.card}>
             <div className={login.form}>
-                <h2 className={login.top}>
+                <h2 className={login.top} onClick={() => redirectWelcome()}>
                     <Image
                         src={logo}
                         alt="photo logo"
