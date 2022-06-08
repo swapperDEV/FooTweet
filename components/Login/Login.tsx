@@ -107,7 +107,7 @@ const LoginComponent = () => {
             </div>
         </div>
     </div>
-    <>
+    </>
     )
 }
 
