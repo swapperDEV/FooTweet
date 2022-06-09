@@ -2,39 +2,40 @@ import React, {useContext, useEffect, useState} from 'react'
 import { FirebaseContext } from '../../store/firebase-context'
 import { getDatabase, ref, set, get, child} from "firebase/database";
 import { getDate } from '../../functions/getDate';
+import { getFirestore } from 'firebase/firestore';
+import { doc, setDoc, getDoc} from "firebase/firestore"; 
 import HomePage from '../../components/HomePage/HomePage';
 import PrivateRoute from '../../routes/PrivateRoute';
 import Head from 'next/head';
 
 export default function Home() {
     const FirebaseCtx = useContext(FirebaseContext)
-    const [userData, setUserData] = useState('')
+    const [userData, setUserData] = useState({
+        email: 'Error',
+    })
     if(FirebaseCtx.currentUser) {
-        const db = getDatabase();
-        const dbRef = ref(db, 'users/' + FirebaseCtx.currentUser.uid);
+        const db = getFirestore();
         if(FirebaseCtx.registerData) {
-            console.log('creating')
-            set(dbRef, {
+            setDoc(doc(db, "users", `${FirebaseCtx.currentUser.uid}`), {
                 username: FirebaseCtx.registerData.data2,
                 email: FirebaseCtx.registerData.data1,
-                createDate: getDate()
+                createDate: getDate(),
+                avatarID: 'standard'
             });
         }
     }
     const { currentUser, auth} = FirebaseCtx
     useEffect(() => {
         if(FirebaseCtx.currentUser) {
-        const readDbRef = ref(getDatabase());
-        get(child(readDbRef, `users/${FirebaseCtx.currentUser.uid}`)).then((snapshot) => {
+        const db = getFirestore();
+            getDoc(doc(db, `users/${FirebaseCtx.currentUser.uid}`)).then((snapshot:any) => {
             if (snapshot.exists()) {
-              setUserData(snapshot.val())
+                console.log(snapshot.data());
+                setUserData(snapshot.data())
             } else {
+                console.log("error");
             }
-          }).catch((error) => {
-            console.error(error);
-          });
-        console.log(userData)
-        }
+        })}
     },[])
     return (
     <>
@@ -42,7 +43,7 @@ export default function Home() {
             <title>FooTweet</title>
         </Head>
         <PrivateRoute>
-            <HomePage/>
+            <HomePage userData={userData}/>
         </PrivateRoute>
     </>
     )

@@ -29,18 +29,18 @@ const Welcome = () => {
                         />
                     </div>
                     <div className={welcomeStyle.text}>
-                        The best news from<br/> football world  <FontAwesomeIcon icon={faNewspaper} />
+                        The best news from<br/> football world  
                     </div>
                     <div className={welcomeStyle.enter}>
                         Join to us.
                     </div>
                     <div className={welcomeStyle.buttonWrapper}>
-                        <button onClick={() => signupRedirect()} className={welcomeStyle.button}>Signup <FontAwesomeIcon icon={faAngleRight} /></button>
+                        <button onClick={() => signupRedirect()} className={welcomeStyle.button}>Signup </button>
                     </div>
 
                     <div className={welcomeStyle.loginWrapper}>
                         Have account? <br/>
-                        <button onClick={() => loginRedirect()} className={welcomeStyle.buttonMini}>Login <FontAwesomeIcon icon={faAngleRight} /></button>
+                        <button onClick={() => loginRedirect()} className={welcomeStyle.buttonMini}>Login </button>
                     </div>
                 </div>
             </div>

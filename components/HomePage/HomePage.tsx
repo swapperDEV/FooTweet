@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import homeStyles from './styles/home.module.scss'
 import Home from './CenterViews/Home'
 import DesktopMenu from './Menu/DesktopMenu'
-const HomePage = () => {
+const HomePage = (props:any) => {
     const [centerView, changeView] = useState('home')
     return (
     <div className={homeStyles.pageWrapper}>
@@ -15,6 +15,7 @@ const HomePage = () => {
             </div>
             <div>
                 Hasztag
+                {props.userData.email}
             </div>
         </div>
     </div>
