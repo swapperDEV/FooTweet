@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100vh;
+    border-right: lightgray 1px solid;
+    position: fixed;
+    .logo {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        transition: 0.1s ease;
+        border-radius: 50px;
+        padding: 10px;
+    }
+    .logo:hover {
+        cursor: pointer;
+        background-color: lightskyblue;
+    }
+    .list {
+        margin-right: 20px;
+        font-size: 30px;
+        ul {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            list-style-type: none;
+            padding-left: 10px;
+            li {
+                font-size: 25px;
+                font-family: 'Roboto', sans-serif;
+                line-height: normal;
+                font-weight: normal;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                padding-bottom: 30px;
+                p {
+                    margin-left: 15px;
+                }
+            }
+            li:hover {
+                cursor: pointer;
+                color: gray;
+            }
+            .twtButton {
+                background-color: lightskyblue;
+                border: lightskyblue 1px solid;
+                color: white;
+                font-size: 25px;
+                padding: 10px;
+                border-radius: 25px;
+                padding-left: 30px;
+                padding-right: 30px;
+                transition: 0.3s ease;
+                width: 100%;
+            }
+            .twtButton:hover {
+                cursor: pointer;
+                background-color: rgb(86, 188, 252)
+            }
+        }
+    }
+    .cover {
+        flex-grow: 1;
+    }
+    .userBaner {
+        display: flex;
+        justify-content: center;
+        transition: 0.3s ease;
+        padding: 10px;
+        border-radius: 20px;
+        align-items: center;
+        margin-bottom: 10px;
+        .userBanerL {
+            padding-right: 10px;
+            img {
+                border-radius: 50px;
+            }
+        }
+        .userBanerOptions {
+            padding-left: 10px;
+        }
+    }
+    .userBaner:hover {
+        cursor: pointer;
+        background-color: lightgray;
+    }
+}

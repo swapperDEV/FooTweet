@@ -1,0 +1,20 @@
+.wrapper {
+    width: 100%;
+    height: 100%;
+    .actView {
+        font-weight: bold;
+        font-size: 20px;
+    }
+    .createPost {
+        margin-top: 10px;
+        display: flex;
+        .createPostLeft {
+            img {
+                border-radius: 50px;
+            }
+        }
+        .createPostRight {
+            flex-grow: 1;
+        }
+    }
+}
