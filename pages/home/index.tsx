@@ -7,9 +7,11 @@ import { doc, setDoc, getDoc} from "firebase/firestore";
 import HomePage from '../../components/HomePage/HomePage';
 import PrivateRoute from '../../routes/PrivateRoute';
 import Head from 'next/head';
+import { UserDataContext } from '../../store/userData-context'
 
 export default function Home() {
     const FirebaseCtx = useContext(FirebaseContext)
+    const UserCtx = useContext(UserDataContext)
     const [userData, setUserData] = useState({
         email: 'Error',
     })
@@ -43,7 +45,9 @@ export default function Home() {
             <title>FooTweet</title>
         </Head>
         <PrivateRoute>
-            <HomePage userData={userData}/>
+            <UserDataContext.Provider value={{data: userData}}>
+                <HomePage/>
+            </UserDataContext.Provider>
         </PrivateRoute>
     </>
     )

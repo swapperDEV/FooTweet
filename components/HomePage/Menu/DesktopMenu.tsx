@@ -1,15 +1,14 @@
 import React from 'react'
 import menuStyles from './desktopmenu.module.scss'
 import Image from 'next/image'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome} from '@fortawesome/free-solid-svg-icons'
-import { faBell } from '@fortawesome/free-solid-svg-icons'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
-import { faNewspaper } from '@fortawesome/free-solid-svg-icons'
-import { faUserGroup } from '@fortawesome/free-solid-svg-icons'
-import { faMoneyBill } from '@fortawesome/free-solid-svg-icons'
 import testAvatar from '../../../assets/meta.png'
 import logo from '../../../assets/logo.png'
+import { FaHome } from "@react-icons/all-files/fa/FaHome"
+import { FaBell } from "@react-icons/all-files/fa/FaBell"
+import { FaUser } from "@react-icons/all-files/fa/FaUser"
+import { FaNewspaper } from "@react-icons/all-files/fa/FaNewspaper";
+import { FaMoneyBill } from "@react-icons/all-files/fa/FaMoneyBill";
+import { FaTrophy } from "@react-icons/all-files/fa/FaTrophy";
 
 const DesktopMenu = () => {
     return (
@@ -24,12 +23,12 @@ const DesktopMenu = () => {
             </div>
             <div className={menuStyles.list}>
                 <ul>
-                    <li><FontAwesomeIcon icon={faHome} /><p>Home</p></li>
-                    <li><FontAwesomeIcon icon={faBell} /><p>Notifications</p></li>
-                    <li><FontAwesomeIcon icon={faUser} /><p>Profile</p></li>
-                    <li><FontAwesomeIcon icon={faNewspaper} /><p>News</p></li>
-                    <li><FontAwesomeIcon icon={faMoneyBill} /><p>Transfer</p></li>
-                    <li><FontAwesomeIcon icon={faUserGroup} /><p>Leagues</p></li>
+                    <li><FaHome/><p>Home</p></li>
+                    <li><FaBell/><p>Notifications</p></li>
+                    <li><FaUser/><p>Profile</p></li>
+                    <li><FaNewspaper/><p>News</p></li>
+                    <li><FaMoneyBill/><p>Transfer</p></li>
+                    <li><FaTrophy/><p>Leagues</p></li>
                     <li><button className={menuStyles.twtButton}>Tweet</button></li>
                 </ul>
             </div>
