@@ -1,22 +1,29 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { getStorage, getDownloadURL, ref } from 'firebase/storage';
 import postStyles from './post.module.scss'
 import Image from 'next/image';
 import testAvatar from '../../../../../assets/meta.png'
+import { FirebaseContext } from '../../../../../store/firebase-context';
+import { getFirestore, deleteDoc, doc } from 'firebase/firestore';
+import Router from 'next/router';
 
 const Post = (props:any) => {
+    const fbCtx = useContext(FirebaseContext)
     const post = props.data
+    const [widgetClass, changeWidgetClass] = useState(postStyles.settingsWidget)
     let [time, changeTime]:any = useState(0)
     const storage = getStorage();
     const [image, setImage] = useState('')
     const link = `images/${post.data.metaData.postId}.jpg`
-    getDownloadURL(ref(storage, link))
-    .then((url) => {
-        setImage(url)
-    })
-    .catch((error) => {
-        console.log(error);
-    });
+    if(post.data.content.haveImg !== false) { 
+        getDownloadURL(ref(storage, link))
+        .then((url) => {
+            setImage(url)
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
     useEffect(() => {
         let actDate:any = new Date()
         actDate = actDate.getTime()
@@ -29,6 +36,19 @@ const Post = (props:any) => {
             changeTime('today')
         }
     },[])
+    const openSettings = () => {
+        changeWidgetClass(postStyles.settingsWidgetOpen)
+    }
+    const closeSettings = () => {
+        changeWidgetClass(postStyles.settingsWidget)
+    }
+    const deletePost = () => {
+        const db = getFirestore()
+        setImage('')
+        deleteDoc(doc(db, "posts", post.data.metaData.postId));
+        closeSettings()
+        Router.push('/')
+    }
     return (
         <div className={postStyles.post}>
             <div className={postStyles.top}>
@@ -46,6 +66,11 @@ const Post = (props:any) => {
                         <p className={postStyles.infoR}>
                         {time !== "today" ? `${time} days ago` : ' Today'}
                         </p>
+                        {fbCtx.currentUser.uid === post.data.creator.uId && <p onClick={() => openSettings()} className={postStyles.settings}>*</p>}
+                        <div className={widgetClass}>
+                            <p onClick={() => deletePost()}>delete</p>
+                            <p onClick={() => closeSettings()}>close</p>
+                        </div>
                     </div>
                     <div className={postStyles.description}>
                         {post.data.content.description}

@@ -1,6 +1,23 @@
 .posts {
     display: flex;
     flex-direction: column;
+    .changes {
+        text-align: center;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        button {
+            background-color: lightskyblue;
+            border: 1px solid lightskyblue;
+            border-radius: 10px;
+            color: white;
+            transition: 0.1s ease;
+            padding: 5px;
+        }
+        button:hover {
+            cursor: pointer;
+            background-color: rgb(86, 188, 252);
+        }
+    }
 }
 
 .post {
@@ -26,11 +43,32 @@
             }
         }
         .right {
+            flex-grow: 1;
+            position: relative;
             .info {
                 display: flex;
                 .infoR {
                     padding-left: 5px;
                     color: gray;
+                }
+                .settings {
+                    margin-left: 5px;
+                    position: absolute;
+                    right: 0%;
+                }
+                .settings:hover {
+                    background-color: blue;
+                }
+                .settingsWidget {
+                    position: absolute;
+                    right: 0%;
+                    background-color: gray;
+                    display: none;
+                }
+                .settingsWidgetOpen {
+                    position: absolute;
+                    right: 0%;
+                    background-color: gray;
                 }
             }
         }

@@ -87,3 +87,23 @@
         background-color: lightgray;
     }
 }
+
+@media (max-height: 690px) {
+    .cover {
+        display: none;
+    }
+    .container {
+        .list {
+            font-size: 15px;
+            ul {
+                .twtButton {
+                    font-size: 15px;
+                    padding: 10px;
+                }
+            }
+        }
+        p,svg {
+            font-size: 15px;
+        }
+    }
+}
