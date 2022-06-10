@@ -7,6 +7,7 @@ import Router from 'next/dist/client/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../assets/logo.png'
+import Wrapper from '../Wrapper/Wrapper'
 
 const SignupComponent = () => {
     const FirebaseCtx = useContext(FirebaseContext)
@@ -50,7 +51,7 @@ const SignupComponent = () => {
         Router.push('/welcome')
     }
     return (
-        <>
+        <Wrapper>
         <div className={signup.wrapper}>
             <div className={signup.card}>
                 <div className={signup.form}>
@@ -93,7 +94,7 @@ const SignupComponent = () => {
                 </div>
             </div>
         </div>
-    </>
+    </Wrapper>
     )
 }
 

@@ -6,7 +6,7 @@ import Router from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../assets/logo.png'
-
+import Wrapper from '../Wrapper/Wrapper'
 
 const LoginComponent = () => {
     const FirebaseCtx = useContext(FirebaseContext)
@@ -54,7 +54,7 @@ const LoginComponent = () => {
         Router.push('/welcome')
     }
     return (
-    <>
+    <Wrapper>
     <div className={login.wrapper}>
         <div className={login.card}>
             <div className={login.form}>
@@ -106,7 +106,7 @@ const LoginComponent = () => {
             </div>
         </div>
     </div>
-    </>
+    </Wrapper>
     )
 }
 

@@ -1,0 +1,104 @@
+.createPost {
+    margin-top: 10px;
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 20px;
+    .createPostLeft {
+        img {
+            border-radius: 50px;
+        }
+    }
+    .createPostRight {
+        flex-grow: 1;
+        .previewImage {
+            max-width: 200px;
+            max-height: 200px;
+        }
+        .postSettings {
+            margin-top: 10px;
+            display: flex;
+            padding-top: 10px;
+            border-top: 1px solid lightgray;
+            justify-content: flex-start;
+            align-items: center;
+            input {
+                width: 0px;
+                height: 0px;
+            }
+            svg {
+                margin: 5px;
+                margin-right: 10px;
+                font-size: 20px;
+                transition: 0.1s ease;
+            }
+            svg:hover {
+                cursor: pointer;
+                color: gray;
+            }
+            .button {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                flex-grow: 1;
+                button {
+                    color: white;
+                    border: 1px solid lightskyblue;
+                    background-color: lightskyblue;
+                    border-radius: 10px;
+                    padding: 5px;
+                    transition: 0.1s ease;
+                    align-self: flex-end;
+                }
+                button:hover {
+                    cursor: pointer;
+                    background-color: rgb(77, 182, 247);
+                }
+            }
+        }
+        .inputText {
+            padding-top: 20px;
+            border: 0px;
+            font-size: 20px;
+            padding-left: 15px;
+            height: 40px;
+            width: 100%;
+            resize: none;
+        }
+        .inputText:focus {
+            outline: none;
+        }
+    }
+}
+
+.filebutton {
+    width:120px;
+    height:40px;
+    overflow:hidden;
+    position:relative;
+}
+
+.filebutton span input {
+    z-index: 999;
+    line-height: 0;
+    font-size: 50px;
+    position: absolute;
+    top: -2px;
+    left: -700px;
+    opacity: 0;
+    filter: alpha(opacity = 0);
+    -ms-filter: "alpha(opacity=0)";
+    cursor: pointer;
+    _cursor: hand;
+    margin: 0;
+    padding:0;
+}
+
+.close {
+    color: lightskyblue;
+    position: fixed;
+}
+.close:hover {
+    cursor: pointer;
+}

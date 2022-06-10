@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import { getStorage, getDownloadURL, ref } from 'firebase/storage';
+import postStyles from './post.module.scss'
+
 const Post = (props:any) => {
     const post = props.data
     const storage = getStorage();
@@ -10,17 +12,17 @@ const Post = (props:any) => {
         setImage(url)
     })
     .catch((error) => {
-        // Handle any errors
+        console.log(error);
     });
     return (
-        <div>
-            <p>POST</p>
-            <img src={image} width="64"  height="64"/>
-            {post.data.content.description}
-            {post.data.creator.email}
-            {`@${post.data.creator.username}`}
-            {post.data.metaData.createDate}
-
+        <div className={postStyles.post}>
+            <div>
+                {post.data.content.description}
+                {post.data.creator.email}
+                {`@${post.data.creator.username}`}
+                {post.data.metaData.createDate}
+            </div>
+            {image !== '' && <img src={image} className={postStyles.img}/>}
         </div>
     )
 }

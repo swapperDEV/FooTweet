@@ -1,7 +1,7 @@
 import React, {useContext, useRef} from 'react'
 import homeStyles from './home.module.scss'
-import CreatePost from './CreatePost'
-import Posts from './Posts'
+import CreatePost from './CreatePost/CreatePost'
+import Posts from './Posts/Posts'
 const Home = (props:any) => {
 
     const {actView} = props

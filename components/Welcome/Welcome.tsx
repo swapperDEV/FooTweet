@@ -3,9 +3,7 @@ import welcomeStyle from './welcome.module.scss'
 import Image from 'next/image'
 import logo from '../../assets/logo.png'
 import Router from 'next/router'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faNewspaper } from '@fortawesome/free-solid-svg-icons'
-import { faAngleRight} from '@fortawesome/free-solid-svg-icons'
+import Wrapper from '../Wrapper/Wrapper'
 
 const Welcome = () => {
     const signupRedirect = () => {
@@ -15,6 +13,7 @@ const Welcome = () => {
         Router.push('/login')
     }
     return (
+    <Wrapper>
         <div className={welcomeStyle.wrapper}>
             <div className={welcomeStyle.wrapperTwo}>
                 <div className={welcomeStyle.leftSide}>
@@ -46,6 +45,7 @@ const Welcome = () => {
             </div>
             <p className={welcomeStyle.copy}><span dangerouslySetInnerHTML={{ "__html": "&copy;" }} /> Wiktor Maciążek</p>
         </div>
+    </Wrapper>
     )
 }
 
