@@ -55,7 +55,6 @@ const CreatePost = () => {
         console.log(fbCtx.currentUser.uid);
         const postImageRef = ref(storage, `images/${postId}.jpg`);
         uploadBytes(postImageRef, imgToUpload).then((snapshot) => {
-            alert('dodano zdj')
             console.log(snapshot);
         });
     }

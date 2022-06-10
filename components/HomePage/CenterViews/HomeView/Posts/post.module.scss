@@ -13,6 +13,27 @@
     .img {
         max-width: 300px;
         max-height: 400px;
+        margin-left: 64px;
+        border: 1px solid lightgray;
+        border-radius: 10px;
+    }
+    .top {
+        display: flex;
+        .left {
+            margin-right: 10px;
+            img {
+                border-radius: 50px;
+            }
+        }
+        .right {
+            .info {
+                display: flex;
+                .infoR {
+                    padding-left: 5px;
+                    color: gray;
+                }
+            }
+        }
     }
 }
 .post:hover {

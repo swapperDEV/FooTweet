@@ -20,8 +20,21 @@
             padding-top: 0px;
             height: 100vh;
         }
+        .mobileMenu {
+            position: fixed;
+            bottom: 0%;
+            background-color: lightgray;
+            width: 100%;
+            left: 0%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: none;
+            text-align: center;
+        }
         .posts {
             max-width: 700px;
+            min-width: 550px;
             border-left: lightgray 1px solid;
             border-right: lightgray 1px solid;
             padding-top: 20px;
@@ -52,6 +65,9 @@
             }
             .menu {
                 display: none;
+            }
+            .mobileMenu {
+                display: block;
             }
             .hashtag {
                 display: none;

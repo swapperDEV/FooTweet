@@ -13,8 +13,8 @@
     .createPostRight {
         flex-grow: 1;
         .previewImage {
-            max-width: 200px;
-            max-height: 200px;
+            max-width: 100px;
+            max-height: 100px;
         }
         .postSettings {
             margin-top: 10px;
@@ -97,7 +97,6 @@
 
 .close {
     color: lightskyblue;
-    position: fixed;
 }
 .close:hover {
     cursor: pointer;
