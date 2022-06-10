@@ -10,13 +10,13 @@ const HomePage = (props:any) => {
     return (
     <div className={homeStyles.pageWrapper}>
         <div className={homeStyles.page}>
-            <div className={homeStyles.menu}>   
+            <div className={homeStyles.menu}>  
                 <DesktopMenu/>
             </div>
             <div className={homeStyles.posts}>
                 {centerView === 'home' && <Home actView={centerView}/>}
             </div>
-            <div>
+            <div className={homeStyles.hashtag}>
                 Hasztag
                 {userCtx.data.email}
             </div>
