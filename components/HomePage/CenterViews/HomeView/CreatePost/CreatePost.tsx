@@ -11,15 +11,19 @@ import { getDate } from '../../../../../functions/getDate'
 import { FaGlobeEurope as FaGlobe } from "@react-icons/all-files/fa/FaGlobeEurope";
 import { FaImage } from "@react-icons/all-files/fa/FaImage";
 import { FaWindowClose } from "@react-icons/all-files/fa/FaWindowClose";
+import { FaHashtag } from "@react-icons/all-files/fa/FaHashtag";
 
 const CreatePost = () => {
     const fbCtx = useContext(FirebaseContext)
     const userCtx = useContext(UserDataContext)
     const postContentRef:any= useRef('')
+    const hashtagRef:any = useRef('')
     const storage = getStorage(fbCtx.app, "gs://ktweetapp.appspot.com")
     const [pImg, changePostImg]:any = useState('')
     const [pImgPhoto, changePostImgPhoto]:any = useState('')
     const [imgToUpload, changeImgToUpload]:any = useState('')
+    const [hashtag, setHashtag]:any = useState([])
+    const [hashtagStyles, setHashtagStyles]:any = useState(createPostStyles.hashtagsList)
 
     const createPost = async () => {
         const db = getFirestore()
@@ -71,6 +75,17 @@ const CreatePost = () => {
         changeImgToUpload('')
         changePostImgPhoto('')
     }
+    const addHashtag = () => {
+        let hashtags = hashtag
+        hashtags.push(hashtagRef.current.value)
+        setHashtag(hashtags)
+    }
+    const closeHashtagList = () => {
+        setHashtagStyles(createPostStyles.hashtagsList)
+    }
+    const openHashTagList = () => {
+        setHashtagStyles(createPostStyles.hashtagsListOpen)
+    }
     return (
         <>
         <div className={createPostStyles.createPost}>
@@ -93,8 +108,17 @@ const CreatePost = () => {
                     <div>
                         <label className={createPostStyles.filebutton}>
                         <FaImage/>
-                        <span><input type="file" value={pImg} onChange={e => changeImg(e)}/></span>
+                        <span><input className={createPostStyles.file} type="file" value={pImg} onChange={e => changeImg(e)}/></span>
                         </label>
+                    </div>
+                    <div className={createPostStyles.hashtags}>
+                        <FaHashtag onClick={() => openHashTagList()}/>
+                        <div className={hashtagStyles}>Hasztag list <button onClick={() => closeHashtagList()}>close</button>
+                        <ul>{hashtag.forEach((h:String)=> {
+                            <li>{h}</li>
+                        })}</ul></div>
+                        <input placeholder="Hashtags" ref={hashtagRef}/>
+                        <button onClick={() => addHashtag()}>Add</button>
                     </div>
                     <div className={createPostStyles.button}>
                         <button onClick={() => createPost()}>Tweet it!</button>

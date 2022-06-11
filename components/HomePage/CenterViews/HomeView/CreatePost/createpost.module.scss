@@ -23,7 +23,49 @@
             border-top: 1px solid lightgray;
             justify-content: flex-start;
             align-items: center;
-            input {
+            .hashtags {
+                display: flex;
+                justify-content: center;
+                position: relative;
+                align-items: center;
+                margin-bottom: 5px;
+                .hashtagsList {
+                    display: none;
+                }
+                .hashtagsListOpen {
+                    position: absolute;
+                    padding: 10px;
+                    background-color: lightskyblue;
+                    color: white;
+                    width: 140px;
+                    margin-top: 10px;
+                    border-radius: 15px;
+                }
+                input {
+                    width: 70px;
+                    height: 20px;
+                    color: black;
+                    outline: none;
+                    background-color: lightskyblue;
+                    border: 1px solid lightskyblue;
+                    border-radius: 10px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+    
+                }
+                button {
+                    padding: 3px;
+                    margin-left: 5px;
+                    background-color: lightskyblue;
+                    border: 1px solid lightskyblue;
+                    border-radius: 10px;
+                    color: white;
+                }
+                button:hover {
+                    cursor: pointer;
+                }
+            }
+            .file {
                 width: 0px;
                 height: 0px;
             }
