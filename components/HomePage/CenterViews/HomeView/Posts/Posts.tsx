@@ -16,6 +16,9 @@ const Posts = () => {
             snapshot.forEach((doc) => {
                 postList.push({data: doc.data(), id: doc.id});
             });
+            postList.sort((postA:any, postB:any) => {
+                return postB.data.metaData.createDate - postA.data.metaData.createDate
+            })
             setNewPosts(postList)
             })
     },[])
@@ -28,6 +31,10 @@ const Posts = () => {
               postList.push({data: doc.data(), id: doc.id});
             });
             console.log(postList); 
+            postList.sort((postA:any, postB:any) => {
+                console.log('sortowanie', postA, postB);
+                return postB.data.metaData.createDate - postA.data.metaData.createDate
+            })
             setPosts(postList)
           }).catch((error) => {
             console.error(error);
@@ -39,7 +46,7 @@ const Posts = () => {
     return (
         <div className={postsStyles.posts}>
             <div className={postsStyles.changes}>
-                {newPosts.length > posts.length ?<button onClick={downloadPosts}>See {newPosts.length - posts.length} new posts</button>:<p>0 new post</p>}
+                {newPosts.length > posts.length ?<button onClick={downloadPosts}>See {newPosts.length - posts.length} new posts</button>:<p></p>}
             </div>
             {posts.length >= 1 && posts.map((post:any, index:number) => {
                 return (<Post key={index} data={post}/>)

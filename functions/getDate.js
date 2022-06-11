@@ -1,4 +1,5 @@
 export const getDate = () => {
     const today = new Date();
-    return today
+    let time = today.getTime()
+    return time
 }

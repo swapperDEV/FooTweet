@@ -3,11 +3,13 @@ import signup from './signup.module.scss'
 import { useRef, useContext, useState} from 'react'
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
 import { FirebaseContext } from '../../store/firebase-context'
+import { useEffect } from 'react'
 import Router from 'next/dist/client/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../assets/logo.png'
 import Wrapper from '../Wrapper/Wrapper'
+import { getFirestore, getDoc, doc, setDoc } from 'firebase/firestore'
 
 const SignupComponent = () => {
     const FirebaseCtx = useContext(FirebaseContext)
@@ -17,7 +19,8 @@ const SignupComponent = () => {
     const passwordConfirmRef:any = useRef('')
     const usernameRef:any = useRef('')
     const [error, setError] = useState('')
-    
+    const [allUsers, setAllUsers]:Array<any> = useState([])
+
     const submitSignup = (e:any) => {
         e.preventDefault()
         let emailValue = emailRef.current.value
@@ -26,20 +29,30 @@ const SignupComponent = () => {
         if(passwordRef.current.value === passwordConfirmRef.current.value) {
             passwordValue = passwordRef.current.value
             if(passwordValue.length >= 7) {
-            if(usernameValue.length >= 7) {
-                createUserWithEmailAndPassword(auth, emailValue, passwordValue).then((userCredential) => {
-                    FirebaseCtx.setRegisterData(emailValue, usernameValue)
-                    const user = userCredential.user;
-                  })
-                  .catch((error) => {
-                    const errorCode = error.code;
-                    if(errorCode === 'auth/email-already-in-use') {
-                        setError('Email is already in use')
+                if(usernameValue.length >= 7) {
+                    if(allUsers.usersList.includes(usernameValue)) {
+                        setError('This username is taken')
+                    } else {
+                        createUserWithEmailAndPassword(auth, emailValue, passwordValue).then((userCredential) => {
+                            FirebaseCtx.setRegisterData(emailValue, usernameValue)
+                            const list = allUsers.usersList 
+                            list.push(usernameValue)
+                            const db = getFirestore()
+                            setDoc(doc(db, "app", `allusers`), {
+                                usersList: list
+                            });
+                            const user = userCredential.user;
+                        })
+                        .catch((error) => {
+                            const errorCode = error.code;
+                            if(errorCode === 'auth/email-already-in-use') {
+                                setError('Email is already in use')
+                            }
+                        });
                     }
-                });
-            } else {
-                setError('Username should have 7 characters')
-            }
+                } else {
+                    setError('Username should have 7 characters')
+                }
             } else {
                 setError('Password should have 7 characters.')
             }
@@ -50,6 +63,14 @@ const SignupComponent = () => {
     const redirectWelcome = () => {
         Router.push('/welcome')
     }
+    useEffect(() => {
+        const db = getFirestore();
+            getDoc(doc(db, "app/allusers")).then((snapshot:any) => {
+            if (snapshot.exists()) {
+                setAllUsers(snapshot.data())
+            }
+        })
+    },[])
     return (
         <Wrapper>
         <div className={signup.wrapper}>

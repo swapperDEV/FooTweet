@@ -22,7 +22,6 @@ const HomePage = (props:any) => {
             </div>
             <div className={homeStyles.hashtag}>
                 Hasztag
-                {userCtx.data.email}
             </div>
         </div>
     </div>
