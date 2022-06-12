@@ -6,6 +6,14 @@ import testAvatar from '../../../../../assets/meta.png'
 import { FirebaseContext } from '../../../../../store/firebase-context';
 import { getFirestore, deleteDoc, doc } from 'firebase/firestore';
 import Router from 'next/router';
+import { FaClock } from "@react-icons/all-files/fa/FaClock";
+import { FaComment } from "@react-icons/all-files/fa/FaComment";
+import { FaShare } from "@react-icons/all-files/fa/FaShare";
+import { FaHeart } from "@react-icons/all-files/fa/FaHeart";
+import { FaRetweet } from "@react-icons/all-files/fa/FaRetweet";
+import { FaEllipsisH } from "@react-icons/all-files/fa/FaEllipsisH";
+import { FaTrash} from "@react-icons/all-files/fa/FaTrash";
+import { FaTimes} from "@react-icons/all-files/fa/FaTimes";
 
 const Post = (props:any) => {
     const fbCtx = useContext(FirebaseContext)
@@ -56,28 +64,44 @@ const Post = (props:any) => {
                     <Image
                         src={testAvatar}
                         alt="photo logo"
-                        width="60px"
-                        height="60px"
+                        width="50px"
+                        height="50px"
                     />
                 </div>
                 <div className={postStyles.right}>
                     <div className={postStyles.info}>
-                        <p>{`@${post.data.creator.username}`}</p>  
+                        <div className={postStyles.user}>Jack Sparrow  <p className={postStyles.username}>{`@${post.data.creator.username}`}</p></div>  
                         <p className={postStyles.infoR}>
-                        {time !== "today" ? `${time} days ago` : ' Today'}
+                        <FaClock/>{time !== "today" ? `${time} days ago` : ' Today'}
                         </p>
-                        {fbCtx.currentUser.uid === post.data.creator.uId && <p onClick={() => openSettings()} className={postStyles.settings}>*</p>}
+                        {fbCtx.currentUser.uid === post.data.creator.uId && <p onClick={() => openSettings()} className={postStyles.settings}><FaEllipsisH/></p>}
                         <div className={widgetClass}>
-                            <p onClick={() => deletePost()}>delete</p>
-                            <p onClick={() => closeSettings()}>close</p>
+                            <p onClick={() => deletePost()}><FaTrash/></p>
+                            <p onClick={() => closeSettings()}><FaTimes/></p>
                         </div>
                     </div>
                     <div className={postStyles.description}>
                         {post.data.content.description}
                     </div>
+                    <div className={postStyles.image}>
+                        {image !== '' && <img src={image} className={postStyles.img}/>}
+                    </div>
+                    <div className={postStyles.options}>
+                        <div>
+                            <FaComment/> 45
+                        </div>
+                        <div>
+                            <FaRetweet/> 17
+                        </div>
+                        <div>
+                            <FaHeart/> 55
+                        </div>
+                        <div>
+                            <FaShare/>
+                        </div>
+                    </div>
                 </div>
             </div>
-            {image !== '' && <img src={image} className={postStyles.img}/>}
         </div>
     )
 }

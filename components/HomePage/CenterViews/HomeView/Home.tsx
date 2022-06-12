@@ -3,12 +3,9 @@ import homeStyles from './home.module.scss'
 import CreatePost from './CreatePost/CreatePost'
 import Posts from './Posts/Posts'
 const Home = (props:any) => {
-
-    const {actView} = props
     return (
         <div className={homeStyles.wrapper}>
             <div className={homeStyles.content}>
-                <p className={homeStyles.actView}>{actView}</p>
                 <CreatePost/>
                 <Posts/>
             </div>

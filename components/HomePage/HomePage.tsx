@@ -4,6 +4,7 @@ import Home from './CenterViews/HomeView/Home'
 import DesktopMenu from './Menu/DesktopMenu'
 import MobileMenu from './Menu/MobileMenu'
 import TopMenu from './Menu/TopMenu'
+import Hashtags from './CenterViews/HomeView/Hashtags/Hashtags'
 import { UserDataContext } from '../../store/userData-context'
 
 const HomePage = (props:any) => {
@@ -21,12 +22,15 @@ const HomePage = (props:any) => {
                 <TopMenu/>
             </div>
             <div className={homeStyles.content}>
+                <div className={homeStyles.cover}>
+
+                </div>
                 <div className={homeStyles.background}></div>
                 <div className={homeStyles.posts}>
                     {centerView === 'home' && <Home actView={centerView}/>}
                 </div>
                 <div className={homeStyles.hashtag}>
-                    Hasztag
+                    <Hashtags/>
                 </div>
             </div>
         </div>

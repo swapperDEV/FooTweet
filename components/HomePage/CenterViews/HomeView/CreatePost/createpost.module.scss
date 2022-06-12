@@ -1,7 +1,6 @@
 .createPost {
     margin-top: 10px;
     display: flex;
-    border-bottom: 1px solid lightgray;
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 20px;
@@ -44,21 +43,23 @@
                 input {
                     width: 70px;
                     height: 20px;
-                    color: black;
                     outline: none;
-                    background-color: lightskyblue;
-                    border: 1px solid lightskyblue;
+                    background-color: #2BA7F3;
+                    border: 1px solid #2BA7F3;
+                    color: white;
                     border-radius: 10px;
-                    padding-left: 5px;
-                    padding-right: 5px;
+                    padding-left: 10px;
+                    padding-right: 10px;
     
                 }
                 button {
                     padding: 3px;
                     margin-left: 5px;
-                    background-color: lightskyblue;
-                    border: 1px solid lightskyblue;
+                    background-color: #2BA7F3;
+                    border: 1px solid #2BA7F3;
                     border-radius: 10px;
+                    padding-left: 10px;
+                    padding-right: 10px;
                     color: white;
                 }
                 button:hover {
@@ -86,10 +87,12 @@
                 flex-grow: 1;
                 button {
                     color: white;
-                    border: 1px solid lightskyblue;
-                    background-color: lightskyblue;
+                    border: 1px solid #2BA7F3;
+                    background-color: #2BA7F3;
                     border-radius: 10px;
                     padding: 5px;
+                    padding-left: 15px;
+                    padding-right: 15px;
                     transition: 0.1s ease;
                     align-self: flex-end;
                 }
@@ -105,6 +108,8 @@
             font-size: 20px;
             padding-left: 15px;
             height: 40px;
+            background-color: #3C424B;
+            color: white;
             width: 100%;
             resize: none;
         }
