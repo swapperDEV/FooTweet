@@ -1,7 +1,10 @@
 .wrapper {
     width: 100%;
-    height: 100%;
+    background-color: #3C424B;
     font-family: 'JetBrains Mono', monospace;
+    padding: 20px;
+    border-radius: 10px;
+
     .search {
         display: flex;
         justify-content: center;

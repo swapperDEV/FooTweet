@@ -27,12 +27,9 @@ const Posts = () => {
         getDocs(collection(db, `posts`)).then((snapshot) => {
             let postList:any = []
             snapshot.forEach((doc) => {
-                console.log('id', doc.id)
               postList.push({data: doc.data(), id: doc.id});
             });
-            console.log(postList); 
             postList.sort((postA:any, postB:any) => {
-                console.log('sortowanie', postA, postB);
                 return postB.data.metaData.createDate - postA.data.metaData.createDate
             })
             setPosts(postList)

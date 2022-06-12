@@ -46,6 +46,7 @@
     .content {
         position: absolute;
         left: 220px;
+        min-height: calc(100% - 80px);
         background-color: #262D37;
         display: flex;
         justify-content: center;
@@ -84,9 +85,7 @@
             padding: 20px;
             z-index: 1;
             min-width: 200px;
-            background-color: #3C424B;
             border-radius: 10px;
-            height: 270px;
             color: white;
             margin-top: 200px;
         }

@@ -6,10 +6,12 @@ import MobileMenu from './Menu/MobileMenu'
 import TopMenu from './Menu/TopMenu'
 import Hashtags from './CenterViews/HomeView/Hashtags/Hashtags'
 import { UserDataContext } from '../../store/userData-context'
+import { useRouter } from 'next/router'
 
 const HomePage = (props:any) => {
+    const path = useRouter()
     const userCtx = useContext(UserDataContext)
-    const [centerView, changeView] = useState('home')
+    console.log(path.pathname);
     return (
         <div className={homeStyles.page}>
             <div className={homeStyles.sideMenu}>  
@@ -26,12 +28,16 @@ const HomePage = (props:any) => {
 
                 </div>
                 <div className={homeStyles.background}></div>
+                {path.pathname === '/home' &&    
+                <>
                 <div className={homeStyles.posts}>
-                    {centerView === 'home' && <Home actView={centerView}/>}
+                    <Home/>
                 </div>
                 <div className={homeStyles.hashtag}>
                     <Hashtags/>
                 </div>
+                </>             
+                }
             </div>
         </div>
     )
