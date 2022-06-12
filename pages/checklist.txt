@@ -1,0 +1,5 @@
+pobieranie wszystkich postów i liczenie hashtagów z nich
+ TRZEBA SPRAWDZIC CZY HASHTAG jest w ALLHASHTAG  jesli nie to stworzyc taka pozycje a jesli jest to count +
+
+ I KIEDY POST BYL JAK DAWNO
+ I DO TEGO HASHTAG

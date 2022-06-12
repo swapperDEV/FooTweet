@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,500&display=swap');
 .menu {
     width: 80%;
     margin: 0px auto 0px auto;
     color: white;
+    font-family: 'JetBrains Mono', monospace;
     display: flex;
     height: 100%;
     .left {
@@ -9,6 +11,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        padding-right: 20px;
         .help {
             margin-left: 30px;
         }

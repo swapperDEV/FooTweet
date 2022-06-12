@@ -34,11 +34,15 @@
                 .hashtagsListOpen {
                     position: absolute;
                     padding: 10px;
+                    top: 0%;
                     background-color: lightskyblue;
                     color: white;
-                    width: 140px;
-                    margin-top: 10px;
+                    width: 160px;
+                    z-index: 5;
                     border-radius: 15px;
+                    ul {
+                        list-style-type: none;
+                    }
                 }
                 input {
                     width: 70px;
@@ -103,6 +107,7 @@
             }
         }
         .inputText {
+            font-family: 'JetBrains Mono', monospace;
             padding-top: 20px;
             border: 0px;
             font-size: 20px;

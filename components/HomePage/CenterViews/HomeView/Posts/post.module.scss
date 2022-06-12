@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
 .posts {
     display: flex;
     flex-direction: column;
+    font-family: 'JetBrains Mono', monospace;
     .changes {
         text-align: center;
         padding-bottom: 10px;
@@ -96,6 +98,14 @@
             }
             .description {
                 margin-top: 20px;
+                .hashtags {
+                    display: flex;
+                    margin-top: 5px;
+                    color: lightgray;
+                    p {
+                        margin-right: 10px;
+                    }
+                }
             }
             .image {
                 margin-top: 20px;
@@ -138,3 +148,4 @@
         opacity: 1;
     }
 }
+

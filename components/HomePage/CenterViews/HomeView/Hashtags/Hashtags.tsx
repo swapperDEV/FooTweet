@@ -22,7 +22,7 @@ const Hashtags = () => {
                     <p>#worldcup</p>
                     <b>2 tweets</b>
                 </div>
-                <p className={hashtagsStyles.more}>See more</p>
+                <p className={hashtagsStyles.more}>SEE MORE</p>
             </div>
         </div>
     )

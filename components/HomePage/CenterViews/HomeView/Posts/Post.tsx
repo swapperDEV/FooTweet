@@ -82,6 +82,11 @@ const Post = (props:any) => {
                     </div>
                     <div className={postStyles.description}>
                         {post.data.content.description}
+                        <div className={postStyles.hashtags}>
+                            {post.data.content.hashtag.map((hash:String, index:number) => (
+                                <p key={index}>{`#${hash}`}</p>
+                            ))}
+                        </div>
                     </div>
                     <div className={postStyles.image}>
                         {image !== '' && <img src={image} className={postStyles.img}/>}

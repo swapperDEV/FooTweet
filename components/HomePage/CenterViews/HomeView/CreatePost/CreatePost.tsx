@@ -1,10 +1,10 @@
-import React, {useContext, useRef, useState} from 'react'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import { FirebaseContext } from '../../../../../store/firebase-context'
 import createPostStyles from './createpost.module.scss'
 import Image from 'next/image'
 import testAvatar from '../../../../../assets/meta.png'
 import {getStorage,ref,uploadBytes} from 'firebase/storage'
-import { setDoc, doc, getFirestore } from 'firebase/firestore'
+import { setDoc, doc, getFirestore, getDoc } from 'firebase/firestore'
 import { generateCode } from '../../../../../functions/generateCode'
 import { UserDataContext } from '../../../../../store/userData-context'
 import { getDate } from '../../../../../functions/getDate'
@@ -23,35 +23,40 @@ const CreatePost = () => {
     const [pImgPhoto, changePostImgPhoto]:any = useState('')
     const [imgToUpload, changeImgToUpload]:any = useState('')
     const [hashtag, setHashtag]:any = useState([])
+    const [allHashtag, setAllHashtag]:any = useState([{name: 'barca', count: 500}])
     const [hashtagStyles, setHashtagStyles]:any = useState(createPostStyles.hashtagsList)
 
     const createPost = async () => {
-        const db = getFirestore()
-        const postId = `${fbCtx.currentUser.uid}.${generateCode()}`
-        console.log('PostID', postId);
-        let haveImg = false;
-        if(pImg !== '') {
-            haveImg = true;
-        }
-        const dataToUpload = {
-            creator: {
-                uId: fbCtx.currentUser.uid,
-                email: userCtx.data.email,
-                username: userCtx.data.username
-            },
-            metaData: {
-                createDate: getDate(),
-                postId: postId,
-            },
-            content: {
-                description: postContentRef.current.value,
-                hashtag: ['poland', 'euro'],
-                haveImg: haveImg
+        if(hashtag.length >= 2) {
+            const db = getFirestore()
+            const postId = `${fbCtx.currentUser.uid}.${generateCode()}`
+            console.log('PostID', postId);
+            let haveImg = false;
+            if(pImg !== '') {
+                haveImg = true;
             }
-        }
-        await setDoc(doc(db, "posts", postId), dataToUpload);
-        if(pImg !== '') {
-            uploadFile(postId)
+            const dataToUpload = {
+                creator: {
+                    uId: fbCtx.currentUser.uid,
+                    email: userCtx.data.email,
+                    username: userCtx.data.username
+                },
+                metaData: {
+                    createDate: getDate(),
+                    postId: postId,
+                },
+                content: {
+                    description: postContentRef.current.value,
+                    hashtag: hashtag,
+                    haveImg: haveImg
+                }
+            }
+            await setDoc(doc(db, "posts", postId), dataToUpload);
+            if(pImg !== '') {
+                uploadFile(postId)
+            }
+        } else {
+            alert('add minimum 2 hashtags')
         }
     }
 
@@ -77,7 +82,10 @@ const CreatePost = () => {
     }
     const addHashtag = () => {
         let hashtags = hashtag
-        hashtags.push(hashtagRef.current.value)
+        if(!hashtags.includes(hashtagRef.current.value)) {
+            hashtags.push(hashtagRef.current.value)
+        }
+        hashtagRef.current.value = ''
         setHashtag(hashtags)
     }
     const closeHashtagList = () => {
@@ -86,6 +94,9 @@ const CreatePost = () => {
     const openHashTagList = () => {
         setHashtagStyles(createPostStyles.hashtagsListOpen)
     }
+    useEffect(() => {
+        const db = getFirestore()
+    },[])
     return (
         <>
         <div className={createPostStyles.createPost}>
@@ -113,10 +124,13 @@ const CreatePost = () => {
                     </div>
                     <div className={createPostStyles.hashtags}>
                         <FaHashtag onClick={() => openHashTagList()}/>
-                        <div className={hashtagStyles}>Hasztag list <button onClick={() => closeHashtagList()}>close</button>
-                        <ul>{hashtag.forEach((h:String)=> {
-                            <li>{h}</li>
-                        })}</ul></div>
+                        <div className={hashtagStyles}>Hasztag list 
+                            <button onClick={() => closeHashtagList()}>close</button>
+                            <ul>{hashtag.map((h:any, index:number) => (
+                                <li key={index}>{`#${h}`}</li>    
+                            ))}
+                            </ul>
+                        </div>
                         <input placeholder="Hashtags" ref={hashtagRef}/>
                         <button onClick={() => addHashtag()}>Add</button>
                     </div>
