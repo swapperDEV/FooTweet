@@ -1,92 +1,105 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 .container {
     display: flex;
+    background-color: #3C424B;
     flex-direction: column;
     align-items: flex-start;
+    color: white;
     height: 100vh;
+    width: 220px;
+    -webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+    box-shadow: 8px 8px 24px 0px rgb(46, 48, 63);
     position: fixed;
+    z-index: 6;
+    .twtButtonWrapper {
+        height: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        .twtButton {
+            background-color: #2BA7F3;
+            border: #2BA7F3 1px solid;
+            color: white;
+            font-size: 15px;
+            padding: 15px;
+            border-radius: 25px;
+            padding-left: 60px;
+            padding-right: 60px;
+            transition: 0.3s ease;
+        }
+        .twtButton:hover {
+            cursor: pointer;
+            background-color: rgb(86, 188, 252)
+        }
+    }
     .logo {
-        margin-top: 10px;
         border: 1px solid transparent;
         transition: 0.1s ease;
         border-radius: 50px;
         padding: 10px;
+        padding-left: 15px;
     }
     .logo:hover {
         cursor: pointer;
         background-color: lightskyblue;
     }
     .list {
-        margin-right: 20px;
+        width: 100%;
+        height: 60%;
+        display: flex;
+        align-items: center;
         font-size: 30px;
         ul {
             margin-top: 10px;
             display: flex;
             flex-direction: column;
+            width: 100%;
             text-align: left;
             list-style-type: none;
             padding-left: 10px;
+            .actView {
+                color: #2BA7F3;
+                svg {
+                    color: #2BA7F3;
+                }
+                border-right: 1px solid #2BA7F3;
+            }
+            .actView:hover {
+                color: #2BA7F3;
+            }
             li {
-                font-size: 25px;
+                width: calc(100% - 14px);
+                padding-left: 13px;
+                transition: 0.1s ease;
+                font-size: 20px;
                 font-family: 'Roboto', sans-serif;
                 line-height: normal;
                 font-weight: normal;
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
-                padding-bottom: 30px;
+                padding-bottom: 20px;
+                margin-bottom: 10px;
                 p {
                     margin-left: 15px;
+                }
+                svg {
+                    color: rgb(145, 141, 141);
                 }
             }
             li:hover {
                 cursor: pointer;
                 color: gray;
             }
-            .twtButton {
-                background-color: lightskyblue;
-                border: lightskyblue 1px solid;
-                color: white;
-                font-size: 25px;
-                padding: 10px;
-                border-radius: 25px;
-                padding-left: 30px;
-                padding-right: 30px;
-                transition: 0.3s ease;
-                width: 100%;
-            }
-            .twtButton:hover {
-                cursor: pointer;
-                background-color: rgb(86, 188, 252)
-            }
         }
     }
     .cover {
         flex-grow: 1;
     }
-    .userBaner {
-        display: flex;
-        justify-content: center;
-        transition: 0.3s ease;
-        padding: 10px;
-        border-radius: 20px;
-        align-items: center;
-        margin-bottom: 10px;
-        .userBanerL {
-            padding-right: 10px;
-            img {
-                border-radius: 50px;
-            }
-        }
-        .userBanerOptions {
-            padding-left: 10px;
-        }
-    }
-    .userBaner:hover {
-        cursor: pointer;
-        background-color: lightgray;
-    }
 }
+
 
 @media (max-height: 690px) {
     .cover {

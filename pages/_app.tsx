@@ -1,6 +1,7 @@
 import Firebase from '../components/Firebase/Firebase'
 import Wrapper from '../components/Wrapper/Wrapper'
 import Script from 'next/script'
+import '../styles/content.css'
 
 function MyApp({ Component, pageProps }:any) {
   return (

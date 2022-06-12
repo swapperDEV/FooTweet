@@ -2,6 +2,7 @@ import React, {useContext, useEffect} from 'react'
 import Head from 'next/head'
 import { FirebaseContext } from '../store/firebase-context'
 import Router from 'next/router'
+import '../styles/content.css'
 
 export default function Home() {
   const FirebaseCtx = useContext(FirebaseContext)

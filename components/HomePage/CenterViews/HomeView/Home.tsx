@@ -7,9 +7,11 @@ const Home = (props:any) => {
     const {actView} = props
     return (
         <div className={homeStyles.wrapper}>
-            <p className={homeStyles.actView}>{actView}</p>
-            <CreatePost/>
-            <Posts/>
+            <div className={homeStyles.content}>
+                <p className={homeStyles.actView}>{actView}</p>
+                <CreatePost/>
+                <Posts/>
+            </div>
         </div>
     )
 }

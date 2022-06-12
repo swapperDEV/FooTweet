@@ -1,7 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
 import menuStyles from './desktopmenu.module.scss'
 import Image from 'next/image'
-import testAvatar from '../../../assets/meta.png'
 import logo from '../../../assets/logo.png'
 import { FaHome } from "@react-icons/all-files/fa/FaHome"
 import { FaBell } from "@react-icons/all-files/fa/FaBell"
@@ -11,48 +10,29 @@ import { FaMoneyBill } from "@react-icons/all-files/fa/FaMoneyBill";
 import { FaTrophy } from "@react-icons/all-files/fa/FaTrophy";
 
 const DesktopMenu = () => {
+    const [actView, changeView] = useState('home')
     return (
         <div className={menuStyles.container}>
             <div className={menuStyles.logo}>
                 <Image
                     src={logo}
                     alt="photo logo"
-                    width="90px"
-                    height="90px"
+                    width="70px"
+                    height="70px"
                 />
             </div>
             <div className={menuStyles.list}>
                 <ul>
-                    <li><FaHome/><p>Home</p></li>
-                    <li><FaBell/><p>Notifications</p></li>
-                    <li><FaUser/><p>Profile</p></li>
-                    <li><FaNewspaper/><p>News</p></li>
-                    <li><FaMoneyBill/><p>Transfer</p></li>
-                    <li><FaTrophy/><p>Leagues</p></li>
-                    <li><button className={menuStyles.twtButton}>Tweet</button></li>
+                    <li className={actView === 'home' ? menuStyles.actView : ''}><FaHome/><p>Home</p></li>
+                    <li className={actView === 'x' ? menuStyles.actView : ''}><FaBell/><p>Notifications</p></li>
+                    <li className={actView === 'x' ? menuStyles.actView : ''}><FaUser/><p>Profile</p></li>
+                    <li className={actView === 'x' ? menuStyles.actView : ''}><FaNewspaper/><p>News</p></li>
+                    <li className={actView === 'x' ? menuStyles.actView : ''}><FaMoneyBill/><p>Transfer</p></li>
+                    <li className={actView === 'x' ? menuStyles.actView : ''}><FaTrophy/><p>Leagues</p></li>
                 </ul>
             </div>
-            <div className={menuStyles.cover}></div>
-            <div className={menuStyles.userBaner}>
-                <div className={menuStyles.userBanerL}>
-                    <Image
-                        src={testAvatar}
-                        alt="photo logo"
-                        width="40px"
-                        height="40px"
-                    />
-                </div>
-                <div className={menuStyles.userBanerR}>
-                    <div className={menuStyles.userBanerRT}>
-                        wiktortest
-                    </div>
-                    <div className={menuStyles.userBanerRB}>
-                        @asdasdsda
-                    </div>
-                </div>
-                <div className={menuStyles.userBanerOptions}>
-                    ...
-                </div>
+            <div className={menuStyles.twtButtonWrapper}>
+            <button className={menuStyles.twtButton}>Tweet</button>
             </div>
         </div>
     )

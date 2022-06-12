@@ -1,6 +1,10 @@
 .wrapper {
     width: 100%;
+    .content {
+        padding: 20px;
+    }
     .actView {
+        z-index: 2;
         font-weight: bold;
         font-size: 25px;
         padding-left: 40px;
