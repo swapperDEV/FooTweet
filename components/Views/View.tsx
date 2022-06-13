@@ -10,6 +10,8 @@ import { useRouter } from 'next/router'
 import HomeView from './CenterViews/HomeView/HomeView'
 import HashtagsView from './CenterViews/HashtagsView/HashtagsView'
 import HashtagView from './CenterViews/HashtagView/HashtagView'
+import SearchView from './CenterViews/SearchView/SearchView'
+import SearchByWordsView from './CenterViews/SearchByWordsView/SearchByWordsView'
 
 const View = (props:any) => {
     const path = useRouter()
@@ -29,6 +31,8 @@ const View = (props:any) => {
                     {path.pathname === '/home' && <HomeView/>}
                     {path.pathname === '/hashtag' && <HashtagView/>}
                     {path.pathname === '/hashtag/[hashtag]' && <HashtagsView/>}
+                    {path.pathname === '/search' && <SearchView/>}
+                    {path.pathname === '/search/[search]' && <SearchByWordsView/>}
             </div>
         </div>
     )

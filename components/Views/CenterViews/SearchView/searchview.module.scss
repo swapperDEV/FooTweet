@@ -1,0 +1,23 @@
+.container {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    p {
+        margin-top: 10px;
+        font-family: 'JetBrains Mono', monospace;
+        margin-bottom: 10px;
+        font-size: 25px;
+    }
+    input {
+        background-color: transparent;
+        font-family: 'JetBrains Mono', monospace;
+        border: 0px solid white;
+        border-bottom: 1px solid white;
+        text-align: center;
+        color: white;
+        font-size: 40px;
+        outline: none;
+    }
+}

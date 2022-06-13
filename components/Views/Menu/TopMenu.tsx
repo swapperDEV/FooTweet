@@ -1,13 +1,23 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef} from 'react'
 import menuStyles from './topmenu.module.scss'
 import Image from 'next/image'
 import testAvatar from '../../../assets/meta.png'
 import { FaSearch } from "@react-icons/all-files/fa/FaSearch"
 import { UserDataContext } from '../../../store/userData-context'
+import Router from 'next/router'
 
 const TopMenu = () => {
     const userCtx = useContext(UserDataContext)
-    console.log(userCtx);
+    const searchRef = useRef<HTMLInputElement>(null)
+    const searchByKeyWords = (e:KeyboardEvent) => {  
+        if(e.key === 'Enter') {
+            if(searchRef.current) {
+                if(searchRef.current.value.length >= 1) {
+                    Router.push(`/search/${searchRef.current.value}`)
+                }
+            }
+        }
+    }
     return (
         <div className={menuStyles.menu}>
             <div className={menuStyles.left}>
@@ -15,7 +25,7 @@ const TopMenu = () => {
                 <p className={menuStyles.help}>Help</p>
             </div>
             <div className={menuStyles.center}>
-                <div><FaSearch/><input placeholder="Search on FooTweet"/></div>
+                <div><FaSearch/><input ref={searchRef} onKeyDown={(event:any) => searchByKeyWords(event)} placeholder="Search on FooTweet"/></div>
             </div>
             <div className={menuStyles.right}>
                 <div className={menuStyles.userBaner}>

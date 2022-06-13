@@ -18,6 +18,10 @@ const DesktopMenu = () => {
     if(path.pathname === '/hashtag/[hashtag]' || path.pathname === '/hashtag') {
         hashtag = true
     }
+    let search = false
+    if(path.pathname === '/search/[search]' || path.pathname === '/search') {
+        search = true
+    }
     const Navigate = (path:String) => {
         Router.push(`/${path}`)
     }
@@ -35,7 +39,7 @@ const DesktopMenu = () => {
                 <ul>
                     <li onClick={() => Navigate('home')} className={path.pathname === '/home' ? menuStyles.actView : ''}><FaHome/><p>Home</p></li>
                     <li onClick={() => Navigate('hashtag')} className={hashtag ? menuStyles.actView : ''}><FaHashtag/><p>Hashtags</p></li>
-                    <li className={path.pathname === 'x' ? menuStyles.actView : ''}><FaSearch/><p>Search</p></li>
+                    <li onClick={() => Navigate('search')} className={search ? menuStyles.actView : ''}><FaSearch/><p>Search</p></li>
                     <li className={path.pathname === 'x' ? menuStyles.actView : ''}><FaBell/><p>Notifications</p></li>
                     <li className={path.pathname=== 'x' ? menuStyles.actView : ''}><FaUser/><p>Profile</p></li>
                     <li className={path.pathname === 'x' ? menuStyles.actView : ''}><FaMoneyBill/><p>Transfer</p></li>

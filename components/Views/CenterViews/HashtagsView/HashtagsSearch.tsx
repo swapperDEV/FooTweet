@@ -8,7 +8,7 @@ const HashtagsSearch = () => {
         <>
         <div className={hashtagsStyles.wrapper}>
             <div className={hashtagsStyles.content}>
-                <Posts requirements={path.query.hashtag}/>
+                <Posts requirements={path.query.hashtag} requirementsType="hashtag"/>
             </div>
         </div>
         </>

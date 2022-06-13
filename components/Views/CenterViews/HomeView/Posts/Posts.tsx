@@ -6,10 +6,45 @@ import { FirebaseContext } from '../../../../../store/firebase-context';
 import Post from './Post';
 
 const Posts = (props:any) => {
-    const {requirements} = props
+    const {requirements, requirementsType} = props
+    console.log(requirements, requirementsType);
     const fbCtx = useContext(FirebaseContext)
     const [posts, setPosts]:any = useState([])
     const [newPosts, setNewPosts]:any = useState([])
+    const mappedPostByHashtag = (postList:Array<Object>, type:String) => {
+        const mappedList:Array<any> = []
+        postList.forEach((post:any) => {
+            let is = false;
+            post.data.content.hashtag.forEach((hashtag:String) => {
+                if(hashtag === requirements) {
+                    if(is === false) {
+                        mappedList.push(post)
+                        is = true;
+                    }
+                }
+            })
+        })
+        if(type === 'new') {
+            setNewPosts(mappedList)
+        } else if(type === 'all') {
+            setPosts(mappedList)
+        }
+    }
+    const mappedPostByWords = (postList:Array<Object>, type:String) => {
+        console.log('mapped by words');
+        const mappedList:Array<any> = []
+        postList.forEach((post: any) => {
+            let description = post.data.content.description.toLowerCase()
+            if(description.includes(requirements.toLowerCase())) {
+                mappedList.push(post)
+            }
+        })        
+        if(type === 'new') {
+            setNewPosts(mappedList)
+        } else if(type === 'all') {
+            setPosts(mappedList)
+        }
+    }
     const postListening = () => {
         const db = getFirestore()
         onSnapshot(collection(db, "posts"), (snapshot) => {
@@ -21,20 +56,11 @@ const Posts = (props:any) => {
                 return postB.data.metaData.createDate - postA.data.metaData.createDate
             })
             if(requirements) {
-                const mappedList:Array<any> = []
-                postList.forEach((post:any) => {
-                    let is = false;
-                    post.data.content.hashtag.forEach((hashtag:String) => {
-                        if(hashtag === requirements) {
-                            if(is === false) {
-                                mappedList.push(post)
-                                is = true;
-                            }
-                        }
-                    })
-                })
-                console.log(mappedList);
-                setNewPosts(mappedList)
+                if(requirementsType === 'hashtag') {
+                    mappedPostByHashtag(postList, 'new')
+                } else if(requirementsType === 'words') {
+                    mappedPostByWords(postList, 'new')
+                }
             } else {
                 setNewPosts(postList)
             }
@@ -57,20 +83,11 @@ const Posts = (props:any) => {
                 return postB.data.metaData.createDate - postA.data.metaData.createDate
             })
             if(requirements) {
-                const mappedList:Array<any> = []
-                postList.forEach((post:any) => {
-                    let is = false;
-                    post.data.content.hashtag.forEach((hashtag:String) => {
-                        if(hashtag === requirements) {
-                            if(is === false) {
-                                mappedList.push(post)
-                                is = true;
-                            }
-                        }
-                    })
-                })
-                console.log(mappedList);
-                setPosts(mappedList)
+                if(requirementsType === 'hashtag') {
+                    mappedPostByHashtag(postList, 'all')
+                } else if(requirementsType === 'words') {
+                    mappedPostByWords(postList, 'all')
+                }
             } else {
                 setPosts(postList)                
             }
@@ -92,7 +109,7 @@ const Posts = (props:any) => {
             <div className={postsStyles.changes}>
                 {newPosts.length > posts.length ?<button onClick={downloadPosts}>See {newPosts.length - posts.length} new posts</button>:<p></p>}
             </div>
-            {requirements && <p className={postsStyles.requirements}>Search by: #{requirements}</p>}
+            {requirements && <p className={postsStyles.requirements}>Search by: {requirementsType === 'hashtag' ?  '#' : 'word '}{requirements}</p>}
             {posts.length >= 1 && posts.map((post:any) => {
                 console.log('test', post);
                 return (

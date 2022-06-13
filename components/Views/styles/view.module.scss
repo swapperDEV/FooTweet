@@ -78,6 +78,21 @@
             margin-right: 50px;
             justify-content: center;
         }
+        .searchContainer {
+            margin-bottom:50px;
+            z-index: 2;
+            margin-top: 160px;
+            flex-grow: 1;
+            background-color: #3C424B;
+            border-radius: 10px;
+            color: white;
+            max-width: 700px;
+            min-width: 650px;
+            padding-top: 20px;
+            margin-left: 50px;
+            margin-right: 50px;
+            text-align: center;
+        }
         .cover {
             width: 200px;
         }
