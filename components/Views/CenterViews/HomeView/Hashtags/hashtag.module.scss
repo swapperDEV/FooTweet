@@ -38,3 +38,10 @@
         }
     }
 }
+.divHashtag {
+    transition: 0.1s ease;
+}
+.divHashtag:hover {
+    cursor: pointer;
+    color: lightgray;
+}

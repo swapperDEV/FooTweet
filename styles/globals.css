@@ -17,4 +17,9 @@ a {
 
 :root {
   color-scheme: light only;
+  --toastify-z-index: 9999;
+}
+
+.Toastify {
+  z-index: 999;
 }

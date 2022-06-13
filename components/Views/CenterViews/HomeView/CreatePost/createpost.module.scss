@@ -11,6 +11,7 @@
     }
     .createPostRight {
         flex-grow: 1;
+        position: relative;
         .previewImage {
             max-width: 100px;
             max-height: 100px;
@@ -149,6 +150,8 @@
 
 .close {
     color: lightskyblue;
+    position: absolute;
+    top: 60px;
 }
 .close:hover {
     cursor: pointer;

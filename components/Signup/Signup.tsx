@@ -15,6 +15,7 @@ const SignupComponent = () => {
     const FirebaseCtx = useContext(FirebaseContext)
     const { auth, app, currentUser, database} = FirebaseCtx
     const emailRef:any = useRef('')
+    const nameRef:any = useRef('')
     const passwordRef:any = useRef('')
     const passwordConfirmRef:any = useRef('')
     const usernameRef:any = useRef('')
@@ -25,30 +26,35 @@ const SignupComponent = () => {
         e.preventDefault()
         let emailValue = emailRef.current.value
         let usernameValue = usernameRef.current.value
+        let nameValue = nameRef.current.value
         let passwordValue
         if(passwordRef.current.value === passwordConfirmRef.current.value) {
             passwordValue = passwordRef.current.value
             if(passwordValue.length >= 7) {
                 if(usernameValue.length >= 7) {
-                    if(allUsers.usersList.includes(usernameValue)) {
-                        setError('This username is taken')
-                    } else {
-                        createUserWithEmailAndPassword(auth, emailValue, passwordValue).then((userCredential) => {
-                            FirebaseCtx.setRegisterData(emailValue, usernameValue)
-                            const list = allUsers.usersList 
-                            list.push(usernameValue)
-                            const db = getFirestore()
-                            setDoc(doc(db, "app", `allusers`), {
-                                usersList: list
+                    if(nameValue.length >= 5) {
+                        if(allUsers.usersList.includes(usernameValue)) {
+                            setError('This username is taken')
+                        } else {
+                            createUserWithEmailAndPassword(auth, emailValue, passwordValue).then((userCredential) => {
+                                FirebaseCtx.setRegisterData(emailValue, usernameValue, nameValue)
+                                const list = allUsers.usersList 
+                                list.push(usernameValue)
+                                const db = getFirestore()
+                                setDoc(doc(db, "app", `allusers`), {
+                                    usersList: list
+                                });
+                                const user = userCredential.user;
+                            })
+                            .catch((error) => {
+                                const errorCode = error.code;
+                                if(errorCode === 'auth/email-already-in-use') {
+                                    setError('Email is already in use')
+                                }
                             });
-                            const user = userCredential.user;
-                        })
-                        .catch((error) => {
-                            const errorCode = error.code;
-                            if(errorCode === 'auth/email-already-in-use') {
-                                setError('Email is already in use')
-                            }
-                        });
+                        }
+                    } else {
+                        setError('Type Name & Surname')
                     }
                 } else {
                     setError('Username should have 7 characters')
@@ -88,6 +94,10 @@ const SignupComponent = () => {
                         <div className={signup.formColumn}>
                             <label>Username</label>
                             <input type="text" ref={usernameRef} required/>
+                        </div>
+                        <div className={signup.formColumn}>
+                            <label>Name & Surname</label>
+                            <input type="text" ref={nameRef} required/>
                         </div>
                         <div className={signup.formColumn}>
                             <label>Email</label>

@@ -1,15 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react'
-import { FirebaseContext } from '../../store/firebase-context'
 import { getDatabase, ref, set, get, child} from "firebase/database";
 import { getDate } from '../../functions/getDate';
 import { getFirestore } from 'firebase/firestore';
 import { doc, setDoc, getDoc} from "firebase/firestore"; 
-import HomePage from '../../components/HomePage/View';
-import PrivateRoute from '../../routes/PrivateRoute';
-import Head from 'next/head';
-import { UserDataContext } from '../../store/userData-context'
+import { FirebaseContext } from '../../store/firebase-context';
+import { UserDataContext } from '../../store/userData-context';
 
-export default function Post() {
+const UserProvider = (props) => {
     const FirebaseCtx = useContext(FirebaseContext)
     const UserCtx = useContext(UserDataContext)
     const [userData, setUserData] = useState({
@@ -21,6 +18,7 @@ export default function Post() {
             setDoc(doc(db, "users", `${FirebaseCtx.currentUser.uid}`), {
                 username: FirebaseCtx.registerData.data2,
                 email: FirebaseCtx.registerData.data1,
+                name: FirebaseCtx.registerData.data3,
                 createDate: getDate(),
                 avatarID: 'standard'
             });
@@ -30,7 +28,7 @@ export default function Post() {
     useEffect(() => {
         if(FirebaseCtx.currentUser) {
         const db = getFirestore();
-            getDoc(doc(db, `users/${FirebaseCtx.currentUser.uid}`)).then((snapshot:any) => {
+            getDoc(doc(db, `users/${FirebaseCtx.currentUser.uid}`)).then((snapshot) => {
             if (snapshot.exists()) {
                 console.log(snapshot.data());
                 setUserData(snapshot.data())
@@ -40,15 +38,11 @@ export default function Post() {
         })}
     },[])
     return (
-    <>
-        <Head>
-            <title>FooTweet</title>
-        </Head>
-        <PrivateRoute>
-            <UserDataContext.Provider value={{data: userData}}>
-                <HomePage/>
-            </UserDataContext.Provider>
-        </PrivateRoute>
-    </>
+        <>
+        <UserDataContext.Provider value={{data: userData}}>
+            {props.children}
+        </UserDataContext.Provider>
+        </>
     )
 }
+export default UserProvider;

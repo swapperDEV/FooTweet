@@ -45,8 +45,11 @@ const Hashtags = () => {
     },[])
     const searchByHashtag = (e:any) => {
         if(e.key === 'Enter') {
-            Router.push(`/post/${hashtagSearchRef.current.value}`)
+            Router.push(`/hashtag/${hashtagSearchRef.current.value}`)
         }
+    }
+    const redirectToHashtag = (hashtag:String) => {
+        Router.push(`/hashtag/${hashtag}`, undefined, { shallow: true })
     }
     return (
         <div className={hashtagsStyles.wrapper}>
@@ -57,7 +60,7 @@ const Hashtags = () => {
             <div className={hashtagsStyles.popular}>
                 {mappedHashtagList.map((hashtag:any, index:number) => {
                     return (
-                        <div key={index}>
+                        <div key={index} className={hashtagsStyles.divHashtag} onClick={() => redirectToHashtag(hashtag.name)}>
                             <p>{`#${hashtag.name}`}</p>
                             <p>{hashtag.count}</p>
                         </div>

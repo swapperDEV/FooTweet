@@ -36,9 +36,7 @@ const Post = (props:any) => {
         let actDate:any = new Date()
         actDate = actDate.getTime()
         let agoDate = post.data.metaData.createDate
-        console.log('1', actDate, '2', agoDate);
         let diff = new Date(actDate - agoDate)
-        console.log(diff);
         changeTime(diff.getUTCDate() - 2)
         if(diff.getUTCDate() - 2 === 0) {
             changeTime('today')
@@ -70,7 +68,7 @@ const Post = (props:any) => {
                 </div>
                 <div className={postStyles.right}>
                     <div className={postStyles.info}>
-                        <div className={postStyles.user}>Jack Sparrow  <p className={postStyles.username}>{`@${post.data.creator.username}`}</p></div>  
+                        <div className={postStyles.user}>{`${post.data.creator.name} `}  <p className={postStyles.username}>{`@${post.data.creator.username}`}</p></div>  
                         <p className={postStyles.infoR}>
                         <FaClock/>{time !== "today" ? `${time} days ago` : ' Today'}
                         </p>

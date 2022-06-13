@@ -12,6 +12,8 @@ import { FaGlobeEurope as FaGlobe } from "@react-icons/all-files/fa/FaGlobeEurop
 import { FaImage } from "@react-icons/all-files/fa/FaImage";
 import { FaWindowClose } from "@react-icons/all-files/fa/FaWindowClose";
 import { FaHashtag } from "@react-icons/all-files/fa/FaHashtag";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreatePost = () => {
     const fbCtx = useContext(FirebaseContext)
@@ -28,35 +30,61 @@ const CreatePost = () => {
 
     const createPost = async () => {
         if(hashtag.length >= 2) {
-            const db = getFirestore()
-            const postId = `${fbCtx.currentUser.uid}.${generateCode()}`
-            console.log('PostID', postId);
-            let haveImg = false;
-            if(pImg !== '') {
-                haveImg = true;
-            }
-            const dataToUpload = {
-                creator: {
-                    uId: fbCtx.currentUser.uid,
-                    email: userCtx.data.email,
-                    username: userCtx.data.username
-                },
-                metaData: {
-                    createDate: getDate(),
-                    postId: postId,
-                },
-                content: {
-                    description: postContentRef.current.value,
-                    hashtag: hashtag,
-                    haveImg: haveImg
+            if(postContentRef.current.value.length >= 7) {
+                const db = getFirestore()
+                const postId = `${fbCtx.currentUser.uid}.${generateCode()}`
+                console.log('PostID', postId);
+                let haveImg = false;
+                if(pImg !== '') {
+                    haveImg = true;
                 }
-            }
-            await setDoc(doc(db, "posts", postId), dataToUpload);
-            if(pImg !== '') {
-                uploadFile(postId)
+                const dataToUpload = {
+                    creator: {
+                        uId: fbCtx.currentUser.uid,
+                        email: userCtx.data.email,
+                        username: userCtx.data.username,
+                        name: userCtx.data.name
+                    },
+                    metaData: {
+                        createDate: getDate(),
+                        postId: postId,
+                    },
+                    content: {
+                        description: postContentRef.current.value,
+                        hashtag: hashtag,
+                        haveImg: haveImg
+                    }
+                }
+                await setDoc(doc(db, "posts", postId), dataToUpload);
+                if(pImg !== '') {
+                    uploadFile(postId)
+                }
+                postContentRef.current.value = ''
+                setHashtag([])
+                delImage()
+            } else {
+                toast.error('Write a post description!', {
+                    theme: 'dark',
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
             }
         } else {
-            alert('add minimum 2 hashtags')
+            toast.error('Add min.2 hashtags!', {
+                theme: 'dark',
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
         }
     }
 
@@ -83,13 +111,18 @@ const CreatePost = () => {
     const addHashtag = () => {
         let hashtags = hashtag
         if(!hashtags.includes(hashtagRef.current.value)) {
-            hashtags.push(hashtagRef.current.value)
+            if(hashtagRef.current.value !== '') {
+                hashtags.push(hashtagRef.current.value)
+            }
         }
         hashtagRef.current.value = ''
         setHashtag(hashtags)
     }
     const closeHashtagList = () => {
         setHashtagStyles(createPostStyles.hashtagsList)
+    }
+    const resetHashtagList = () => {
+        setHashtag([])
     }
     const openHashTagList = () => {
         setHashtagStyles(createPostStyles.hashtagsListOpen)
@@ -124,12 +157,12 @@ const CreatePost = () => {
                     </div>
                     <div className={createPostStyles.hashtags}>
                         <FaHashtag onClick={() => openHashTagList()}/>
-                        <div className={hashtagStyles}>Hasztag list 
-                            <button onClick={() => closeHashtagList()}>close</button>
+                        <div className={hashtagStyles}>Hasztag list <br/> 
                             <ul>{hashtag.map((h:any, index:number) => (
                                 <li key={index}>{`#${h}`}</li>    
                             ))}
                             </ul>
+                            <button onClick={() => closeHashtagList()}>close</button>                            <button onClick={() => resetHashtagList()}>reset</button>
                         </div>
                         <input placeholder="Hashtags" ref={hashtagRef}/>
                         <button onClick={() => addHashtag()}>Add</button>
@@ -140,6 +173,17 @@ const CreatePost = () => {
                 </div>
             </div>
         </div>
+        <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+        />
         </>
     )
 }

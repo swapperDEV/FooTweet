@@ -3,14 +3,14 @@ import View from '../../components/Views/View';
 import PrivateRoute from '../../routes/PrivateRoute';
 import Head from 'next/head';
 
-export default function Home() {
+export default function Hashtag() {
     return (
     <>
         <Head>
-            <title>FooTweet</title>
+            <title>Searching By Hashtag</title>
         </Head>
         <PrivateRoute>
-                <View/>
+            <View/>
         </PrivateRoute>
     </>
     )

@@ -10,6 +10,7 @@ import { getFirestore } from 'firebase/firestore';
 import Image from 'next/image';
 import ImageStyle from './firebase.module.scss'
 import logo from '../../assets/logo.png'
+import UserProvider from './UserProvider'
 
 const Firebase = (props) => {
     const [currentUser, setCurrentUser] = useState()
@@ -25,17 +26,21 @@ const Firebase = (props) => {
         setCurrentUser(user)
         setCanLogged(true)
     })})
-    const setData = (data1, data2) => {
-        console.log(data1, data2)
+    const setData = (data1, data2, data3) => {
+        console.log(data1, data2, data3)
         setDataState({
-            data1, data2
+            data1, data2, data3
         })
     }
 
     return (
         <>
-            <FirebaseContext.Provider value={{registerData: registerDataState, setRegisterData: (x,y) => setData(x,y), canLogged: canLogged, auth: auth, app: app, currentUser: currentUser, setCurrentUser: (x) => setCurrentUser(x), signOutUser: () => signOutUser()}}>
-                {canLogged ? props.children : 
+            <FirebaseContext.Provider value={{registerData: registerDataState, setRegisterData: (x,y,z) => setData(x,y,z), canLogged: canLogged, auth: auth, app: app, currentUser: currentUser, setCurrentUser: (x) => setCurrentUser(x), signOutUser: () => signOutUser()}}>
+                {canLogged ? 
+                <UserProvider>
+                    { props.children }
+                </UserProvider>                
+                : 
                 <div className={ImageStyle.wrapper}>
                 </div>}    
             </FirebaseContext.Provider>        
@@ -44,3 +49,5 @@ const Firebase = (props) => {
 }
 
 export default Firebase;
+
+
