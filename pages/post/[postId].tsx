@@ -4,10 +4,11 @@ import { getDatabase, ref, set, get, child} from "firebase/database";
 import { getDate } from '../../functions/getDate';
 import { getFirestore } from 'firebase/firestore';
 import { doc, setDoc, getDoc} from "firebase/firestore"; 
-import HomePage from '../../components/HomePage/View';
+
 import PrivateRoute from '../../routes/PrivateRoute';
 import Head from 'next/head';
 import { UserDataContext } from '../../store/userData-context'
+import View from '../../components/Views/View';
 
 export default function Post() {
     const FirebaseCtx = useContext(FirebaseContext)
@@ -46,7 +47,7 @@ export default function Post() {
         </Head>
         <PrivateRoute>
             <UserDataContext.Provider value={{data: userData}}>
-                <HomePage/>
+                <View/>
             </UserDataContext.Provider>
         </PrivateRoute>
     </>

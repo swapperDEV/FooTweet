@@ -133,9 +133,14 @@
         background-position: 75% 0px;
         .leftSide {
             width: 100%;
+            margin-left: 10px;
         }
         .rightSide {
             width: 0%;
         }
     }
+}
+
+.img:hover {
+    cursor: pointer;
 }

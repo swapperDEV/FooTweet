@@ -111,6 +111,7 @@ const SignupComponent = () => {
                     <div className={signupStyle.img}>
                         <Image
                         src={logo}
+                        onClick={() => redirectWelcome()}
                         alt="photo logo"
                         width="80px"
                         height="80px"
@@ -165,5 +166,5 @@ const SignupComponent = () => {
     </>
     )
 }
-
+//https://dribbble.com/shots/16753965-Login-Sign-up-Dark-Mode-AW-Universal-Page/attachments/11801748?mode=media
 export default SignupComponent;

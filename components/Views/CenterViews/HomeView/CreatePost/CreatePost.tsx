@@ -53,6 +53,10 @@ const CreatePost = () => {
                         description: postContentRef.current.value,
                         hashtag: hashtag,
                         haveImg: haveImg
+                    },
+                    interaction: {
+                        comments: [],
+                        likes: [],
                     }
                 }
                 await setDoc(doc(db, "posts", postId), dataToUpload);

@@ -1,5 +1,5 @@
 import React, {useRef, useState, useContext} from 'react'
-import login from './login.module.scss'
+import loginStyle from './login.module.scss'
 import { FirebaseContext } from '../../store/firebase-context'
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth"
 import Router from 'next/router'
@@ -8,6 +8,9 @@ import Image from 'next/image'
 import logo from '../../assets/logo.png'
 import Wrapper from '../Wrapper/Wrapper'
 import { Fade } from 'react-awesome-reveal'
+import { ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginComponent = () => {
     const FirebaseCtx = useContext(FirebaseContext)
@@ -55,62 +58,83 @@ const LoginComponent = () => {
         Router.push('/welcome')
     }
     return (
-    <Wrapper>
-    <Fade>
-    <div className={login.wrapper}>
-        <div className={login.card}>
-            <div className={login.form}>
-                <h2 className={login.top} onClick={() => redirectWelcome()}>
-                    <Image
+        <>
+        <Wrapper>
+        <div className={loginStyle.wrapper}>
+            <div className={loginStyle.leftSide}>
+                <Fade>
+                <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                />
+                <div className={loginStyle.top}>
+                    <div className={loginStyle.img}>
+                        <Image
                         src={logo}
                         alt="photo logo"
-                        width="90px"
-                        height="90px"
-                    />
-                </h2>
+                        onClick={() => redirectWelcome()}
+                        width="80px"
+                        height="80px"
+                        /> 
+                    </div>   
+                    <p className={loginStyle.join}>Welcome back!</p>
+                    <p>Login to your acc<a>.</a> </p>  
+                    <a className={loginStyle.login}>You dont have account?<b className={loginStyle.loginBtn}><Link href='/signup'>Signup</Link></b></a>    
+                </div>
+                <div className={loginStyle.bottom}>
                 <form>
-                    <div className={login.formColumn}>
-                        <label>Email</label>
-                        <input type="email" ref={emailRef} required/>
+                    <div>
+                        <div className={loginStyle.formColumn}>
+                            <label>Email</label>
+                            <input type="email" ref={emailRef} required/>
+                        </div>
                     </div>
+                    <div>
                     {resetPass ? 
                     <>
                     </>
                     : 
                     <>
-                        <div className={login.formColumn}>
+                        <div className={loginStyle.formColumn}>
                             <label>Password</label>
                             <input type="password" ref={passwordRef} required/>
                         </div>
                         <br/>
                     </>
                     }
-                    <button onClick={submitBtn} className={login.submit}>{resetPass ? 'Reset' : 'Login'}</button>
+                    </div>
+                    <div className={loginStyle.bottomInfo}>
+                        <button onClick={submitBtn} className={loginStyle.button}>{resetPass ? 'Reset' : 'Login'}</button>
+                    {
+                        resetPass ?
+                        <p className={loginStyle.loginBtn} onClick={() => resetPasswordMode()}><a className={loginStyle.backButton}>Go back</a></p>
+                        :
+                        <>
+                        <div>Forgot your password?
+                            <p className={loginStyle.loginBtn} onClick={() => resetPasswordMode()}><a> Reset</a></p>
+                        </div>
+                        </>
+                    }
+                    </div>
                 </form>
+                </div>
+                </Fade>
             </div>
-            <div className={login.loginMess}>
-                <p className={login.error}>{error}</p>
-                {
-                    resetPass ?
-                    <p>
-                    <p className={login.loginBtn} onClick={() => resetPasswordMode()}>Go back</p></p>
-                    :
-                    <>
-                        <div>Forgot a password?
-                            <p className={login.loginBtn} onClick={() => resetPasswordMode()}><a>Reset</a></p>
-                        </div>
-                        <div>
-                            Dont have an account?
-                            <p className={login.loginBtn}><Link href='/signup'>Signup</Link></p>
-                        </div>
-                    </>
-                }
+            <div className={loginStyle.rightSide}>
+                <div className={loginStyle.copy}>
+                    <p><span dangerouslySetInnerHTML={{ "__html": "&copy;" }} /> Wiktor Maciążek</p>
+                </div>
             </div>
         </div>
-    </div>
-    </Fade>
-    </Wrapper>
+    </Wrapper>    
+    </>
     )
 }
-
 export default LoginComponent

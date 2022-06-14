@@ -36,7 +36,7 @@ const UserProvider = (props) => {
                 console.log("error");
             }
         })}
-    },[])
+    },[currentUser])
     return (
         <>
         <UserDataContext.Provider value={{data: userData}}>

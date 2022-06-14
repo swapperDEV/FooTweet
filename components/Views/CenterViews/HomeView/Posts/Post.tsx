@@ -1,19 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react'
 import { getStorage, getDownloadURL, ref } from 'firebase/storage';
 import postStyles from './post.module.scss'
-import Image from 'next/image';
-import testAvatar from '../../../../../assets/meta.png'
 import { FirebaseContext } from '../../../../../store/firebase-context';
 import { getFirestore, deleteDoc, doc } from 'firebase/firestore';
 import Router from 'next/router';
-import { FaClock } from "@react-icons/all-files/fa/FaClock";
-import { FaComment } from "@react-icons/all-files/fa/FaComment";
-import { FaShare } from "@react-icons/all-files/fa/FaShare";
-import { FaHeart } from "@react-icons/all-files/fa/FaHeart";
-import { FaRetweet } from "@react-icons/all-files/fa/FaRetweet";
-import { FaEllipsisH } from "@react-icons/all-files/fa/FaEllipsisH";
-import { FaTrash} from "@react-icons/all-files/fa/FaTrash";
-import { FaTimes} from "@react-icons/all-files/fa/FaTimes";
+import Options from './Post/Options';
+import Avatar from '../../../../Avatar/Avatar';
+import Hashtags from './Post/Hashtags'
+import ImagePreview from './Post/ImagePreview';
+import PostDescription from './Post/PostDescription';
 
 const Post = (props:any) => {
     const fbCtx = useContext(FirebaseContext)
@@ -55,54 +50,20 @@ const Post = (props:any) => {
         closeSettings()
         Router.push('/')
     }
+    const redirectToPost = () => {
+        Router.push(`/post/${post.data.metaData.postId}`)
+    }
     return (
-        <div className={postStyles.post}>
+        <div className={postStyles.post} onClick={() => redirectToPost()}>
             <div className={postStyles.top}>
                 <div className={postStyles.left}>
-                    <Image
-                        src={testAvatar}
-                        alt="photo logo"
-                        width="50px"
-                        height="50px"
-                    />
+                    <Avatar/>
                 </div>
                 <div className={postStyles.right}>
-                    <div className={postStyles.info}>
-                        <div className={postStyles.user}>{`${post.data.creator.name} `}  <p className={postStyles.username}>{`@${post.data.creator.username}`}</p></div>  
-                        <p className={postStyles.infoR}>
-                        <FaClock/>{time !== "today" ? `${time} days ago` : ' Today'}
-                        </p>
-                        {fbCtx.currentUser.uid === post.data.creator.uId && <p onClick={() => openSettings()} className={postStyles.settings}><FaEllipsisH/></p>}
-                        <div className={widgetClass}>
-                            <p onClick={() => deletePost()}><FaTrash/></p>
-                            <p onClick={() => closeSettings()}><FaTimes/></p>
-                        </div>
-                    </div>
-                    <div className={postStyles.description}>
-                        {post.data.content.description}
-                        <div className={postStyles.hashtags}>
-                            {post.data.content.hashtag.map((hash:String, index:number) => (
-                                <p key={index}>{`#${hash}`}</p>
-                            ))}
-                        </div>
-                    </div>
-                    <div className={postStyles.image}>
-                        {image !== '' && <img src={image} className={postStyles.img}/>}
-                    </div>
-                    <div className={postStyles.options}>
-                        <div>
-                            <FaComment/> 45
-                        </div>
-                        <div>
-                            <FaRetweet/> 17
-                        </div>
-                        <div>
-                            <FaHeart/> 55
-                        </div>
-                        <div>
-                            <FaShare/>
-                        </div>
-                    </div>
+                    <PostDescription post={post} openSettings={() => openSettings()} deletePost={() => deletePost()} closeSettings={() => closeSettings()} widgetClass={widgetClass} time={time} fbCtx={fbCtx}/>
+                    <Hashtags post={post}/>
+                    <ImagePreview image={image}/>
+                    <Options heartActive={postStyles.heartActive} wrapperClass={postStyles.options} post={post} fbCtx={fbCtx}/>
                 </div>
             </div>
         </div>
