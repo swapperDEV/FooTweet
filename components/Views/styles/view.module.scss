@@ -82,6 +82,8 @@
             margin-bottom:50px;
             z-index: 2;
             margin-top: 160px;
+            padding: 40px;
+            height: 300px;
             flex-grow: 1;
             background-color: #3C424B;
             border-radius: 10px;
@@ -158,5 +160,11 @@
                 width: 1000px;
             }
         }
+    }
+}
+
+@media (max-width: 1555px) {
+    .cover {
+        display: none;
     }
 }

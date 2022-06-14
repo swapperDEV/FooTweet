@@ -1,5 +1,5 @@
 import React from 'react'
-import signup from './signup.module.scss'
+import signupStyle from './signup.module.scss'
 import { useRef, useContext, useState} from 'react'
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
 import { FirebaseContext } from '../../store/firebase-context'
@@ -10,6 +10,10 @@ import Image from 'next/image'
 import logo from '../../assets/logo.png'
 import Wrapper from '../Wrapper/Wrapper'
 import { getFirestore, getDoc, doc, setDoc } from 'firebase/firestore'
+import { Fade } from 'react-awesome-reveal'
+import { ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignupComponent = () => {
     const FirebaseCtx = useContext(FirebaseContext)
@@ -19,8 +23,17 @@ const SignupComponent = () => {
     const passwordRef:any = useRef('')
     const passwordConfirmRef:any = useRef('')
     const usernameRef:any = useRef('')
-    const [error, setError] = useState('')
     const [allUsers, setAllUsers]:Array<any> = useState([])
+    const options:any = {
+        position: "top-right",
+        theme: 'dark',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    }
 
     const submitSignup = (e:any) => {
         e.preventDefault()
@@ -34,7 +47,7 @@ const SignupComponent = () => {
                 if(usernameValue.length >= 7) {
                     if(nameValue.length >= 5) {
                         if(allUsers.usersList.includes(usernameValue)) {
-                            setError('This username is taken')
+                            toast.error('This username is taken!', options);
                         } else {
                             createUserWithEmailAndPassword(auth, emailValue, passwordValue).then((userCredential) => {
                                 FirebaseCtx.setRegisterData(emailValue, usernameValue, nameValue)
@@ -49,21 +62,21 @@ const SignupComponent = () => {
                             .catch((error) => {
                                 const errorCode = error.code;
                                 if(errorCode === 'auth/email-already-in-use') {
-                                    setError('Email is already in use')
+                                    toast.error('Email is already in use!', options);
                                 }
                             });
                         }
                     } else {
-                        setError('Type Name & Surname')
+                        toast.error('Type name & surname!', options);
                     }
                 } else {
-                    setError('Username should have 7 characters')
+                    toast.error('Username should have 7 characters!', options);
                 }
             } else {
-                setError('Password should have 7 characters.')
+                toast.error('Password should have 7 characters!', options);
             }
         } else {
-            setError("Password didn't match.")
+            toast.error('Password doesnt match!', options);
         }
     }
     const redirectWelcome = () => {
@@ -78,54 +91,78 @@ const SignupComponent = () => {
         })
     },[])
     return (
+        <>
         <Wrapper>
-        <div className={signup.wrapper}>
-            <div className={signup.card}>
-                <div className={signup.form}>
-                    <h2 className={signup.top} onClick={() => redirectWelcome()}>                
+        <div className={signupStyle.wrapper}>
+            <div className={signupStyle.leftSide}>
+                <Fade>
+                <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                />
+                <div className={signupStyle.top}>
+                    <div className={signupStyle.img}>
                         <Image
                         src={logo}
                         alt="photo logo"
-                        width="90px"
-                        height="90px"
-                        />
-                    </h2>
-                    <form>
-                        <div className={signup.formColumn}>
+                        width="80px"
+                        height="80px"
+                        /> 
+                    </div>   
+                    <p className={signupStyle.join}>Join to us.</p>
+                    <p>Create a account<a>.</a> </p>  
+                    <a className={signupStyle.login}>Already have account?<b className={signupStyle.loginBtn}><Link href='/login'>Login</Link></b></a>    
+                </div>
+                <div className={signupStyle.bottom}>
+                <form>
+                    <div>
+                        <div className={signupStyle.formColumn}>
                             <label>Username</label>
                             <input type="text" ref={usernameRef} required/>
                         </div>
-                        <div className={signup.formColumn}>
+                        <div className={signupStyle.formColumn}>
                             <label>Name & Surname</label>
                             <input type="text" ref={nameRef} required/>
                         </div>
-                        <div className={signup.formColumn}>
+                    </div>
+                    <div>
+                        <div className={signupStyle.formColumn}>
                             <label>Email</label>
                             <input type="email" ref={emailRef} required/>
                         </div>
-                        <div className={signup.formColumn}>
+                    </div>
+                    <div>
+                        <div className={signupStyle.formColumn}>
                             <label>Password</label>
                             <input type="password" ref={passwordRef} required/>
                         </div>
-                        <div className={signup.formColumn}>
+                        <div className={signupStyle.formColumn}>
                             <label>Confirm Password</label>
                             <input type="password" ref={passwordConfirmRef} required/>
                         </div>
-                        <div className={signup.logo}>
-                            <div className={signup.left}>
-                            <button onClick={submitSignup} className={signup.submit}>Submit</button>
-                            <div className={signup.loginMess}>
-                                <p className={signup.error}>{error}</p>
-                                <p>Already have an account?</p>
-                                <p className={signup.loginBtn}><Link href='/login'>Login</Link></p>
-                            </div>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
+                    <div className={signupStyle.button}>
+                        <button onClick={submitSignup} className={signupStyle.submit}>Submit</button>
+                    </div>
+                </form>
+                </div>
+                </Fade>
+            </div>
+            <div className={signupStyle.rightSide}>
+                <div className={signupStyle.copy}>
+                    <p><span dangerouslySetInnerHTML={{ "__html": "&copy;" }} /> Wiktor Maciążek</p>
                 </div>
             </div>
         </div>
-    </Wrapper>
+    </Wrapper>    
+    </>
     )
 }
 

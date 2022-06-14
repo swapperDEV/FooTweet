@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../assets/logo.png'
 import Wrapper from '../Wrapper/Wrapper'
+import { Fade } from 'react-awesome-reveal'
 
 const LoginComponent = () => {
     const FirebaseCtx = useContext(FirebaseContext)
@@ -55,6 +56,7 @@ const LoginComponent = () => {
     }
     return (
     <Wrapper>
+    <Fade>
     <div className={login.wrapper}>
         <div className={login.card}>
             <div className={login.form}>
@@ -106,6 +108,7 @@ const LoginComponent = () => {
             </div>
         </div>
     </div>
+    </Fade>
     </Wrapper>
     )
 }

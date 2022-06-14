@@ -4,6 +4,9 @@ import Image from 'next/image'
 import logo from '../../assets/logo.png'
 import Router from 'next/router'
 import Wrapper from '../Wrapper/Wrapper'
+import { FaFacebook } from "@react-icons/all-files/fa/FaFacebook";
+import { FaInstagram} from "@react-icons/all-files/fa/FaInstagram";
+import { Fade } from 'react-awesome-reveal'
 
 const Welcome = () => {
     const signupRedirect = () => {
@@ -15,21 +18,27 @@ const Welcome = () => {
     return (
     <Wrapper>
         <div className={welcomeStyle.wrapper}>
-            <div className={welcomeStyle.wrapperTwo}>
-                <div className={welcomeStyle.leftSide}>
-                </div>
-                <div className={welcomeStyle.rightSide}>
-                    <div className={welcomeStyle.logo}>
+            <div className={welcomeStyle.leftSide}>
+                <div className={welcomeStyle.top}>
+                    <div className={welcomeStyle.img}>
                         <Image
                         src={logo}
                         alt="photo logo"
-                        width="150px"
-                        height="150px"
-                        />
+                        width="80px"
+                        height="80px"
+                        /> 
+                    </div>   
+                    <p>The best news from<br/> football <a>world</a> </p>      
+                </div>
+                <div className={welcomeStyle.social}>
+                    <div className={welcomeStyle.icon}>
+                        <FaFacebook/>
                     </div>
-                    <div className={welcomeStyle.text}>
-                        The best news from<br/> football world  
+                    <div className={welcomeStyle.icon}>
+                        <FaInstagram/>
                     </div>
+                </div>
+                <div className={welcomeStyle.bottom}>
                     <div className={welcomeStyle.enter}>
                         Join to us.
                     </div>
@@ -43,12 +52,15 @@ const Welcome = () => {
                     </div>
                 </div>
             </div>
-            <p className={welcomeStyle.copy}><span dangerouslySetInnerHTML={{ "__html": "&copy;" }} /> Wiktor Maciążek</p>
+            <div className={welcomeStyle.rightSide}>
+                <div className={welcomeStyle.copy}>
+                    <p><span dangerouslySetInnerHTML={{ "__html": "&copy;" }} /> Wiktor Maciążek</p>
+                </div>
+            </div>
         </div>
     </Wrapper>
     )
 }
 
 //na login i signup ikonka przekierowuje do welcome oraz animacja ikonki na welcome i ikonki na welcome 
-
 export default Welcome;

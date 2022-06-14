@@ -1,7 +1,9 @@
 .wrapper {
     width: 100%;
+    min-height: 300px;
     .content {
         padding: 20px;
+        min-height: 300px;
     }
 }
 
