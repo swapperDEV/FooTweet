@@ -18,7 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const CreatePost = () => {
     const fbCtx = useContext(FirebaseContext)
     const userCtx = useContext(UserDataContext)
-    const postContentRef= useRef<HTMLInputElement>(null)//xx
+    const postContentRef= useRef<HTMLTextAreaElement>(null)
     const hashtagRef = useRef<HTMLInputElement>(null)
     const storage = getStorage(fbCtx.app, "gs://ktweetapp.appspot.com")
     const [pImg, changePostImg]:any = useState('')

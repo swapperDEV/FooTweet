@@ -11,8 +11,8 @@ import Hashtags from './Post/Hashtags'
 import ImagePreview from './Post/ImagePreview';
 import PostDescription from './Post/PostDescription';
 import Comments from './Post/Comments';
-import { UserDataContext } from '../../store/userData-context';
 import { useRouter } from 'next/router';
+import { UserDataContext } from '../../store/userData-context';
 import { getTime } from '../../functions/getTime'
 
 type DataType = {
