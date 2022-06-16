@@ -12,22 +12,33 @@ import { ToastContainer } from 'react-toastify'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const options:Object = {
+    position: "top-right",
+    theme: 'dark',
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+}
+
 const LoginComponent = () => {
     const FirebaseCtx = useContext(FirebaseContext)
     const [error, setError] = useState('')
     const [resetPass, setResetPass] = useState(false)
     const { auth } = FirebaseCtx
-    const emailRef:any = useRef('')
-    const passwordRef:any = useRef('')
+    const emailRef = useRef<HTMLInputElement>(null)
+    const passwordRef = useRef<HTMLInputElement>(null)
     const submitLogin = () => {
-        let emailValue = emailRef.current.value
-        let passwordValue = passwordRef.current.value
+        let emailValue = emailRef.current!.value
+        let passwordValue = passwordRef.current!.value
         signInWithEmailAndPassword(auth, emailValue, passwordValue).then((userCredential) => {
             const user = userCredential.user;
           })
           .catch((error) => {
             const errorCode = error.code;
-            setError('Invalid.')
+            toast.error('Invalid!', options);
         });
     }
     const resetPasswordMode = () => {
@@ -35,7 +46,7 @@ const LoginComponent = () => {
         setError('')
     }
     const resetPassword = () => {
-        let emailValue = emailRef.current.value
+        let emailValue = emailRef.current!.value
         sendPasswordResetEmail(auth, emailValue)
             .then(() => {
                 setError('Check inbox for instructions about reseting')
@@ -62,7 +73,6 @@ const LoginComponent = () => {
         <Wrapper>
         <div className={loginStyle.wrapper}>
             <div className={loginStyle.leftSide}>
-                <Fade>
                 <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -125,7 +135,6 @@ const LoginComponent = () => {
                     </div>
                 </form>
                 </div>
-                </Fade>
             </div>
             <div className={loginStyle.rightSide}>
                 <div className={loginStyle.copy}>

@@ -62,5 +62,4 @@ const Welcome = () => {
     )
 }
 
-//na login i signup ikonka przekierowuje do welcome oraz animacja ikonki na welcome i ikonki na welcome 
 export default Welcome;

@@ -7,8 +7,8 @@ import { FirebaseContext } from '../../store/firebase-context';
 import Post from './Post';
 
 type PostsProps = {
-    requirements: String,
-    requirementsType: String,
+    requirements: any,
+    requirementsType: string | undefined,
 }
 
 
@@ -53,8 +53,8 @@ interface IPostList {
 
 const Posts = ({requirements, requirementsType}: PostsProps) => {
     const fbCtx = useContext(FirebaseContext)
-    const [posts, setPosts] = useState<IPostList[]>([])
-    const [newPosts, setNewPosts] = useState<IPostList[]>([])
+    const [posts, setPosts] = useState<IPostList[]|any>([])
+    const [newPosts, setNewPosts] = useState<IPostList[]|any>([])
     const mappedPostByHashtag = (postList:Array<PostListType>, type:String) => {
         const mappedList:Array<PostListType> = []
         postList.map((post) => {
@@ -74,7 +74,7 @@ const Posts = ({requirements, requirementsType}: PostsProps) => {
         const mappedList:Array<PostListType> = []
         postList.map((post) => {
             let description = post.data.content.description.toLowerCase()
-            if(description.includes(requirements.toLowerCase())) {
+            if(description.includes(requirements!.toLowerCase())) {
                 mappedList.push(post)
             }
         })        
@@ -149,7 +149,7 @@ const Posts = ({requirements, requirementsType}: PostsProps) => {
                 {newPosts.length > posts.length ?<button onClick={downloadPosts}>See {newPosts.length - posts.length} new posts</button>:<p></p>}
             </div>
             {requirements && <p className={postsStyles.requirements}>Search by: {requirementsType === 'hashtag' ?  '#' : 'word '}{requirements}</p>}
-            {posts.length >= 1 && posts.map((post) => {
+            {posts.length >= 1 && posts.map((post:any) => {
                 return (
                 <>
                     <Post key={post.data.metaData.postId} type='short' data={post}/>                

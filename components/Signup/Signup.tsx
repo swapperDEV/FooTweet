@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import signupStyle from './signup.module.scss'
 import { useRef, useContext, useState} from 'react'
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
@@ -14,17 +14,18 @@ import { Fade } from 'react-awesome-reveal'
 import { ToastContainer } from 'react-toastify'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { type } from 'os'
 
 const SignupComponent = () => {
     const FirebaseCtx = useContext(FirebaseContext)
     const { auth, app, currentUser, database} = FirebaseCtx
-    const emailRef:any = useRef('')
-    const nameRef:any = useRef('')
-    const passwordRef:any = useRef('')
-    const passwordConfirmRef:any = useRef('')
-    const usernameRef:any = useRef('')
+    const emailRef = useRef<HTMLInputElement>(null)
+    const nameRef = useRef<HTMLInputElement>(null)
+    const passwordRef = useRef<HTMLInputElement>(null)
+    const passwordConfirmRef = useRef<HTMLInputElement>(null)
+    const usernameRef= useRef<HTMLInputElement>(null)
     const [allUsers, setAllUsers]:Array<any> = useState([])
-    const options:any = {
+    const options:Object = {
         position: "top-right",
         theme: 'dark',
         autoClose: 5000,
@@ -35,14 +36,14 @@ const SignupComponent = () => {
         progress: undefined,
     }
 
-    const submitSignup = (e:any) => {
-        e.preventDefault()
-        let emailValue = emailRef.current.value
-        let usernameValue = usernameRef.current.value
-        let nameValue = nameRef.current.value
+    const submitSignup = (event: MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        let emailValue = emailRef.current!.value
+        let usernameValue = usernameRef.current!.value
+        let nameValue = nameRef.current!.value
         let passwordValue
-        if(passwordRef.current.value === passwordConfirmRef.current.value) {
-            passwordValue = passwordRef.current.value
+        if(passwordRef.current!.value === passwordConfirmRef.current!.value) {
+            passwordValue = passwordRef.current!.value
             if(passwordValue.length >= 7) {
                 if(usernameValue.length >= 7) {
                     if(nameValue.length >= 5) {
@@ -84,7 +85,7 @@ const SignupComponent = () => {
     }
     useEffect(() => {
         const db = getFirestore();
-            getDoc(doc(db, "app/allusers")).then((snapshot:any) => {
+            getDoc(doc(db, "app/allusers")).then((snapshot) => {
             if (snapshot.exists()) {
                 setAllUsers(snapshot.data())
             }
@@ -95,7 +96,6 @@ const SignupComponent = () => {
         <Wrapper>
         <div className={signupStyle.wrapper}>
             <div className={signupStyle.leftSide}>
-                <Fade>
                 <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -154,7 +154,6 @@ const SignupComponent = () => {
                     </div>
                 </form>
                 </div>
-                </Fade>
             </div>
             <div className={signupStyle.rightSide}>
                 <div className={signupStyle.copy}>
@@ -166,5 +165,4 @@ const SignupComponent = () => {
     </>
     )
 }
-//https://dribbble.com/shots/16753965-Login-Sign-up-Dark-Mode-AW-Universal-Page/attachments/11801748?mode=media
 export default SignupComponent;

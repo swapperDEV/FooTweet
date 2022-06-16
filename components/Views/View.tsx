@@ -14,9 +14,8 @@ import SearchView from './CenterViews/SearchView/SearchView'
 import SearchByWordsView from './CenterViews/SearchByWordsView/SearchByWordsView'
 import PostView from './CenterViews/PostView/PostView'
 
-const View = (props:any) => {
+const View = () => {
     const path = useRouter()
-    console.log(path.pathname)
     return (
         <div className={viewStyles.page}>
             <div className={viewStyles.sideMenu}>  

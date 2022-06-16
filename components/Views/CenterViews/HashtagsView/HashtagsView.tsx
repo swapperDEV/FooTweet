@@ -2,10 +2,9 @@ import React from 'react'
 import Hashtags from '../../../Hashtags/Hashtags';
 import HashtagsSearch from './HashtagsSearch';
 import viewStyles from '../../styles/view.module.scss'
-import { Fade } from 'react-awesome-reveal'
 const HashtagsView = () => {
     return (
-        <Fade>
+        <>
             <div className={viewStyles.cover}>
             </div>
             <div className={viewStyles.posts}>
@@ -14,7 +13,7 @@ const HashtagsView = () => {
             <div className={viewStyles.hashtag}>
                 <Hashtags/>
             </div>     
-        </Fade>
+        </>
     )
 }
 export default HashtagsView;

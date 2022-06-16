@@ -4,8 +4,31 @@ import Comment from './Comment'
 import { getFirestore, doc, updateDoc} from 'firebase/firestore';
 import { getDate } from '../../../functions/getDate';
 import { useRef } from 'react';
-const Comments = (props:any) => {
-    const {type, post, fbCtx, userCtx} = props;
+type CommentsProps = {
+    type: String, 
+    post: {
+        data: {
+            interaction: {
+                comments: Array<any>,
+                likes: Array<string>
+            }
+            metaData: {
+                postId: string,
+            }
+        }
+    }
+    fbCtx: {
+        currentUser: {
+            uid: string,
+        }
+    }
+    userCtx: {
+        data: {
+            username: string,
+        }
+    }
+}
+const Comments = ({type, post, fbCtx, userCtx}:CommentsProps) => {
     const commentRef:any = useRef()
     const pushComment = () => {
         if(commentRef.current.value.length > 3) {

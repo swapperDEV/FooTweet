@@ -9,8 +9,37 @@ import Reply from './Reply';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Comment = (props:any) => {
-    const {comment, post, fbCtx, userCtx} = props
+type CommentProps = {
+    comment: {
+        likes: Array<string>
+        commentId: string,
+        comment: String,
+        creatorName: string,
+        commentReply: Array<Object>
+    }
+    post: {
+        data: {
+            interaction: {
+                likes: Array<string>
+                comments: Array<any>
+            }
+            metaData: {
+                postId: string
+            }
+        }
+    }
+    fbCtx: {
+        currentUser: {
+            uid: string,
+        }
+    }
+    userCtx: {
+        data: {
+            username: String
+        }
+    }
+}
+const Comment = ({comment, post, fbCtx, userCtx}:CommentProps) => {
     const replyRef:any = useRef()
     const [showReply, changeReplyShow] = useState(false)
     let [likesNumber, setLikesNumber]:any = useState(comment.likes)
