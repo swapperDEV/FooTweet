@@ -4,6 +4,11 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    svg, span {
+        top: 100px;
+        transform: scale(5);
+        overflow-X: hidden;
+    }
     p {
         margin-top: 10px;
         font-family: 'JetBrains Mono', monospace;

@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+.posts {
+    display: flex;
+    flex-direction: column;
+    font-family: 'JetBrains Mono', monospace;
+    .changes {
+        text-align: center;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        button {
+            background-color: lightskyblue;
+            border: 1px solid lightskyblue;
+            border-radius: 10px;
+            color: white;
+            transition: 0.1s ease;
+            padding: 5px;
+        }
+        button:hover {
+            cursor: pointer;
+            background-color: rgb(86, 188, 252);
+        }
+    }
+}
+
+.post {
+    font-family: 'JetBrains Mono', monospace;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    transition: 0.1s ease;
+    .top {
+        display: flex;
+        .left {
+            margin-right: 10px;
+            img {
+                border-radius: 50px;
+            }
+        }
+        .right {
+            flex-grow: 1;
+            background-color: #57606e;
+            padding: 15px;
+            border: 1px solid #57606e;
+            border-radius: 10px;
+            position: relative;
+            transition: 0.1s ease;
+            .info {
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                .user {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    .username {
+                        color: gray;
+                        padding-left: 10px;
+                    }
+                    flex-grow: 1;
+                }
+                .infoR {
+                    padding-left: 5px;
+                    color: white;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    svg {
+                        padding-right: 5px;
+                    }
+                }
+                .settings {
+                    margin-left: 20px;
+                    right: 0%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 20px;
+                    border-radius: 10px;
+                    transition: 0.1s ease;
+                    background-color: transparent;
+                }
+                .settings:hover {
+                    background-color: #2BA7F3;
+                }
+                .settingsWidget {
+                    right: 0%;
+                    background-color: gray;
+                    display: none;
+                }
+                .settingsWidgetOpen {
+                    position: absolute;
+                    padding: 10px;
+                    border-radius: 10px;
+                    right: 10px;
+                    background-color: #2BA7F3;
+                    animation: loading 0.3s ease;
+                }
+            }
+            .description {
+                margin-top: 20px;
+                .hashtags {
+                    display: flex;
+                    margin-top: 5px;
+                    color: lightgray;
+                    p {
+                        margin-right: 10px;
+                    }
+                }
+            }
+            .image {
+                margin-top: 20px;
+                .img {
+                    max-width: 100%;
+                    max-height: 400px;
+                    border-radius: 10px;
+                }
+            }
+            .options {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-top: 40px;
+                div {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    svg {
+                        margin-right: 5px;
+                        color: rgb(153, 153, 153);
+                    }
+                    flex-grow: 1;
+                }
+            }
+        }
+        .right:hover {
+            cursor: pointer;
+            background-color: #4f5764;
+            border: 1px solid #4f5764;
+        }
+    }
+    .bottom {
+        text-align: center;
+        display: flex;
+        border-radius: 10px;
+        margin-top: 5px;
+        margin-right: 15px;
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-end;
+        input {
+            outline: none;
+            width: 300px;
+            background-color: #57606e;
+            border: 1px solid #57606e;
+            border: 1px solid #57606e;
+            color: white;
+            padding: 5px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #2BA7F3;;
+            border: 1px solid #2BA7F3;
+            padding: 5px;
+            color: white;
+        }
+        .heartActive {
+            color: rgb(221, 133, 133);
+        }
+        .replyCreate {
+            margin-top: 10px;
+            margin-right: 15px;
+            border-radius: 10px;
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+            input { 
+                width: 100px;
+            }
+        }
+        .comments {
+            flex-grow: 1;
+            margin-top: 20px;
+            width: 100%;
+            .comment {
+                margin-left: 50px;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+                .topComment {
+                    display: flex;
+                    justify-content: center;
+                    align-items: flex-start;
+                    .commentLeft {
+                        overflow: hidden;
+                        border-radius: 50px;
+                    }
+                    .commentRight {
+                        background-color: #57606e;
+                        color: white;
+                        flex-grow: 1;
+                        display: flex;
+                        padding: 15px;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: flex-start;
+                        border-radius: 15px;
+                        margin-left: 20px;
+                        .line {
+                            display: none;
+                            position: absolute;
+                            width: 2px;
+                            background-color: #57606e;
+                            height: 100px;
+                            overflow: 0;
+                            transform: translateY(-80px) translateX(-5px);
+                        }
+                        .creator {
+                            padding-bottom: 10px;
+                            color: gray;
+                        }
+                        .commentDescription {
+                            padding-bottom: 10px;
+                        }
+                        .options {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            .replySettings {
+                                color: #2BA7F3;
+                                margin-left: 15px;
+                                cursor: pointer;
+                            }
+                            .replySettingsOff {
+                                margin-left: 15px;
+                                cursor: pointer;
+                            }
+                            svg {
+                                font-size: 15px;
+                                margin-right: 5px;
+                            }
+                        }
+                    }   
+                }
+                .bottomComment {
+                    .reply {
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        margin-top: 20px;
+                        .replyLeft {
+                            img {
+                                transform: scale(0.8);
+                                border-radius: 50px;
+                            }
+                        }
+                        .replyRight {
+                            border-radius: 15px;
+                            padding: 10px;
+                            flex-direction: column;
+                            width: 50%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: flex-start;
+                            background-color: #57606e;
+                            .creatorName {
+                                color: gray;
+                            }
+                            .likes {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                svg {
+                                    font-size: 15px;
+                                    margin-right: 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes loading {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.requirements {
+    text-align: center;
+    
+    padding-bottom: 30px;
+}
+.heartActive {
+    svg {
+        color: red!important;
+    }
+}

@@ -1,7 +1,16 @@
 import React from 'react'
 import postStyles from '../post.module.scss'
-const Hashtags = (props:any) => {
-    const {post} = props
+type HashtagsProps = {
+    post: {
+        data: {
+            content: {
+                description: String,
+                hashtag: Array<String>
+            }
+        }
+    }
+}
+const Hashtags = ({post}: HashtagsProps) => {
     return (
         <>
         <div className={postStyles.description}>

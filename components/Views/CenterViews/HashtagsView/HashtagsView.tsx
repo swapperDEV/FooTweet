@@ -1,5 +1,5 @@
 import React from 'react'
-import Hashtags from '../HomeView/Hashtags/Hashtags';
+import Hashtags from '../../../Hashtags/Hashtags';
 import HashtagsSearch from './HashtagsSearch';
 import viewStyles from '../../styles/view.module.scss'
 import { Fade } from 'react-awesome-reveal'

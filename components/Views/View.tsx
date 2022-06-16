@@ -4,7 +4,7 @@ import Home from './CenterViews/HomeView/Home'
 import DesktopMenu from './Menu/DesktopMenu'
 import MobileMenu from './Menu/MobileMenu'
 import TopMenu from './Menu/TopMenu'
-import Hashtags from './CenterViews/HomeView/Hashtags/Hashtags'
+import Hashtags from '../Hashtags/Hashtags'
 import { UserDataContext } from '../../store/userData-context'
 import { useRouter } from 'next/router'
 import HomeView from './CenterViews/HomeView/HomeView'
@@ -12,9 +12,11 @@ import HashtagsView from './CenterViews/HashtagsView/HashtagsView'
 import HashtagView from './CenterViews/HashtagView/HashtagView'
 import SearchView from './CenterViews/SearchView/SearchView'
 import SearchByWordsView from './CenterViews/SearchByWordsView/SearchByWordsView'
+import PostView from './CenterViews/PostView/PostView'
 
 const View = (props:any) => {
     const path = useRouter()
+    console.log(path.pathname)
     return (
         <div className={viewStyles.page}>
             <div className={viewStyles.sideMenu}>  
@@ -29,6 +31,7 @@ const View = (props:any) => {
             <div className={viewStyles.content}>
                 <div className={viewStyles.background}></div>
                     {path.pathname === '/home' && <HomeView/>}
+                    {path.pathname === '/post/[postId]' && <PostView/>}
                     {path.pathname === '/hashtag' && <HashtagView/>}
                     {path.pathname === '/hashtag/[hashtag]' && <HashtagsView/>}
                     {path.pathname === '/search' && <SearchView/>}

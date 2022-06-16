@@ -1,6 +1,6 @@
 import React from 'react'
 import searchStyles from './searchwords.module.scss'
-import Posts from '../HomeView/Posts/Posts';
+import Posts from '../../../Posts/Posts';
 import { useRouter } from 'next/router';
 import { Fade } from 'react-awesome-reveal'
 const SearchByWords = () => {

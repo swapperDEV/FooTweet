@@ -1,7 +1,9 @@
 import React from 'react'
 import postStyles from '../post.module.scss'
-const ImagePreview = (props:any) => {
-    const {image} = props
+type ImageProps = {
+    image: string,
+}
+const ImagePreview = ({image}:ImageProps) => {
     return (
         <>
         <div className={postStyles.image}>

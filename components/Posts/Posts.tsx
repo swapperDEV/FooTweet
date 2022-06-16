@@ -1,26 +1,66 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from 'react'
 import postsStyles from './post.module.scss'
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { getDocs, collection, getFirestore, onSnapshot, setDoc, doc} from 'firebase/firestore';
-import { FirebaseContext } from '../../../../../store/firebase-context';
+import { FirebaseContext } from '../../store/firebase-context';
 import Post from './Post';
 
-const Posts = (props:any) => {
-    const {requirements, requirementsType} = props
-    console.log(requirements, requirementsType);
+type PostsProps = {
+    requirements: String,
+    requirementsType: String,
+}
+
+
+type PostListType = {
+    data: {
+        metaData: {
+            createDate: number,
+            postId: string,
+        }
+        content: {
+            description: String,
+            hashtag: Array<String>,
+            haveImg: boolean,
+        }
+        creator: {
+            email: string,
+            name: string,
+            uId: string,
+            username: string,
+        }
+        interaction: {
+            comments: Array<any>
+            likes: Array<string>
+        }
+    },
+    id: string,
+}
+
+interface IPostList {
+    data:  {
+        content: {
+            description: String,
+            hashtag: Array<String>
+            haveImg: boolean,
+        }
+        metaData: {
+            createDate: number,
+            postId: string,
+        }
+    }
+}
+
+const Posts = ({requirements, requirementsType}: PostsProps) => {
     const fbCtx = useContext(FirebaseContext)
-    const [posts, setPosts]:any = useState([])
-    const [newPosts, setNewPosts]:any = useState([])
-    const mappedPostByHashtag = (postList:Array<Object>, type:String) => {
-        const mappedList:Array<any> = []
-        postList.forEach((post:any) => {
-            let is = false;
-            post.data.content.hashtag.forEach((hashtag:String) => {
+    const [posts, setPosts] = useState<IPostList[]>([])
+    const [newPosts, setNewPosts] = useState<IPostList[]>([])
+    const mappedPostByHashtag = (postList:Array<PostListType>, type:String) => {
+        const mappedList:Array<PostListType> = []
+        postList.map((post) => {
+            post.data.content.hashtag.map((hashtag:String) => {
                 if(hashtag === requirements) {
-                    if(is === false) {
-                        mappedList.push(post)
-                        is = true;
-                    }
+                    return mappedList.push(post)
                 }
             })
         })
@@ -30,10 +70,9 @@ const Posts = (props:any) => {
             setPosts(mappedList)
         }
     }
-    const mappedPostByWords = (postList:Array<Object>, type:String) => {
-        console.log('mapped by words');
-        const mappedList:Array<any> = []
-        postList.forEach((post: any) => {
+    const mappedPostByWords = (postList:Array<PostListType>, type:String) => {
+        const mappedList:Array<PostListType> = []
+        postList.map((post) => {
             let description = post.data.content.description.toLowerCase()
             if(description.includes(requirements.toLowerCase())) {
                 mappedList.push(post)
@@ -52,7 +91,7 @@ const Posts = (props:any) => {
             snapshot.forEach((doc) => {
                 postList.push({data: doc.data(), id: doc.id});
             });
-            postList.sort((postA:any, postB:any) => {
+            postList.sort((postA:PostListType, postB:PostListType) => {
                 return postB.data.metaData.createDate - postA.data.metaData.createDate
             })
             if(requirements) {
@@ -75,11 +114,11 @@ const Posts = (props:any) => {
     const postSearch = () => {
         const db = getFirestore()
         getDocs(collection(db, `posts`)).then((snapshot) => {
-            let postList:any = []
+            let postList:Array<PostListType|any> = []
             snapshot.forEach((doc) => {
               postList.push({data: doc.data(), id: doc.id});
             });
-            postList.sort((postA:any, postB:any) => {
+            postList.sort((postA:PostListType, postB:PostListType) => {
                 return postB.data.metaData.createDate - postA.data.metaData.createDate
             })
             if(requirements) {
@@ -110,11 +149,10 @@ const Posts = (props:any) => {
                 {newPosts.length > posts.length ?<button onClick={downloadPosts}>See {newPosts.length - posts.length} new posts</button>:<p></p>}
             </div>
             {requirements && <p className={postsStyles.requirements}>Search by: {requirementsType === 'hashtag' ?  '#' : 'word '}{requirements}</p>}
-            {posts.length >= 1 && posts.map((post:any) => {
-                console.log('test', post);
+            {posts.length >= 1 && posts.map((post) => {
                 return (
                 <>
-                    <Post key={post.data.metaData.postId} data={post}/>                
+                    <Post key={post.data.metaData.postId} type='short' data={post}/>                
                 </>
                 )
             })}

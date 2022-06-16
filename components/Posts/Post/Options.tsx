@@ -7,10 +7,32 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 
-const Options = (props:any) => {
-    const {post, fbCtx} = props
+type OptionProps = {
+    post: {
+        data: {
+            interaction: {
+                comments: Array<String> 
+                likes: Array<string>
+            }
+            metaData: {
+                postId: string, 
+            }
+            creator: {
+                uId: string,
+            }
+        }
+    }
+    fbCtx: {
+        currentUser: {
+            uid: string
+        }
+    }
+    heartActive: any, 
+    wrapperClass: string, 
+}
+const Options = ({post, fbCtx, heartActive, wrapperClass}: OptionProps) => {
     const commentNumber = post.data.interaction.comments
-    let likesNumber:any = post.data.interaction.likes
+    let likesNumber:Array<string> = post.data.interaction.likes
     const updateDB = (table:Array<any>) => {
         const db = getFirestore()
         const dbRef = doc(db, "posts", post.data.metaData.postId)
@@ -56,14 +78,14 @@ const Options = (props:any) => {
     }
     return (
         <>
-        <div className={props.wrapperClass}>
+        <div className={wrapperClass}>
             <div>
                 <FaComment/> {commentNumber.length}
             </div>
             <div>
                 <FaRetweet/> 0
             </div>
-            <div className={likesNumber.includes(fbCtx.currentUser.uid) && props.heartActive}>
+            <div className={likesNumber.includes(fbCtx.currentUser.uid) && heartActive}>
                 <FaHeart onClick={() => handleLikePost()}/> {likesNumber.length}
             </div>
             <div>

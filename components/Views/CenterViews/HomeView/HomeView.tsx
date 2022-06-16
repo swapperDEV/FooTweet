@@ -1,6 +1,6 @@
 import React from 'react'
 import Home from './Home'
-import Hashtags from './Hashtags/Hashtags'
+import Hashtags from '../../../Hashtags/Hashtags'
 import viewStyles from '../../styles/view.module.scss'
 import { Fade } from 'react-awesome-reveal'
 const HomeView = () => {
