@@ -16,7 +16,7 @@ import { useRouter } from 'next/router';
 import { getTime } from '../../functions/getTime'
 
 type DataType = {
-    data: {
+ data: {
         metaData: {
             createDate: number,
             postId: string,

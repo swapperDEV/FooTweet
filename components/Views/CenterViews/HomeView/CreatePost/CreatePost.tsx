@@ -18,8 +18,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const CreatePost = () => {
     const fbCtx = useContext(FirebaseContext)
     const userCtx = useContext(UserDataContext)
-    const postContentRef:any= useRef('')
-    const hashtagRef:any = useRef('')
+    const postContentRef= useRef<HTMLInputElement>(null)//xx
+    const hashtagRef = useRef<HTMLInputElement>(null)
     const storage = getStorage(fbCtx.app, "gs://ktweetapp.appspot.com")
     const [pImg, changePostImg]:any = useState('')
     const [pImgPhoto, changePostImgPhoto]:any = useState('')
@@ -30,7 +30,7 @@ const CreatePost = () => {
 
     const createPost = async () => {
         if(hashtag.length >= 2) {
-            if(postContentRef.current.value.length >= 7) {
+            if(postContentRef.current!.value.length >= 7) {
                 const db = getFirestore()
                 const postId = `${fbCtx.currentUser.uid}.${generateCode()}`
                 console.log('PostID', postId);
@@ -50,7 +50,7 @@ const CreatePost = () => {
                         postId: postId,
                     },
                     content: {
-                        description: postContentRef.current.value,
+                        description: postContentRef.current!.value,
                         hashtag: hashtag,
                         haveImg: haveImg
                     },
@@ -63,7 +63,7 @@ const CreatePost = () => {
                 if(pImg !== '') {
                     uploadFile(postId)
                 }
-                postContentRef.current.value = ''
+                postContentRef.current!.value = ''
                 setHashtag([])
                 delImage()
             } else {
@@ -114,12 +114,12 @@ const CreatePost = () => {
     }
     const addHashtag = () => {
         let hashtags = hashtag
-        if(!hashtags.includes(hashtagRef.current.value)) {
-            if(hashtagRef.current.value !== '') {
-                hashtags.push(hashtagRef.current.value)
+        if(!hashtags.includes(hashtagRef.current!.value)) {
+            if(hashtagRef.current!.value !== '') {
+                hashtags.push(hashtagRef.current!.value)
             }
         }
-        hashtagRef.current.value = ''
+        hashtagRef.current!.value = ''
         setHashtag(hashtags)
     }
     const closeHashtagList = () => {
