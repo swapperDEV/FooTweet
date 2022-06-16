@@ -87,6 +87,7 @@ const Posts = ({requirements, requirementsType}: PostsProps) => {
     const postListening = () => {
         const db = getFirestore()
         onSnapshot(collection(db, "posts"), (snapshot) => {
+            console.log('real');
             let postList:any = []
             snapshot.forEach((doc) => {
                 postList.push({data: doc.data(), id: doc.id});
@@ -94,7 +95,7 @@ const Posts = ({requirements, requirementsType}: PostsProps) => {
             postList.sort((postA:PostListType, postB:PostListType) => {
                 return postB.data.metaData.createDate - postA.data.metaData.createDate
             })
-            if(requirements) {
+            if(requirements !== 'none') {
                 if(requirementsType === 'hashtag') {
                     mappedPostByHashtag(postList, 'new')
                 } else if(requirementsType === 'words') {

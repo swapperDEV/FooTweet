@@ -45,7 +45,6 @@ const Comments = ({type, post, fbCtx, userCtx}:CommentsProps) => {
                 creatorName: userCtx.data.username,
                 createDate: getDate()
             })
-            console.log(fbCtx.currentUser.uid);
             updateDoc(dbRef, {
                 interaction: {
                     comments: table,
@@ -66,6 +65,22 @@ const Comments = ({type, post, fbCtx, userCtx}:CommentsProps) => {
                 });
         }
     }
+    const deleteComment = (id:String) => {
+        const table = post.data.interaction.comments
+        table.map((comment, index) => {
+            if(comment.commentId === id) {
+                table.splice(index, 1)
+            }
+        })
+        const db = getFirestore()
+        const dbRef = doc(db, "posts", post.data.metaData.postId)
+        updateDoc(dbRef, {
+            interaction: {
+                comments: table,
+                likes: post.data.interaction.likes
+            }
+        })
+    }
     return (
         <>
         {type === 'long' &&
@@ -78,7 +93,7 @@ const Comments = ({type, post, fbCtx, userCtx}:CommentsProps) => {
             <div className={postStyles.comments}>
                 {post.data.interaction.comments.map((comment:any) => {
                     return (
-                    <Comment key={Math.random() * (1000000 - 1 + 1) + 1} comment={comment} post={post} userCtx={userCtx} fbCtx={fbCtx}/>
+                    <Comment key={Math.random() * (1000000 - 1 + 1) + 1} comment={comment} post={post} userCtx={userCtx} fbCtx={fbCtx}  deleteComment={deleteComment}/>
                     )
                 })}
             </div>

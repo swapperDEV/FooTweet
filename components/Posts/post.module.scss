@@ -22,6 +22,10 @@
     }
 }
 
+.trash {
+    margin-left: 15px;
+}
+
 .post {
     font-family: 'JetBrains Mono', monospace;
     padding-top: 10px;
@@ -45,6 +49,7 @@
             border-radius: 10px;
             position: relative;
             transition: 0.1s ease;
+            max-width: 530px;
             .info {
                 display: flex;
                 justify-content: flex-start;
@@ -99,6 +104,7 @@
             }
             .description {
                 margin-top: 20px;
+                word-wrap: break-word;
                 .hashtags {
                     display: flex;
                     margin-top: 5px;
@@ -144,7 +150,7 @@
         display: flex;
         border-radius: 10px;
         margin-top: 5px;
-        margin-right: 15px;
+        margin-right: 55px;
         justify-content: center;
         flex-direction: column;
         align-items: flex-end;
@@ -259,10 +265,17 @@
                             padding: 10px;
                             flex-direction: column;
                             width: 50%;
+                            word-wrap: break-word;
                             display: flex;
                             justify-content: center;
+                            position: relative;
                             align-items: flex-start;
                             background-color: #57606e;
+                            .replyTrash {
+                                position: absolute;
+                                right: 20px;
+                                top: 10px;
+                            }
                             .creatorName {
                                 color: gray;
                             }

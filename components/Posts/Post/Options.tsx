@@ -76,6 +76,19 @@ const Options = ({post, fbCtx, heartActive, wrapperClass}: OptionProps) => {
             });
         }
     }
+    const sharePost = () => {
+        navigator.clipboard.writeText(window.location.href)
+        toast('Link was copied to your clipboard!', {
+            theme: 'dark',
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+    }
     return (
         <>
         <div className={wrapperClass}>
@@ -89,7 +102,7 @@ const Options = ({post, fbCtx, heartActive, wrapperClass}: OptionProps) => {
                 <FaHeart onClick={() => handleLikePost()}/> {likesNumber.length}
             </div>
             <div>
-                <FaShare/>
+                <FaShare onClick={sharePost}/>
             </div>
         </div>
         <ToastContainer

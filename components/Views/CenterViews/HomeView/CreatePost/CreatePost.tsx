@@ -25,7 +25,6 @@ const CreatePost = () => {
     const [pImgPhoto, changePostImgPhoto] = useState('')
     const [imgToUpload, changeImgToUpload]:Array<any> = useState('')
     const [hashtag, setHashtag]:Array<any> = useState([])
-    const [allHashtag, setAllHashtag]:Array<any> = useState([{name: 'barca', count: 500}])
     const [hashtagStyles, setHashtagStyles] = useState(createPostStyles.hashtagsList)
 
     const createPost = async () => {
@@ -131,9 +130,6 @@ const CreatePost = () => {
     const openHashTagList = () => {
         setHashtagStyles(createPostStyles.hashtagsListOpen)
     }
-    useEffect(() => {
-        const db = getFirestore()
-    },[])
     return (
         <>
         <div className={createPostStyles.createPost}>
@@ -156,7 +152,7 @@ const CreatePost = () => {
                     <div>
                         <label className={createPostStyles.filebutton}>
                         <FaImage/>
-                        <span><input className={createPostStyles.file} type="file" value={pImg} onChange={e => changeImg(e)}/></span>
+                        <span><input className={createPostStyles.file} accept="image/*" type="file" value={pImg} onChange={e => changeImg(e)}/></span>
                         </label>
                     </div>
                     <div className={createPostStyles.hashtags}>

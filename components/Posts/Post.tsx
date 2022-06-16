@@ -79,7 +79,6 @@ const Post = ({data, type}: PostProps) => {
             Router.push(`/post/${post.data.metaData.postId}`)
         }
     }
-    
     useEffect(() => {
         changeTime(getTime(post.data.metaData.createDate))        
     },[])
