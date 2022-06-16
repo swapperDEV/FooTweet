@@ -13,6 +13,7 @@ import HashtagView from './CenterViews/HashtagView/HashtagView'
 import SearchView from './CenterViews/SearchView/SearchView'
 import SearchByWordsView from './CenterViews/SearchByWordsView/SearchByWordsView'
 import PostView from './CenterViews/PostView/PostView'
+import ProfileView from './CenterViews/ProfileView/ProvileView'
 
 const View = () => {
     const path = useRouter()
@@ -35,6 +36,7 @@ const View = () => {
                     {path.pathname === '/hashtag/[hashtag]' && <HashtagsView/>}
                     {path.pathname === '/search' && <SearchView/>}
                     {path.pathname === '/search/[search]' && <SearchByWordsView/>}
+                    {path.pathname === '/profile/[profile]' && <ProfileView/>}
             </div>
         </div>
     )

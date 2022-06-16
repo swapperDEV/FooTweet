@@ -95,9 +95,6 @@ const Options = ({post, fbCtx, heartActive, wrapperClass}: OptionProps) => {
             <div>
                 <FaComment/> {commentNumber.length}
             </div>
-            <div>
-                <FaRetweet/> 0
-            </div>
             <div className={likesNumber.includes(fbCtx.currentUser.uid) && heartActive}>
                 <FaHeart onClick={() => handleLikePost()}/> {likesNumber.length}
             </div>
