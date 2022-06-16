@@ -121,7 +121,7 @@ const Posts = ({requirements, requirementsType}: PostsProps) => {
             postList.sort((postA:PostListType, postB:PostListType) => {
                 return postB.data.metaData.createDate - postA.data.metaData.createDate
             })
-            if(requirements) {
+            if(requirements !== 'none') {
                 if(requirementsType === 'hashtag') {
                     mappedPostByHashtag(postList, 'all')
                 } else if(requirementsType === 'words') {
@@ -148,7 +148,7 @@ const Posts = ({requirements, requirementsType}: PostsProps) => {
             <div className={postsStyles.changes}>
                 {newPosts.length > posts.length ?<button onClick={downloadPosts}>See {newPosts.length - posts.length} new posts</button>:<p></p>}
             </div>
-            {requirements && <p className={postsStyles.requirements}>Search by: {requirementsType === 'hashtag' ?  '#' : 'word '}{requirements}</p>}
+            {requirements !== 'none' && <p className={postsStyles.requirements}>Search by: {requirementsType === 'hashtag' ?  '#' : 'word '}{requirements}</p>}
             {posts.length >= 1 && posts.map((post:any) => {
                 return (
                 <>

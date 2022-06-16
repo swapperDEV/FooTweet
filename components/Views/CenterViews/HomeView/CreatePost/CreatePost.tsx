@@ -21,12 +21,12 @@ const CreatePost = () => {
     const postContentRef= useRef<HTMLTextAreaElement>(null)
     const hashtagRef = useRef<HTMLInputElement>(null)
     const storage = getStorage(fbCtx.app, "gs://ktweetapp.appspot.com")
-    const [pImg, changePostImg]:any = useState('')
+    const [pImg, changePostImg] = useState('')
     const [pImgPhoto, changePostImgPhoto]:any = useState('')
     const [imgToUpload, changeImgToUpload]:any = useState('')
     const [hashtag, setHashtag]:any = useState([])
     const [allHashtag, setAllHashtag]:any = useState([{name: 'barca', count: 500}])
-    const [hashtagStyles, setHashtagStyles]:any = useState(createPostStyles.hashtagsList)
+    const [hashtagStyles, setHashtagStyles] = useState(createPostStyles.hashtagsList)
 
     const createPost = async () => {
         if(hashtag.length >= 2) {

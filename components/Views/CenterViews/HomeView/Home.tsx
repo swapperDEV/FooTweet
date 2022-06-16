@@ -7,7 +7,7 @@ const Home = () => {
         <div className={homeStyles.wrapper}>
             <div className={homeStyles.content}>
                 <CreatePost/>
-                <Posts/>
+                <Posts requirements={'none'} requirementsType={'none'}/>
             </div>
         </div>
     )
