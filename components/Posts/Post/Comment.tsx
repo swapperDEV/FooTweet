@@ -6,8 +6,7 @@ import { FaComment } from '@react-icons/all-files/fa/FaComment';
 import { getFirestore, doc, updateDoc} from 'firebase/firestore';
 import { getDate } from '../../../functions/getDate';
 import Reply from './Reply';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 type CommentProps = {
     comment: {
@@ -67,7 +66,18 @@ const Comment = ({comment, post, fbCtx, userCtx}:CommentProps) => {
                     likes: post.data.interaction.likes
                 }
             })
-        }
+        } else {
+            toast.error('Your reply is too short!', {
+                theme: 'dark',
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+            }
     }
     const handleShowReply = () => {
         changeReplyShow(!showReply)
@@ -78,16 +88,13 @@ const Comment = ({comment, post, fbCtx, userCtx}:CommentProps) => {
         const table = post.data.interaction.comments
         table.forEach((tb:any, index: any) => {
             if(tb.commentId === comment.commentId) {
-                console.log('test', table);
-                table[index].likes === likesNumber
-                console.log(table);
+                table[index].likes = likesNumber
             }
         })
-        console.log(table, 'final');
         updateDoc(dbRef, {
             interaction: {
-                comments: post.data.interaction.comments,
-                likes: table,
+                comments: table,
+                likes: post.data.interaction.likes,
             }
         })
     }
@@ -97,6 +104,7 @@ const Comment = ({comment, post, fbCtx, userCtx}:CommentProps) => {
         updateLikeDB(table)
     }
     const dislikeComment = (index:any) => {
+        console.log(likesNumber, 'ts');
         let indexX = likesNumber.indexOf(fbCtx.currentUser.uid)
         let table = likesNumber
         table.splice(indexX, 1)
@@ -110,6 +118,7 @@ const Comment = ({comment, post, fbCtx, userCtx}:CommentProps) => {
                     if(!likesNumber.includes(fbCtx.currentUser.uid)) {
                         likeComment(index)
                     } else {
+                        console.log('dislike');
                         dislikeComment(index)
                     }
                 } else {

@@ -4,6 +4,7 @@ import Comment from './Comment'
 import { getFirestore, doc, updateDoc} from 'firebase/firestore';
 import { getDate } from '../../../functions/getDate';
 import { useRef } from 'react';
+import { toast } from 'react-toastify';
 type CommentsProps = {
     type: String, 
     post: {
@@ -29,14 +30,14 @@ type CommentsProps = {
     }
 }
 const Comments = ({type, post, fbCtx, userCtx}:CommentsProps) => {
-    const commentRef:any = useRef()
+    const commentRef = useRef<HTMLInputElement>(null)
     const pushComment = () => {
-        if(commentRef.current.value.length > 3) {
+        if(commentRef.current!.value.length > 3) {
             const db = getFirestore()
             const dbRef = doc(db, "posts", post.data.metaData.postId)
             const table = post.data.interaction.comments
             table.push({
-                comment: commentRef.current.value, 
+                comment: commentRef.current!.value, 
                 commentId: fbCtx.currentUser.uid + getDate(),
                 likes: [],
                 commentReply: [],
@@ -51,9 +52,18 @@ const Comments = ({type, post, fbCtx, userCtx}:CommentsProps) => {
                     likes: post.data.interaction.likes
                 }
             })
-            commentRef.current.value = ''
+            commentRef.current!.value = ''
         } else {
-            console.log('error');
+            toast.error('Your comment is too short!', {
+                theme: 'dark',
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
         }
     }
     return (
