@@ -37,6 +37,11 @@ type PostListType = {
     id: string,
 }
 
+type PostListType2 = {
+    likes: Array<string>
+    id: string,
+}
+
 interface IPostList {
     data:  {
         content: {
@@ -115,7 +120,7 @@ const Posts = ({requirements, requirementsType}: PostsProps) => {
     const postSearch = () => {
         const db = getFirestore()
         getDocs(collection(db, `posts`)).then((snapshot) => {
-            let postList:Array<PostListType|any> = []
+            let postList:Array<PostListType | any> = []
             snapshot.forEach((doc) => {
               postList.push({data: doc.data(), id: doc.id});
             });

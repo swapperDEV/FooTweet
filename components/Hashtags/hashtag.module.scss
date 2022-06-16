@@ -21,6 +21,14 @@
         padding-bottom: 15px;
     }
     .popular {
+        .popularWrap {
+            height: 205px;
+            overflow: hidden;
+        }
+        .wrapperonce {
+            height: 1000px;
+            overflow: hidden;
+        }
         div {
             p {
                 font-size: 20px;

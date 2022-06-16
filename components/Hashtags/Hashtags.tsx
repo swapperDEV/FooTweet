@@ -13,6 +13,7 @@ type postTypes = {
 }
 const Hashtags = () => {
     const hashtagSearchRef = useRef<HTMLInputElement>(null)
+    const [allHashtag, setAllHashtag] = useState(false)
     const [mappedHashtagList, setMappedHashtagList] = useState([{}])
     const calculateHashtags = async (postList:Array<postTypes>) => {
         console.log('post', postList);
@@ -38,6 +39,9 @@ const Hashtags = () => {
             }
             hashtagsArray.push(obj)
         }
+        hashtagsArray.sort((hashA, hashB) => {
+            return hashB.count - hashA.count
+        })
         setMappedHashtagList(hashtagsArray)
     }
     useEffect(() => {
@@ -58,6 +62,9 @@ const Hashtags = () => {
     const redirectToHashtag = (hashtag:String) => {
         Router.push(`/hashtag/${hashtag}`, undefined, { shallow: true })
     }
+    const seeAllHashtag = () => {
+        setAllHashtag(!allHashtag)
+    }
     return (
         <div className={hashtagsStyles.wrapper}>
             <div className={hashtagsStyles.search}>
@@ -65,6 +72,7 @@ const Hashtags = () => {
                 <FaStream/>
             </div>
             <div className={hashtagsStyles.popular}>
+                <div className={allHashtag ? hashtagsStyles.wrapperonce : hashtagsStyles.popularWrap}>
                 {mappedHashtagList.map((hashtag:any, index:number) => {
                     return (
                         <div key={index} className={hashtagsStyles.divHashtag} onClick={() => redirectToHashtag(hashtag.name)}>
@@ -73,7 +81,8 @@ const Hashtags = () => {
                         </div>
                     )
                 })}
-                <p className={hashtagsStyles.more}>SEE MORE</p>
+                </div>
+                <p className={hashtagsStyles.more} onClick={() => seeAllHashtag()}>{allHashtag ? "HIDE" : "SEE MORE" }</p>
             </div>
         </div>
     )
