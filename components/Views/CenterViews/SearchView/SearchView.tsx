@@ -6,7 +6,7 @@ import Image from 'next/image';
 import offer from '../../../../assets/offer.svg'
 const SearchView = () => {
     const searchRef = useRef<HTMLInputElement>(null)
-    const searchByKeyWords = (e:KeyboardEvent) => {  
+    const searchByKeyWords = (e: React.KeyboardEvent<HTMLInputElement>) => {  
         if(e.key === 'Enter') {
             if(searchRef.current) {
                 if(searchRef.current.value.length >= 1) {
@@ -19,7 +19,7 @@ const SearchView = () => {
         <div className={viewStyles.searchContainer}>
             <div className={searchStyle.container}>
                 <p>Search on Footweet by Keywords</p>
-                <input ref={searchRef} onKeyDown={(event:any) => searchByKeyWords(event)} placeholder="type word"/>
+                <input ref={searchRef} onKeyDown={searchByKeyWords} placeholder="type word"/>
                 <Image
                     src={offer}
                     alt="photo logo"

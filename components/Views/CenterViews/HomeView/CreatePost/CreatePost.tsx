@@ -22,10 +22,10 @@ const CreatePost = () => {
     const hashtagRef = useRef<HTMLInputElement>(null)
     const storage = getStorage(fbCtx.app, "gs://ktweetapp.appspot.com")
     const [pImg, changePostImg] = useState('')
-    const [pImgPhoto, changePostImgPhoto]:any = useState('')
-    const [imgToUpload, changeImgToUpload]:any = useState('')
-    const [hashtag, setHashtag]:any = useState([])
-    const [allHashtag, setAllHashtag]:any = useState([{name: 'barca', count: 500}])
+    const [pImgPhoto, changePostImgPhoto] = useState('')
+    const [imgToUpload, changeImgToUpload]:Array<any> = useState('')
+    const [hashtag, setHashtag]:Array<any> = useState([])
+    const [allHashtag, setAllHashtag]:Array<any> = useState([{name: 'barca', count: 500}])
     const [hashtagStyles, setHashtagStyles] = useState(createPostStyles.hashtagsList)
 
     const createPost = async () => {
@@ -162,7 +162,7 @@ const CreatePost = () => {
                     <div className={createPostStyles.hashtags}>
                         <FaHashtag onClick={() => openHashTagList()}/>
                         <div className={hashtagStyles}>Hasztag list <br/> 
-                            <ul>{hashtag.map((h:any, index:number) => (
+                            <ul>{hashtag.map((h:String, index:number) => (
                                 <li key={index}>{`#${h}`}</li>    
                             ))}
                             </ul>
