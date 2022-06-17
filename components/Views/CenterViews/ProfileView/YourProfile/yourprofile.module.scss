@@ -1,0 +1,32 @@
+//#57606e;
+//#2BA7F3;
+//font-family: 'JetBrains Mono', monospace;
+//#262D37
+//#3C424B
+.wrapper {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    margin-top: 160px;
+    justify-content: center;
+    align-items: flex-start;
+    .sectionFirst, .sectionSecond, .sectionThird {
+        z-index: 2;
+        word-wrap: break-word;
+        min-width: 20px;
+    }
+    .sectionFirst {
+        margin-left: 100px;
+        margin-right: 23px;
+    }
+    .sectionSecond {
+        margin-left: 20px;
+        flex-grow: 1;
+        margin-right: 20px;
+    }
+    .sectionThird {
+        margin-left: 30px;
+        margin-right: 100px;
+    }
+    
+}

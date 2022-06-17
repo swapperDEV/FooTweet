@@ -1,14 +1,23 @@
-import React from 'react'
-import viewStyles from '../../styles/view.module.scss'
+import React, { useContext } from 'react'
 import profileStyles from './profile.module.scss'
+import UserProfile from './UserProfile/UserProfile'
+import YourProfile from './YourProfile/YourProfile'
+import { UserDataContext } from '../../../../store/userData-context'
+import { useRouter } from 'next/router'
 
 const ProfileView = () => {
+    const path = useRouter()
+    const UserCtx = useContext(UserDataContext)
+    let anotherUser = false
+    if(path.pathname === '/profile/[profile]' && path.query.profile !== UserCtx.data.username) {
+        anotherUser = true
+    }
     return (
-        <div className={viewStyles.profileContainer}>
-            <div className={profileStyles.container}>
-                <p>yikes</p>
-            </div>
-        </div>
+        <>
+            {path.query.profile === UserCtx.data.username && <YourProfile/>}
+            {path.pathname === "/profile" && <YourProfile/>}
+            {anotherUser && <UserProfile/>}
+        </>
     )
 }
 export default ProfileView

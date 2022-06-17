@@ -26,6 +26,8 @@ const CreatePost = () => {
     const [imgToUpload, changeImgToUpload]:Array<any> = useState('')
     const [hashtag, setHashtag]:Array<any> = useState([])
     const [hashtagStyles, setHashtagStyles] = useState(createPostStyles.hashtagsList)
+    const [postTools, openPostTools] = useState(false)
+    const [startedCreatingPost, changeStartedCreatingPost] = useState(false)
 
     const createPost = async () => {
         if(hashtag.length >= 2) {
@@ -99,6 +101,7 @@ const CreatePost = () => {
         });
     }
     const changeImg = (e: any) => {
+        changeStartedCreatingPost(true)
         changePostImg(e.target.value)
         const file = e.target.files[0]
         changeImgToUpload(file)
@@ -112,6 +115,7 @@ const CreatePost = () => {
         changePostImgPhoto('')
     }
     const addHashtag = () => {
+        changeStartedCreatingPost(true)
         let hashtags = hashtag
         if(!hashtags.includes(hashtagRef.current!.value)) {
             if(hashtagRef.current!.value !== '') {
@@ -130,8 +134,20 @@ const CreatePost = () => {
     const openHashTagList = () => {
         setHashtagStyles(createPostStyles.hashtagsListOpen)
     }
+    const handleOpenPostTools = () => {
+        openPostTools(true)
+    }
+    const handleClosePostTools = () => {
+        if(!startedCreatingPost) {
+            openPostTools(false)
+        }
+    }
+    const handleWrite = () => {
+        changeStartedCreatingPost(true)
+    }
     return (
         <>
+        {}
         <div className={createPostStyles.createPost}>
             <div className={createPostStyles.createPostLeft}>
                 <Image
@@ -141,8 +157,10 @@ const CreatePost = () => {
                     height="60px"
                 />
             </div>
-            <div className={createPostStyles.createPostRight}>
-                <textarea ref={postContentRef} placeholder='What is happening?' className={createPostStyles.inputText}/>
+            <div className={createPostStyles.createPostRight} onMouseEnter={handleOpenPostTools} onMouseLeave={handleClosePostTools}>
+                <textarea ref={postContentRef} onChange={handleWrite} placeholder='What is happening?' className={createPostStyles.inputText}/>
+                {postTools && 
+                <div className={createPostStyles.animate}>
                 <img src={pImgPhoto} className={createPostStyles.previewImage}/>
                 {pImgPhoto && <FaWindowClose onClick={() => delImage()} className={createPostStyles.close}/>}
                 <div className={createPostStyles.postSettings}>
@@ -152,7 +170,7 @@ const CreatePost = () => {
                     <div>
                         <label className={createPostStyles.filebutton}>
                         <FaImage/>
-                        <span><input className={createPostStyles.file} accept="image/*" type="file" value={pImg} onChange={e => changeImg(e)}/></span>
+                        <span><input onClick={handleWrite} className={createPostStyles.file} accept="image/*" type="file" value={pImg} onChange={e => changeImg(e)}/></span>
                         </label>
                     </div>
                     <div className={createPostStyles.hashtags}>
@@ -164,13 +182,15 @@ const CreatePost = () => {
                             </ul>
                             <button onClick={() => closeHashtagList()}>close</button>                            <button onClick={() => resetHashtagList()}>reset</button>
                         </div>
-                        <input placeholder="Hashtags" ref={hashtagRef}/>
+                        <input placeholder="Hashtags" onChange={handleWrite} ref={hashtagRef}/>
                         <button onClick={() => addHashtag()}>Add</button>
                     </div>
                     <div className={createPostStyles.button}>
                         <button onClick={() => createPost()}>Tweet it!</button>
                     </div>
+                </div> 
                 </div>
+                }
             </div>
         </div>
         <ToastContainer

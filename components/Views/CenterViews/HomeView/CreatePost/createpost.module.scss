@@ -20,7 +20,6 @@
             margin-top: 10px;
             display: flex;
             padding-top: 10px;
-            border-top: 1px solid lightgray;
             justify-content: flex-start;
             align-items: center;
             .hashtags {
@@ -38,7 +37,7 @@
                     top: 0%;
                     background-color: lightskyblue;
                     color: white;
-                    width: 160px;
+                    width: 209px;
                     z-index: 5;
                     border-radius: 15px;
                     ul {
@@ -46,25 +45,25 @@
                     }
                 }
                 input {
-                    width: 70px;
-                    height: 20px;
+                    width: 100px;
+                    height: 26px;
                     outline: none;
                     background-color: #2BA7F3;
                     border: 1px solid #2BA7F3;
                     color: white;
                     border-radius: 10px;
-                    padding-left: 10px;
-                    padding-right: 10px;
+                    padding-left: 15px;
+                    padding-right: 15px;
     
                 }
                 button {
-                    padding: 3px;
+                    padding: 5px;
                     margin-left: 5px;
                     background-color: #2BA7F3;
                     border: 1px solid #2BA7F3;
                     border-radius: 10px;
-                    padding-left: 10px;
-                    padding-right: 10px;
+                    padding-left: 15px;
+                    padding-right: 15px;
                     color: white;
                 }
                 button:hover {
@@ -155,4 +154,18 @@
 }
 .close:hover {
     cursor: pointer;
+}
+
+.animate {
+    transition: 0.3s ease;
+    animation: displayed 0.3s;
+}
+
+@keyframes displayed {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
 }

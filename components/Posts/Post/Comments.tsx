@@ -27,9 +27,10 @@ type CommentsProps = {
         data: {
             username: string,
         }
-    }
+    },
+    commentCreateView: boolean,
 }
-const Comments = ({type, post, fbCtx, userCtx}:CommentsProps) => {
+const Comments = ({type, post, fbCtx, userCtx, commentCreateView}:CommentsProps) => {
     const commentRef = useRef<HTMLInputElement>(null)
     const pushComment = () => {
         if(commentRef.current!.value.length > 3) {
@@ -85,11 +86,13 @@ const Comments = ({type, post, fbCtx, userCtx}:CommentsProps) => {
         <>
         {type === 'long' &&
             <>
+            { commentCreateView && 
             <div className={postStyles.commentCreate}>
                 <div>
                     <input placeholder="comment post" ref={commentRef}/><button onClick={() => pushComment()}>Push</button>
                 </div>
             </div>
+            }
             <div className={postStyles.comments}>
                 {post.data.interaction.comments.map((comment:any) => {
                     return (

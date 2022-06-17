@@ -18,6 +18,9 @@ const TopMenu = () => {
             }
         }
     }
+    const redirectToProfile = () => {
+        Router.push(`/profile`)
+    }
     return (
         <div className={menuStyles.menu}>
             <div className={menuStyles.left}>
@@ -28,7 +31,7 @@ const TopMenu = () => {
                 <div><FaSearch/><input ref={searchRef} onKeyDown={(event:any) => searchByKeyWords(event)} placeholder="Search on FooTweet"/></div>
             </div>
             <div className={menuStyles.right}>
-                <div className={menuStyles.userBaner}>
+                <div className={menuStyles.userBaner} onClick={() => redirectToProfile()}>
                     <div className={menuStyles.userBanerR}>
                         <div className={menuStyles.userBanerRT}>
                             Hey, {userCtx.data.username}!

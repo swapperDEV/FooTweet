@@ -48,6 +48,8 @@ const Post = ({data, type}: PostProps) => {
     let [time, changeTime] = useState(0)
     const [pType, changeType] = useState(type)
     const [image, setImage] = useState('')
+    const [commentCreateView, changeCommentCreateView] = useState(false)
+    const wrapperBox = useRef(null)
     const fbCtx = useContext(FirebaseContext)
     const userCtx = useContext(UserDataContext)
     const path = useRouter()
@@ -74,7 +76,22 @@ const Post = ({data, type}: PostProps) => {
         closeSettings()
         Router.push('/')
     }
-    const redirectToPost = () => {
+    const redirectToPost = (event:any) => {
+        if(event.target.className === 'post_image__tv_2H' || event.target.className === 'post_img__0j3rv' || event.target.className === 'post_img__0j3rv' || event.target.className === 'post_description__wkjLG' || event.target.className === 'post_hashtags__QN9_o' || event.target.className === 'post_right__qpBts' || event.target.className === 'post_infoR__XLGVJ' ) {
+            if(path.pathname !== "/post/[postId]") {
+                Router.push(`/post/${post.data.metaData.postId}`)
+            }
+        } else if (event.target.className === 'post_user__Z6gmk' || event.target.className === 'post_username___3_tF') {
+            Router.push(`/profile/${post.data.creator.username}`)
+        }
+    }
+    const forceRedirectToPost = () => {
+        if(path.pathname !== "/post/[postId]") {
+            Router.push(`/post/${post.data.metaData.postId}`)
+        }
+    }
+    const openCommentCreate = () => {
+        changeCommentCreateView(!commentCreateView)
         if(path.pathname !== "/post/[postId]") {
             Router.push(`/post/${post.data.metaData.postId}`)
         }
@@ -88,15 +105,15 @@ const Post = ({data, type}: PostProps) => {
                 <div className={postStyles.left}>
                     <Avatar/>
                 </div>
-                <div className={postStyles.right} onClick={() => redirectToPost()}>
+                <div className={postStyles.right} onClick={() => redirectToPost(event)} ref={wrapperBox}>
                     <PostDescription post={post} openSettings={() => openSettings()} deletePost={() => deletePost()} closeSettings={() => closeSettings()} widgetClass={widgetClass} time={time === 0 ? 'Today' : `${time} d. ago`} fbCtx={fbCtx}/>
                     <Hashtags post={post}/>
                     <ImagePreview image={image}/>
-                    <Options heartActive={postStyles.heartActive} wrapperClass={postStyles.options} post={post} fbCtx={fbCtx}/>
+                    <Options commentCreateView={commentCreateView}   openCommentCreate={openCommentCreate} heartActive={postStyles.heartActive} wrapperClass={postStyles.options} post={post} fbCtx={fbCtx} commentActive={postStyles.commentActive} pType={pType} redirectToPost={forceRedirectToPost}/>
                 </div>
             </div>
             {pType === 'long' && <div className={postStyles.bottom}>
-                <Comments type={pType} post={post} fbCtx={fbCtx} userCtx={userCtx}/>
+                <Comments type={pType} post={post} fbCtx={fbCtx} userCtx={userCtx} commentCreateView={commentCreateView}/>
             </div>}
         </div>
     )

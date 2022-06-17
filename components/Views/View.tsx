@@ -37,6 +37,7 @@ const View = () => {
                     {path.pathname === '/search' && <SearchView/>}
                     {path.pathname === '/search/[search]' && <SearchByWordsView/>}
                     {path.pathname === '/profile/[profile]' && <ProfileView/>}
+                    {path.pathname === '/profile' && <ProfileView/>}
             </div>
         </div>
     )

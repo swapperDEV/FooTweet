@@ -3,11 +3,13 @@ import { FaComment } from "@react-icons/all-files/fa/FaComment";
 import { FaShare } from "@react-icons/all-files/fa/FaShare";
 import { FaHeart } from "@react-icons/all-files/fa/FaHeart";
 import { FaRetweet } from "@react-icons/all-files/fa/FaRetweet";
+import { FaOpenid } from "@react-icons/all-files/fa/FaOpenid";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 
 type OptionProps = {
+    openCommentCreate: Function,
     post: {
         data: {
             interaction: {
@@ -28,9 +30,13 @@ type OptionProps = {
         }
     }
     heartActive: any, 
-    wrapperClass: string, 
+    wrapperClass: any, 
+    commentCreateView: boolean,
+    commentActive: any,
+    redirectToPost: Function,
+    pType: String,
 }
-const Options = ({post, fbCtx, heartActive, wrapperClass}: OptionProps) => {
+const Options = ({post, fbCtx, heartActive, wrapperClass, openCommentCreate, commentCreateView, commentActive, pType, redirectToPost}: OptionProps) => {
     const commentNumber = post.data.interaction.comments
     let likesNumber:Array<string> = post.data.interaction.likes
     const updateDB = (table:Array<any>) => {
@@ -89,14 +95,23 @@ const Options = ({post, fbCtx, heartActive, wrapperClass}: OptionProps) => {
             progress: undefined,
             });
     }
+    if(pType !== 'long') {
+        commentActive = ''
+    }
     return (
         <>
         <div className={wrapperClass}>
             <div>
-                <FaComment/> {commentNumber.length}
+                <FaComment onClick={() => openCommentCreate()} className={commentCreateView && commentActive}/> {commentNumber.length}
             </div>
             <div className={likesNumber.includes(fbCtx.currentUser.uid) && heartActive}>
                 <FaHeart onClick={() => handleLikePost()}/> {likesNumber.length}
+            </div>
+            <div>
+                <FaOpenid onClick={() => redirectToPost()}/>
+            </div>
+            <div>
+                <FaRetweet/>
             </div>
             <div>
                 <FaShare onClick={sharePost}/>

@@ -20,7 +20,11 @@ const UserProvider = (props) => {
                 email: FirebaseCtx.registerData.data1,
                 name: FirebaseCtx.registerData.data3,
                 createDate: getDate(),
-                avatarID: 'standard'
+                avatarID: 'standard',
+                location: 'Football pitch',
+                followers: [],
+                following: [],
+                bio: '',
             });
         }
     }
