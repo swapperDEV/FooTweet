@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from 'react'
 import postsStyles from './post.module.scss'
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { getDocs, collection, getFirestore, onSnapshot, setDoc, doc} from 'firebase/firestore';
+import { getDocs, collection, getFirestore, onSnapshot } from 'firebase/firestore';
 import { FirebaseContext } from '../../store/firebase-context';
 import Post from './Post';
 
@@ -37,11 +36,6 @@ type PostListType = {
     id: string,
 }
 
-type PostListType2 = {
-    likes: Array<string>
-    id: string,
-}
-
 interface IPostList {
     data:  {
         content: {
@@ -57,7 +51,6 @@ interface IPostList {
 }
 
 const Posts = ({requirements, requirementsType}: PostsProps) => {
-    const fbCtx = useContext(FirebaseContext)
     const [posts, setPosts] = useState<IPostList[]|any>([])
     const [newPosts, setNewPosts] = useState<IPostList[]|any>([])
     const mappedPostByHashtag = (postList:Array<PostListType>, type:String) => {

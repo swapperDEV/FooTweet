@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import profileStyles from './profile.module.scss'
 import UserProfile from './UserProfile/UserProfile'
 import YourProfile from './YourProfile/YourProfile'
 import { UserDataContext } from '../../../../store/userData-context'

@@ -7,7 +7,7 @@ const ImagePreview = ({image}:ImageProps) => {
     return (
         <>
         <div className={postStyles.image}>
-            {image !== '' && <img src={image} className={postStyles.img}/>}
+            {image !== '' && <img src={image} className={postStyles.img} alt="image error"/>}
         </div>
         </>
     )

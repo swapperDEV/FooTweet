@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+@import '../../styles/variables.module.scss';
 .posts {
     display: flex;
     flex-direction: column;
@@ -8,8 +9,8 @@
         padding-bottom: 10px;
         padding-top: 10px;
         button {
-            background-color: lightskyblue;
-            border: 1px solid lightskyblue;
+            background-color: $lightBlue;
+            border: 1px solid $lightBlue;
             border-radius: 10px;
             color: white;
             transition: 0.1s ease;
@@ -17,7 +18,7 @@
         }
         button:hover {
             cursor: pointer;
-            background-color: rgb(86, 188, 252);
+            background-color: $darkestLightBlue;
         }
     }
 }
@@ -43,9 +44,9 @@
         }
         .right {
             flex-grow: 1;
-            background-color: #57606e;
+            background-color: $lightGray;
             padding: 15px;
-            border: 1px solid #57606e;
+            border: 1px solid $lightGray;
             border-radius: 10px;
             position: relative;
             transition: 0.1s ease;
@@ -86,7 +87,7 @@
                     background-color: transparent;
                 }
                 .settings:hover {
-                    background-color: #2BA7F3;
+                    background-color: $blue;
                 }
                 .settingsWidget {
                     right: 0%;
@@ -98,7 +99,7 @@
                     padding: 10px;
                     border-radius: 10px;
                     right: 10px;
-                    background-color: #2BA7F3;
+                    background-color: $blue;
                     animation: loading 0.3s ease;
                 }
             }
@@ -141,8 +142,8 @@
         }
         .right:hover {
             cursor: pointer;
-            background-color: #4f5764;
-            border: 1px solid #4f5764;
+            background-color: $middleGray;
+            border: 1px solid $middleGray;
         }
     }
     .bottom {
@@ -157,21 +158,21 @@
         input {
             outline: none;
             width: 300px;
-            background-color: #57606e;
-            border: 1px solid #57606e;
-            border: 1px solid #57606e;
+            background-color: $lightGray;
+            border: 1px solid $lightGray;
+            border: 1px solid $lightGray;
             color: white;
             padding: 5px;
         }
         button {
             cursor: pointer;
-            background-color: #2BA7F3;
-            border: 1px solid #2BA7F3;
+            background-color: $blue;
+            border: 1px solid  $blue;
             padding: 5px;
             color: white;
         }
         .heartActive {
-            color: rgb(221, 133, 133);
+            color: $red;
         }
         .replyCreate {
             margin-top: 10px;
@@ -202,7 +203,7 @@
                         border-radius: 50px;
                     }
                     .commentRight {
-                        background-color: #57606e;
+                        background-color: $lightGray;
                         color: white;
                         flex-grow: 1;
                         display: flex;
@@ -216,7 +217,7 @@
                             display: none;
                             position: absolute;
                             width: 2px;
-                            background-color: #57606e;
+                            background-color: $lightGray;
                             height: 100px;
                             overflow: 0;
                             transform: translateY(-80px) translateX(-5px);
@@ -233,7 +234,7 @@
                             justify-content: center;
                             align-items: center;
                             .replySettings {
-                                color: #2BA7F3;
+                                color: $blue;
                                 margin-left: 15px;
                                 cursor: pointer;
                             }
@@ -270,7 +271,7 @@
                             justify-content: center;
                             position: relative;
                             align-items: flex-start;
-                            background-color: #57606e;
+                            background-color: $lightGray;
                             .replyTrash {
                                 position: absolute;
                                 right: 20px;
@@ -312,9 +313,12 @@
 }
 .heartActive {
     svg {
-        color: rgb(221, 133, 133)!important;
+        color: $red!important;
     }
 }
 .commentActive {
-    color: #2BA7F3!important;
+    color: $blue!important;
+}
+.retweetActive {
+    color: $blue!important;
 }

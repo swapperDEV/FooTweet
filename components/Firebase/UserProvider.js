@@ -24,6 +24,7 @@ const UserProvider = (props) => {
                 location: 'Football pitch',
                 followers: [],
                 following: [],
+                retweets: [],
                 bio: '',
             });
         }

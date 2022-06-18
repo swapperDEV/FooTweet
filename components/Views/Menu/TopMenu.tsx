@@ -21,11 +21,17 @@ const TopMenu = () => {
     const redirectToProfile = () => {
         Router.push(`/profile`)
     }
+    const redirectToHelp = () => {
+        Router.push(`/help`)
+    }
+    const redirectToAbout = () => {
+        Router.push(`/about`)
+    }
     return (
         <div className={menuStyles.menu}>
             <div className={menuStyles.left}>
-                <p>About</p>
-                <p className={menuStyles.help}>Help</p>
+                <p onClick={() => redirectToAbout()}>About</p>
+                <p className={menuStyles.help} onClick={() => redirectToHelp()}>Help</p>
             </div>
             <div className={menuStyles.center}>
                 <div><FaSearch/><input ref={searchRef} onKeyDown={(event:any) => searchByKeyWords(event)} placeholder="Search on FooTweet"/></div>

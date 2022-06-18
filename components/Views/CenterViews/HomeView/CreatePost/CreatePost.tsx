@@ -58,7 +58,8 @@ const CreatePost = () => {
                     interaction: {
                         comments: [],
                         likes: [],
-                    }
+                    },
+                    retweets: []
                 }
                 await setDoc(doc(db, "posts", postId), dataToUpload);
                 if(pImg !== '') {

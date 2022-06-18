@@ -16,7 +16,6 @@ const Hashtags = () => {
     const [allHashtag, setAllHashtag] = useState(false)
     const [mappedHashtagList, setMappedHashtagList] = useState([{}])
     const calculateHashtags = async (postList:Array<postTypes>) => {
-        console.log('post', postList);
         const hashtags:Array<String> = []
         postList.forEach(post => {
             let hashtagsInPost = post.data.content.hashtag
@@ -27,9 +26,9 @@ const Hashtags = () => {
         let sortedArr = hashtags.sort();
         let hashtagsArray = []
         let count = 1;
-        for (var i = 0; i < sortedArr.length; i = i + count) {
+        for (let i = 0; i < sortedArr.length; i = i + count) {
             count = 1;
-            for (var j = i + 1; j < sortedArr.length; j++) {
+            for (let j = i + 1; j < sortedArr.length; j++) {
                 if (sortedArr[i] === sortedArr[j])
                 count++;
             }

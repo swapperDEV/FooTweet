@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { FaComment } from "@react-icons/all-files/fa/FaComment";
 import { FaShare } from "@react-icons/all-files/fa/FaShare";
 import { FaHeart } from "@react-icons/all-files/fa/FaHeart";
@@ -6,7 +6,8 @@ import { FaRetweet } from "@react-icons/all-files/fa/FaRetweet";
 import { FaOpenid } from "@react-icons/all-files/fa/FaOpenid";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getFirestore, doc, updateDoc } from 'firebase/firestore';
+import { getFirestore, doc, updateDoc, setDoc } from 'firebase/firestore';
+import { UserDataContext } from '../../../store/userData-context';
 
 type OptionProps = {
     openCommentCreate: Function,
@@ -22,6 +23,7 @@ type OptionProps = {
             creator: {
                 uId: string,
             }
+            retweets: Array<String>,
         }
     }
     fbCtx: {
@@ -35,9 +37,12 @@ type OptionProps = {
     commentActive: any,
     redirectToPost: Function,
     pType: String,
+    retweetActive: any,
 }
-const Options = ({post, fbCtx, heartActive, wrapperClass, openCommentCreate, commentCreateView, commentActive, pType, redirectToPost}: OptionProps) => {
+const Options = ({post, retweetActive, fbCtx, heartActive, wrapperClass, openCommentCreate, commentCreateView, commentActive, pType, redirectToPost}: OptionProps) => {
     const commentNumber = post.data.interaction.comments
+    const [isUserRetweet, updateIsUserRetweet] = useState(post.data.retweets.includes(fbCtx.currentUser.uid))
+    const UserCtx = useContext(UserDataContext)
     let likesNumber:Array<string> = post.data.interaction.likes
     const updateDB = (table:Array<any>) => {
         const db = getFirestore()
@@ -63,10 +68,8 @@ const Options = ({post, fbCtx, heartActive, wrapperClass, openCommentCreate, com
     const handleLikePost = () => {
         if(post.data.creator.uId !== fbCtx.currentUser.uid) {
             if(!likesNumber.includes(fbCtx.currentUser.uid)) {
-                console.log('nie zawiera');
                 likePost()
             } else {
-                console.log('zawiera');
                 dislikePost()
             }
         } else {
@@ -83,7 +86,7 @@ const Options = ({post, fbCtx, heartActive, wrapperClass, openCommentCreate, com
         }
     }
     const sharePost = () => {
-        navigator.clipboard.writeText(window.location.href)
+        navigator.clipboard.writeText(window.location.origin + `/post/${post.data.metaData.postId}`)
         toast('Link was copied to your clipboard!', {
             theme: 'dark',
             position: "bottom-right",
@@ -98,6 +101,35 @@ const Options = ({post, fbCtx, heartActive, wrapperClass, openCommentCreate, com
     if(pType !== 'long') {
         commentActive = ''
     }
+    const postRetweet = (id:String) => {
+        const db = getFirestore()
+        const uid = fbCtx.currentUser.uid
+        const postRetweets = post.data.retweets 
+        const retweetsTable = UserCtx.data.retweets
+        if(isUserRetweet) {
+            let indexP = retweetsTable.indexOf(id)
+            retweetsTable.splice(indexP, 1)
+            updateDoc(doc(db, "users", uid), {
+                retweets: retweetsTable
+            })
+            let indexU = postRetweets.indexOf(uid)
+            postRetweets.splice(indexU, 1)
+            updateDoc(doc(db, "posts", post.data.metaData.postId), {
+                retweets: postRetweets,
+            })
+            updateIsUserRetweet(false)
+        } else {
+            retweetsTable.push(id)
+            updateDoc(doc(db, "users", uid), {
+                retweets: retweetsTable
+            })
+            postRetweets.push(uid)
+            updateDoc(doc(db, "posts", post.data.metaData.postId), {
+                retweets: postRetweets,
+            })
+            updateIsUserRetweet(true)
+        }
+    } 
     return (
         <>
         <div className={wrapperClass}>
@@ -111,7 +143,7 @@ const Options = ({post, fbCtx, heartActive, wrapperClass, openCommentCreate, com
                 <FaOpenid onClick={() => redirectToPost()}/>
             </div>
             <div>
-                <FaRetweet/>
+                <FaRetweet onClick={() => postRetweet(post.data.metaData.postId)} className={isUserRetweet && retweetActive}/>
             </div>
             <div>
                 <FaShare onClick={sharePost}/>

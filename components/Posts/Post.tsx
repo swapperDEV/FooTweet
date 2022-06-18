@@ -35,7 +35,8 @@ type DataType = {
         interaction: {
             comments: Array<any>
             likes: Array<string>
-        }
+        },
+        retweets: Array<string>
     },
 }
 type PostProps = {
@@ -44,11 +45,13 @@ type PostProps = {
 }
 
 const Post = ({data, type}: PostProps) => {
+    console.log('test', data);
     const [widgetClass, changeWidgetClass] = useState(postStyles.settingsWidget)
     let [time, changeTime] = useState(0)
     const [pType, changeType] = useState(type)
     const [image, setImage] = useState('')
     const [commentCreateView, changeCommentCreateView] = useState(false)
+    const [retweetModalStatus, changeRetweetModalStatus] = useState({display: false, id: ''})
     const wrapperBox = useRef(null)
     const fbCtx = useContext(FirebaseContext)
     const userCtx = useContext(UserDataContext)
@@ -109,7 +112,7 @@ const Post = ({data, type}: PostProps) => {
                     <PostDescription post={post} openSettings={() => openSettings()} deletePost={() => deletePost()} closeSettings={() => closeSettings()} widgetClass={widgetClass} time={time === 0 ? 'Today' : `${time} d. ago`} fbCtx={fbCtx}/>
                     <Hashtags post={post}/>
                     <ImagePreview image={image}/>
-                    <Options commentCreateView={commentCreateView}   openCommentCreate={openCommentCreate} heartActive={postStyles.heartActive} wrapperClass={postStyles.options} post={post} fbCtx={fbCtx} commentActive={postStyles.commentActive} pType={pType} redirectToPost={forceRedirectToPost}/>
+                    <Options commentCreateView={commentCreateView}   openCommentCreate={openCommentCreate} heartActive={postStyles.heartActive} wrapperClass={postStyles.options} post={post} fbCtx={fbCtx} retweetActive={postStyles.retweetActive} commentActive={postStyles.commentActive} pType={pType} redirectToPost={forceRedirectToPost}/>
                 </div>
             </div>
             {pType === 'long' && <div className={postStyles.bottom}>

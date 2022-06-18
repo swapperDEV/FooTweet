@@ -54,9 +54,9 @@ const ProfileDescription = () => {
             </div>
             <div className={pdescriptionStyles.menu}>
                 <div className={pdescriptionStyles.activeSection}><FaEye/><p>Tweets</p></div>
-                <div><FaRetweet/><p>Retweet</p></div>
+                <div><FaRetweet/><p>Retweets</p></div>
                 <div><FaUserFriends/><p>Friends</p></div>
-                <div><FaEquals/><p>Settings</p></div>
+                <div><FaEquals/><p>Edit profile</p></div>
             </div>
         </div>
     )
