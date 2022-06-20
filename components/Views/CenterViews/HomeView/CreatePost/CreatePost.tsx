@@ -21,7 +21,7 @@ const CreatePost = () => {
     const postContentRef= useRef<HTMLTextAreaElement>(null)
     const hashtagRef = useRef<HTMLInputElement>(null)
     const storage = getStorage(fbCtx.app, "gs://ktweetapp.appspot.com")
-    const [pImg, changePostImg] = useState('')
+    const [imgRef, changeImgRef] = useState('')
     const [pImgPhoto, changePostImgPhoto] = useState('')
     const [imgToUpload, changeImgToUpload]:Array<any> = useState('')
     const [hashtag, setHashtag]:Array<any> = useState([])
@@ -36,7 +36,7 @@ const CreatePost = () => {
                 const postId = `${fbCtx.currentUser.uid}.${generateCode()}`
                 console.log('PostID', postId);
                 let haveImg = false;
-                if(pImg !== '') {
+                if(imgRef !== '') {
                     haveImg = true;
                 }
                 const dataToUpload = {
@@ -62,7 +62,7 @@ const CreatePost = () => {
                     retweets: []
                 }
                 await setDoc(doc(db, "posts", postId), dataToUpload);
-                if(pImg !== '') {
+                if(imgRef !== '') {
                     uploadFile(postId)
                 }
                 postContentRef.current!.value = ''
@@ -103,7 +103,7 @@ const CreatePost = () => {
     }
     const changeImg = (e: any) => {
         changeStartedCreatingPost(true)
-        changePostImg(e.target.value)
+        changeImgRef(e.target.value)
         const file = e.target.files[0]
         changeImgToUpload(file)
         if(file) {
@@ -111,7 +111,7 @@ const CreatePost = () => {
         }
     }
     const delImage = () => {
-        changePostImg('')
+        changeImgRef('')
         changeImgToUpload('')
         changePostImgPhoto('')
     }
@@ -171,7 +171,7 @@ const CreatePost = () => {
                     <div>
                         <label className={createPostStyles.filebutton}>
                         <FaImage/>
-                        <span><input onClick={handleWrite} className={createPostStyles.file} accept="image/*" type="file" value={pImg} onChange={e => changeImg(e)}/></span>
+                        <span><input onClick={handleWrite} className={createPostStyles.file} accept="image/*" type="file" value={imgRef} onChange={e => changeImg(e)}/></span>
                         </label>
                     </div>
                     <div className={createPostStyles.hashtags}>
