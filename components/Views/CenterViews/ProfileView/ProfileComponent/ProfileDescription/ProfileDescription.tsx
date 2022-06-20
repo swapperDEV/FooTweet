@@ -10,14 +10,18 @@ import { FaRetweet } from "@react-icons/all-files/fa/FaRetweet";
 import { FaUserFriends } from "@react-icons/all-files/fa/FaUserFriends";
 import { FaEquals } from "@react-icons/all-files/fa/FaEquals";
 
-const ProfileDescription = () => {
+type ProfileProps = {
+    updateUserData: Function,
+}
+const ProfileDescription = ({updateUserData}: ProfileProps) => {
     const path = useRouter() 
     const UserCtx = useContext(UserDataContext) 
     const [userData, setUserData] = useState({name: '', username: ''})
     const searchData = async (searchingUser:String) => {
-        await getUserData(searchingUser).then(value => 
-            setUserData(value[0]))
-    }  
+        await getUserData(searchingUser).then(value => { 
+            setUserData(value[0])
+            updateUserData(value[0])
+    })}  
     useEffect(() => {
         if(UserCtx.data.username) {
             let searchingUser
@@ -26,7 +30,6 @@ const ProfileDescription = () => {
             } else if(path.pathname === "/profile") {
                 searchingUser = UserCtx.data.username
             }
-            console.log(searchingUser);
             searchData(searchingUser)
         }
     },[UserCtx])
@@ -54,7 +57,7 @@ const ProfileDescription = () => {
             </div>
             <div className={pdescriptionStyles.menu}>
                 <div className={pdescriptionStyles.activeSection}><FaEye/><p>Tweets</p></div>
-                <div><FaRetweet/><p>Retweets</p></div>
+                <div><FaRetweet/><p>Followed</p></div>
                 <div><FaUserFriends/><p>Friends</p></div>
                 <div><FaEquals/><p>Edit profile</p></div>
             </div>

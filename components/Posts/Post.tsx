@@ -42,16 +42,15 @@ type DataType = {
 type PostProps = {
     data: DataType,
     type: String,
+    avatar: boolean,
 }
 
-const Post = ({data, type}: PostProps) => {
-    console.log('test', data);
+const Post = ({data, type, avatar}: PostProps) => {
     const [widgetClass, changeWidgetClass] = useState(postStyles.settingsWidget)
     let [time, changeTime] = useState(0)
     const [pType, changeType] = useState(type)
     const [image, setImage] = useState('')
     const [commentCreateView, changeCommentCreateView] = useState(false)
-    const [retweetModalStatus, changeRetweetModalStatus] = useState({display: false, id: ''})
     const wrapperBox = useRef(null)
     const fbCtx = useContext(FirebaseContext)
     const userCtx = useContext(UserDataContext)
@@ -106,7 +105,7 @@ const Post = ({data, type}: PostProps) => {
         <div className={postStyles.post}>
             <div className={postStyles.top}>
                 <div className={postStyles.left}>
-                    <Avatar/>
+                    {avatar && <Avatar/>}
                 </div>
                 <div className={postStyles.right} onClick={() => redirectToPost(event)} ref={wrapperBox}>
                     <PostDescription post={post} openSettings={() => openSettings()} deletePost={() => deletePost()} closeSettings={() => closeSettings()} widgetClass={widgetClass} time={time === 0 ? 'Today' : `${time} d. ago`} fbCtx={fbCtx}/>

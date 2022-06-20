@@ -1,6 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 const UserProfile = () => {
-    console.log('idk who');
+    const [userData, setUserData] = useState({})
+    const updateUserData = (data:object) => {
+        setUserData(data)
+    }
     return (
         <>
             another user

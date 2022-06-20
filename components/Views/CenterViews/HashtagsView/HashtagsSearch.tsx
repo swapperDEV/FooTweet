@@ -1,6 +1,6 @@
 import React from 'react'
 import hashtagsStyles from './hashtagssearch.module.scss'
-import Posts from '../../../Posts/Posts';
+import Posts from '../../../Posts/PostsMapper';
 import { useRouter } from 'next/router';
 const HashtagsSearch = () => {
     const path = useRouter()

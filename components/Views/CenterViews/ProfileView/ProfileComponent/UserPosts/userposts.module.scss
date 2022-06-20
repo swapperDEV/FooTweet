@@ -1,0 +1,60 @@
+.wrapper {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    .postsWrapper {
+        padding: 10px;
+        background-color: #3C424B;
+        border: 1px solid #3C424B;
+        border-radius: 15px;
+        min-height: 500px;
+        width: 600px;
+    }
+    .tweetsMenu {
+        width: 100%;
+        margin-left: 30px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        div {
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.1s ease;
+            padding: 10px;
+        }
+        .active {
+            color: #2BA7F3;
+            border-bottom: 1px solid #2BA7F3;;
+        }
+    }
+    .retweet {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        .retweetR {
+            background-color: #57606e;
+            border-radius: 10px;
+            margin: 20px;
+            margin-left: 10px;
+            padding-top: 10px;
+        }
+        .retweetL {
+            margin-top: 20px;
+            img {
+                border-radius: 50px;
+            }
+        }
+        .retweetInfo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: lightgray;
+        }
+    }
+}

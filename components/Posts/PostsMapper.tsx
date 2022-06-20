@@ -85,7 +85,6 @@ const Posts = ({requirements, requirementsType}: PostsProps) => {
     const postListening = () => {
         const db = getFirestore()
         onSnapshot(collection(db, "posts"), (snapshot) => {
-            console.log('real');
             let postList:any = []
             snapshot.forEach((doc) => {
                 postList.push({data: doc.data(), id: doc.id});
@@ -129,9 +128,7 @@ const Posts = ({requirements, requirementsType}: PostsProps) => {
             } else {
                 setPosts(postList)                
             }
-          }).catch((error) => {
-            console.error(error);
-          });
+          })
     }
     useEffect(() => {
         postSearch()
@@ -151,7 +148,7 @@ const Posts = ({requirements, requirementsType}: PostsProps) => {
             {posts.length >= 1 && posts.map((post:any) => {
                 return (
                 <>
-                    <Post key={post.data.metaData.postId} type='short' data={post}/>                
+                    <Post avatar={true} key={post.data.metaData.postId} type='short' data={post}/>                
                 </>
                 )
             })}

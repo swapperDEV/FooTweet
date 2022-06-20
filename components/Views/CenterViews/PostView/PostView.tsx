@@ -25,7 +25,7 @@ const PostView = () => {
     return (
         <>
         <div className={viewStyles.posts}>
-            {data !== null && <Post data={data} type='long'/>}
+            {data !== null && <Post data={data} type='long' avatar={true}/>}
         </div>
         </>
     )

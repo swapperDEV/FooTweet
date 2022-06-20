@@ -1,0 +1,29 @@
+.wrapper {
+    background-color: #3C424B;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 1px solid #3C424B;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    .userBaner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        div {
+            margin-left: 10px;
+            margin-right: 10px;
+            img {
+                border-radius: 50px;
+            }
+        }
+        .userBanerInfo {
+            flex-grow: 1;
+        }
+    }
+}
