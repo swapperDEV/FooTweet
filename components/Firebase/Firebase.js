@@ -32,10 +32,13 @@ const Firebase = (props) => {
             data1, data2, data3
         })
     }
+    const resetRegisterData = () => {
+        setDataState()
+    }
 
     return (
         <>
-            <FirebaseContext.Provider value={{registerData: registerDataState, setRegisterData: (x,y,z) => setData(x,y,z), canLogged: canLogged, auth: auth, app: app, currentUser: currentUser, setCurrentUser: (x) => setCurrentUser(x), signOutUser: () => signOutUser()}}>
+            <FirebaseContext.Provider value={{registerData: registerDataState, resetRegisterData: () => resetRegisterData(), setRegisterData: (x,y,z) => setData(x,y,z), canLogged: canLogged, auth: auth, app: app, currentUser: currentUser, setCurrentUser: (x) => setCurrentUser(x), signOutUser: () => signOutUser()}}>
                 {canLogged ? 
                 <UserProvider>
                     { props.children }

@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import { getDatabase, ref, set, get, child} from "firebase/database";
 import { getDate } from '../../functions/getDate';
 import { getFirestore } from 'firebase/firestore';
-import { doc, setDoc, getDoc, onSnapshot, collection} from "firebase/firestore"; 
+import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc} from "firebase/firestore"; 
 import { FirebaseContext } from '../../store/firebase-context';
 import { UserDataContext } from '../../store/userData-context';
 
@@ -39,6 +39,7 @@ const UserProvider = (props) => {
                     bio: '',
                     uid: FirebaseCtx.currentUser.uid,
                 });
+                FirebaseCtx.resetRegisterData()
             }
         }
     },[FirebaseCtx.currentUser])
