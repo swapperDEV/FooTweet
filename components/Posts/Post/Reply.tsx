@@ -17,7 +17,7 @@ const Reply = ({reply, deleteReply}: ReplyProps) => {
     return (
         <div className={postStyles.reply}>
             <div className={postStyles.replyLeft}>
-                <Avatar/>
+                <Avatar userID={reply.creatorId}/>
             </div>
             <div className={postStyles.replyRight}>
                 <p className={postStyles.creatorName}>@{reply.creatorName}</p>

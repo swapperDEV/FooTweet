@@ -164,7 +164,7 @@ const Comment = ({comment, post, fbCtx, userCtx, deleteComment}:CommentProps) =>
          <div className={postStyles.comment}>
             <div className={postStyles.topComment}>
                 <div className={postStyles.commentLeft}>
-                    <Avatar/>
+                    <Avatar userID={comment.creatorId}/>
                 </div>
                 <div className={postStyles.commentRight}>
                     <div className={postStyles.line}></div>

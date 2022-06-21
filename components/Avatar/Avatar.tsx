@@ -8,6 +8,7 @@ type avatarProps = {
     userID: string
 }
 const Avatar = ({userID}:avatarProps) => {
+    console.log('HALO', userID)
     const storage = getStorage()
     const db = getFirestore()
     const [image, setImage] = useState('')
