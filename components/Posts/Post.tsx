@@ -99,13 +99,13 @@ const Post = ({data, type, avatar}: PostProps) => {
         }
     }
     useEffect(() => {
-        changeTime(getTime(post.data.metaData.createDate))        
+        changeTime(getTime(post.data.metaData.createDate))     
     },[])
     return (
         <div className={postStyles.post}>
             <div className={postStyles.top}>
                 <div className={postStyles.left}>
-                    {avatar && <Avatar/>}
+                    {avatar && <Avatar userID={post.data.creator.uId}/>}
                 </div>
                 <div className={postStyles.right} onClick={() => redirectToPost(event)} ref={wrapperBox}>
                     <PostDescription post={post} openSettings={() => openSettings()} deletePost={() => deletePost()} closeSettings={() => closeSettings()} widgetClass={widgetClass} time={time === 0 ? 'Today' : `${time} d. ago`} fbCtx={fbCtx}/>

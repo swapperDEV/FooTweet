@@ -5,8 +5,11 @@ import testAvatar from '../../../assets/meta.png'
 import { FaSearch } from "@react-icons/all-files/fa/FaSearch"
 import { UserDataContext } from '../../../store/userData-context'
 import Router from 'next/router'
+import Avatar from '../../Avatar/Avatar'
+import { FirebaseContext } from '../../../store/firebase-context'
 
 const TopMenu = () => {
+    const fbCtx = useContext(FirebaseContext)
     const userCtx = useContext(UserDataContext)
     const searchRef = useRef<HTMLInputElement>(null)
     const searchByKeyWords = (e:KeyboardEvent) => {  
@@ -44,12 +47,7 @@ const TopMenu = () => {
                         </div>
                     </div>
                     <div className={menuStyles.userBanerL}>
-                        <Image
-                            src={testAvatar}
-                            alt="photo logo"
-                            width="40px"
-                            height="40px"
-                        />
+                        <Avatar userID={fbCtx.currentUser.uid}/>
                     </div>
                 </div>
             </div>

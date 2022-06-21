@@ -9,9 +9,11 @@ type UserPostProps = {
     userData: {
         username: string,
         name: string,
-    }
+    },
+    id: string
 }
-const UserPosts = ({userData}: UserPostProps) => {
+const UserPosts = ({userData, id}: UserPostProps) => {
+    console.log(id, 'id');
     const [postList, changePostList]:any = useState([]) 
     const [retweetList, changeRetweets]:any = useState([])
     const [actSection, changeSection] = useState('Tweets')
@@ -65,7 +67,7 @@ const UserPosts = ({userData}: UserPostProps) => {
                         return (
                             <div className={postStyles.retweet} key={post.metaData.postId}>
                                 <div className={postStyles.retweetL}>
-                                    <Avatar/>
+                                    <Avatar userID={id}/>
                                 </div>
                                 <div className={postStyles.retweetR}>
                                     <div className={postStyles.retweetInfo}><FaRetweet/>{userData.name} RETWEETED</div>

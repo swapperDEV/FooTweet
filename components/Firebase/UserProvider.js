@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import { getDatabase, ref, set, get, child} from "firebase/database";
 import { getDate } from '../../functions/getDate';
 import { getFirestore } from 'firebase/firestore';
-import { doc, setDoc, getDoc} from "firebase/firestore"; 
+import { doc, setDoc, getDoc, onSnapshot, collection} from "firebase/firestore"; 
 import { FirebaseContext } from '../../store/firebase-context';
 import { UserDataContext } from '../../store/userData-context';
 
@@ -26,6 +26,7 @@ const UserProvider = (props) => {
                 following: [],
                 retweets: [],
                 bio: '',
+                uid: FirebaseCtx.currentUser.uid
             });
         }
     }
@@ -33,7 +34,7 @@ const UserProvider = (props) => {
     useEffect(() => {
         if(FirebaseCtx.currentUser) {
         const db = getFirestore();
-            getDoc(doc(db, `users/${FirebaseCtx.currentUser.uid}`)).then((snapshot) => {
+            onSnapshot(doc(db, `users/${FirebaseCtx.currentUser.uid}`), (snapshot) => {
             if (snapshot.exists()) {
                 console.log(snapshot.data());
                 setUserData(snapshot.data())

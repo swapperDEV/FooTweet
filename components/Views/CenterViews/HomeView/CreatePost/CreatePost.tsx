@@ -14,6 +14,7 @@ import { FaWindowClose } from "@react-icons/all-files/fa/FaWindowClose";
 import { FaHashtag } from "@react-icons/all-files/fa/FaHashtag";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Avatar from '../../../../Avatar/Avatar'
 
 const CreatePost = () => {
     const fbCtx = useContext(FirebaseContext)
@@ -22,7 +23,7 @@ const CreatePost = () => {
     const hashtagRef = useRef<HTMLInputElement>(null)
     const storage = getStorage(fbCtx.app, "gs://ktweetapp.appspot.com")
     const [imgRef, changeImgRef] = useState('')
-    const [pImgPhoto, changePostImgPhoto] = useState('')
+    const [photoPreview, changePhotoPreview] = useState('')
     const [imgToUpload, changeImgToUpload]:Array<any> = useState('')
     const [hashtag, setHashtag]:Array<any> = useState([])
     const [hashtagStyles, setHashtagStyles] = useState(createPostStyles.hashtagsList)
@@ -107,13 +108,13 @@ const CreatePost = () => {
         const file = e.target.files[0]
         changeImgToUpload(file)
         if(file) {
-            changePostImgPhoto(URL.createObjectURL(file))
+            changePhotoPreview(URL.createObjectURL(file))
         }
     }
     const delImage = () => {
         changeImgRef('')
         changeImgToUpload('')
-        changePostImgPhoto('')
+        changePhotoPreview('')
     }
     const addHashtag = () => {
         changeStartedCreatingPost(true)
@@ -151,19 +152,14 @@ const CreatePost = () => {
         {}
         <div className={createPostStyles.createPost}>
             <div className={createPostStyles.createPostLeft}>
-                <Image
-                    src={testAvatar}
-                    alt="photo logo"
-                    width="60px"
-                    height="60px"
-                />
+                <Avatar userID={fbCtx.currentUser.uid}/>
             </div>
             <div className={createPostStyles.createPostRight} onMouseEnter={handleOpenPostTools} onMouseLeave={handleClosePostTools}>
                 <textarea ref={postContentRef} onChange={handleWrite} placeholder='What is happening?' className={createPostStyles.inputText}/>
                 {postTools && 
                 <div className={createPostStyles.animate}>
-                <img src={pImgPhoto} className={createPostStyles.previewImage}/>
-                {pImgPhoto && <FaWindowClose onClick={() => delImage()} className={createPostStyles.close}/>}
+                <img src={photoPreview} className={createPostStyles.previewImage}/>
+                {photoPreview && <FaWindowClose onClick={() => delImage()} className={createPostStyles.close}/>}
                 <div className={createPostStyles.postSettings}>
                     <div>
                         <FaGlobe/>

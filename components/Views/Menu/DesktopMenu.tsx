@@ -29,6 +29,9 @@ const DesktopMenu = () => {
     const Navigate = (path:String) => {
         Router.push(`/${path}`)
     }
+    const logoutAccount = () => {
+        Router.push(`/logout`)
+    }
     return (
         <div className={menuStyles.container}>
             <div className={menuStyles.logo}>
@@ -51,7 +54,7 @@ const DesktopMenu = () => {
                 </ul>
             </div>
             <div className={menuStyles.twtButtonWrapper}>
-            <button className={menuStyles.twtButton}>Tweet</button>
+            <button className={menuStyles.twtButton} onClick={() => logoutAccount()}>Logout</button>
             </div>
         </div>
     )

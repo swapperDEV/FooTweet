@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { doc, getDocs, getFirestore, collection } from "firebase/firestore";
+import { doc, getDocs, getFirestore, collection, updateDoc } from "firebase/firestore";
 import suggestionStyle from './suggestion.module.scss'
 import Avatar from '../../../../../Avatar/Avatar';
-const Suggestions = () => {
+
+type suggestionsProps = {
+    followedUsers: Array<String>,
+    id: String
+}
+const Suggestions = ({followedUsers, id}:suggestionsProps) => {
     const [usersSuggestion, updateSuggestion]:any = useState([])
     useEffect(() => {
         const db = getFirestore()
@@ -28,6 +33,15 @@ const Suggestions = () => {
             updateSuggestion(list)
         })
     },[])
+    const followUser = async (username:String) => {
+        const db = getFirestore()
+        const userRef = doc(db, "users", `${id}`);
+        const following = followedUsers
+        following.push(username)
+        await updateDoc(userRef, {
+            following: following
+          });
+    }
     return (
         <div className={suggestionStyle.wrapper}>
             <div>
@@ -35,18 +49,18 @@ const Suggestions = () => {
             </div>
             <div>
                 {usersSuggestion.length > 0 && usersSuggestion.map((user:any, index:number) => {
-                    console.log(user);
                     return (
                         <div key={index} className={suggestionStyle.userBaner}>
                             <div>
-                                <Avatar/>
+                                <Avatar userID={user.data.uid}/>
                             </div>
                             <div className={suggestionStyle.userBanerInfo}>
                                 <p>{user.data.name}</p>
                                 <p>@{user.data.username}</p>
                             </div>
                             <div>
-                                <p>Follow</p>
+                                <div onClick={() => followUser(user.data.username)}>{followedUsers.includes(user.data.username) ? <button>Unfollow</button> : <button>Follow</button>}
+                                </div>
                             </div>
                         </div>
                     )

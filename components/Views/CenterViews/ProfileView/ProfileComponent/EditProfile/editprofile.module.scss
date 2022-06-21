@@ -1,9 +1,10 @@
 .wrapper {
     font-family: 'Roboto', sans-serif;
     color: white;
-    min-height: 500px;
+    min-height: 300px;
     display: flex;
     align-items: center;
+    font-size: 25px;
     justify-content: flex-start;
     flex-direction: column;
     padding: 10px;
@@ -11,4 +12,79 @@
     background-color: #3C424B;
     border: 1px solid #3C424B;
     border-radius: 15px;
+    .avatar {
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 35px;
+        p {
+            margin-bottom: 5px;
+        }
+    }
+    .info {
+        div {
+            font-size: 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            input {
+                outline: none;
+                margin-right: 10px;
+                background-color: transparent;
+                border: 1px solid transparent;
+                border-bottom: 1px solid white;
+                color: white;
+            }
+        }
+    }
+    .btn {
+        cursor: pointer;
+        color: white;
+        background-color: #2BA7F3;
+        border: 1px solid #2BA7F3;
+        padding: 5px;
+        margin-top: 10px;
+        transition: 0.1s ease;
+        padding-left: 12px;
+        padding-right: 12px;
+        outline: none;
+        border-radius: 10px;
+    }
+    .btn:hover {
+        cursor: pointer;
+        background-color: #2181bd;
+        border: 1px solid #2181bd;
+    }
+}
+
+.file {
+    color: #2BA7F3!important;
+}
+
+.filebutton {
+    top: 8px;
+    width:120px;
+    height:40px;
+    overflow:hidden;
+    margin-right: 20px;
+    position:relative;
+}
+
+.filebutton span input {
+    z-index: 999;
+    line-height: 0;
+    font-size: 50px;
+    position: absolute;
+    left: 0px;
+    width: 30px;
+    height: 30px;
+    opacity: 0;
+    filter: alpha(opacity = 0);
+    -ms-filter: "alpha(opacity=0)";
+    cursor: pointer;
+    _cursor: hand;
+    margin: 0;
+    padding:0;
 }
