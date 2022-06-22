@@ -13,7 +13,6 @@ type UserPostProps = {
     id: string
 }
 const UserPosts = ({userData, id}: UserPostProps) => {
-    console.log(id, 'id');
     const [postList, changePostList]:any = useState([]) 
     const [retweetList, changeRetweets]:any = useState([])
     const [actSection, changeSection] = useState('Tweets')
@@ -55,7 +54,6 @@ const UserPosts = ({userData, id}: UserPostProps) => {
                 {actSection === 'Tweets' && 
                 <div>
                     {postList.length > 0 ? postList.map((post:any) => {
-                        console.log('x', post);
                         return (
                             <Post data={{data: post}} type={'short'} key={post.metaData.postId} avatar={true}/>
                         )

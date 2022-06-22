@@ -47,7 +47,7 @@ const TopMenu = () => {
                         </div>
                     </div>
                     <div className={menuStyles.userBanerL}>
-                        <Avatar userID={fbCtx.currentUser.uid}/>
+                        <img src={userCtx.avatar}/>
                     </div>
                 </div>
             </div>

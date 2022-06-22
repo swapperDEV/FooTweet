@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react'
 import { UserDataContext } from '../../../../../../store/userData-context';
 import {getUserData} from '../../../../../../functions/getUserData'
-import Avatar from '../../../../../Avatar/Avatar';
 import pdescriptionStyles from './profiledescription.module.scss'
 import { FaLocationArrow } from "@react-icons/all-files/fa/FaLocationArrow";
 import { FaEye } from "@react-icons/all-files/fa/FaEye";
@@ -19,8 +18,7 @@ type ProfileProps = {
 const ProfileDescription = ({updateUserData, updateSection, sectionType}: ProfileProps) => {
     const path = useRouter() 
     const UserCtx = useContext(UserDataContext) 
-    const fbCtx = useContext(FirebaseContext)
-    const [userData, setUserData] = useState({name: '', username: '', bio: '', location: ''})
+    const [userData, setUserData] = useState({name: '', username: '', bio: '', location: '', following: [], followers: []})
     const searchData = async (searchingUser:String) => {
         await getUserData(searchingUser).then(value => { 
             setUserData(value[0])
@@ -40,23 +38,23 @@ const ProfileDescription = ({updateUserData, updateSection, sectionType}: Profil
     return (
         <div className={pdescriptionStyles.wrapper}>
             <div className={pdescriptionStyles.info}>
-                <Avatar userID={fbCtx.currentUser.uid}/>
+                <img src={UserCtx.avatar} width="50" height="50"/>
                 <p className={pdescriptionStyles.name}>{userData.name}</p>
                 <p className={pdescriptionStyles.username}>@{userData.username}</p>
                 <p className={pdescriptionStyles.bio}>{userData.bio}</p>
                 <p className={pdescriptionStyles.location}><FaLocationArrow/>{userData.location}</p>
                 <div className={pdescriptionStyles.stats}>
                     <div>
-                        <p className={pdescriptionStyles.statName}>Tweets</p>
+                        <p className={pdescriptionStyles.statName}>FlexPoints</p>
                         <p>0</p>
                     </div>
                     <div className={pdescriptionStyles.centerS}>
                         <p className={pdescriptionStyles.statName}>Followers</p>
-                        <p>0</p>
+                        <p>{userData && userData.followers.length}</p>
                     </div>
                     <div>
                         <p className={pdescriptionStyles.statName}>Following</p>
-                        <p>0</p>
+                        <p>{userData && userData.following.length}</p>
                     </div>
                 </div>
             </div>

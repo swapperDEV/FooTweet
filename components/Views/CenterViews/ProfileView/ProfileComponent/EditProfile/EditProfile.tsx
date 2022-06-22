@@ -6,6 +6,9 @@ import { FirebaseContext } from '../../../../../../store/firebase-context'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
+import { FaUser } from "@react-icons/all-files/fa/FaUser";
+import { FaInfo } from "@react-icons/all-files/fa/FaInfo";
+import { UserDataContext } from '../../../../../../store/userData-context';
 
 const toastOptions:any = {
     theme: 'dark',
@@ -20,8 +23,10 @@ const toastOptions:any = {
 
 const EditProfile = () => {
     const fbCtx = useContext(FirebaseContext)
+    const userCtx = useContext(UserDataContext)
     const [imgRef, changeImgRef] = useState('')
     const [photo, changePhoto]:any = useState('')
+    const [tile, changeTile]:any = useState('none')
     const nameRef = useRef<HTMLInputElement>(null);
     const locationRef = useRef<HTMLInputElement>(null);
     const bioRef = useRef<HTMLInputElement>(null);
@@ -45,6 +50,8 @@ const EditProfile = () => {
                 updateDoc(userRef, {
                     avatarID: id
                 })
+                userCtx.getAvatar()
+                changeTile('none')
             });
         } else {
             toast.error('Add a file to upload new avatar!', toastOptions);
@@ -77,17 +84,34 @@ const EditProfile = () => {
     }
     return (
         <div className={editProfileStyles.wrapper}>
-            <div className={editProfileStyles.avatar}>
-                <p>Change Avatar</p>
-                <div>
-                    <label className={editProfileStyles.filebutton}>
-                        <FaImage className={imgRef && editProfileStyles.file}/>
-                        <span><input accept="image/*" type="file" value={imgRef} onChange={e => changeImg(e)}/></span>
-                    </label>
-                    <button className={editProfileStyles.btn} onClick={() => uploadFile()}>Add</button>
-                </div>
-
+            {tile === 'none' && 
+            <>
+            <div className={editProfileStyles.tile} onClick={() => changeTile('avatar')}>
+                <p>Avatar</p>
+                <FaUser/>
             </div>
+            <div className={editProfileStyles.tile} onClick={() => changeTile('information')}>
+                <p>Information</p>
+                <FaInfo/>
+            </div>
+            </>
+            }
+            {tile === 'avatar' && 
+            <>
+            <div className={editProfileStyles.avatar}>
+            <p>Change Avatar</p>
+            <div>
+                <label className={editProfileStyles.filebutton}>
+                    <FaImage className={imgRef && editProfileStyles.file}/>
+                    <span><input accept="image/*" type="file" value={imgRef} onChange={e => changeImg(e)}/></span>
+                </label>
+                <button className={editProfileStyles.btnAvatar} onClick={() => uploadFile()}>Change</button>
+            </div>
+            </div>
+            </>
+            }
+            {tile === 'information' && 
+            <div className={editProfileStyles.information}>
             <div className={editProfileStyles.info}>
                 <div>
                     <input maxLength={32} ref={nameRef}/>Change Name 
@@ -99,9 +123,11 @@ const EditProfile = () => {
                     <input maxLength={64} ref={bioRef}/>Change Bio
                 </div>
             </div> 
-            <div>
+            <div className={editProfileStyles.update}>
                 <button onClick={() => updateProfile()} className={editProfileStyles.btn}>Update profile</button>
+            </div> 
             </div>
+            }
             <ToastContainer
             position="bottom-right"
             autoClose={5000}
@@ -117,3 +143,4 @@ const EditProfile = () => {
     )
 }
 export default EditProfile;
+

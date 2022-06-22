@@ -1,6 +1,5 @@
 import { getFirestore, query, collection, where, getDocs} from 'firebase/firestore';
 export const getUserRetweets = async (username) => {
-    console.log(username, 'RT')
     const db = getFirestore()
     const userRef = collection(db, "users")
     const qUser = query(userRef, where("username", "==", username))

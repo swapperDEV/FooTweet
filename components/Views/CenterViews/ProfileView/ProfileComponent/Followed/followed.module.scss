@@ -1,10 +1,11 @@
 .wrapper {
     font-family: 'Roboto', sans-serif;
     color: white;
-    min-height: 300px;
     display: flex;
     align-items: center;
     font-size: 25px;
+    min-height: 475px;
+    overflow: hidden;
     justify-content: flex-start;
     flex-direction: column;
     padding: 10px;
@@ -12,4 +13,66 @@
     background-color: #3C424B;
     border: 1px solid #3C424B;
     border-radius: 15px;
+    .following {
+        margin-bottom: 15px;
+        font-size: 20px;
+        .info {
+            text-align: center;
+            font-size: 30px;
+        }
+        .followingUser {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .avatar {
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+            .name {
+                flex-grow: 1;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                flex-direction: column;
+                margin-left: 10px;
+                font-size: 20px;
+                margin-right: 10px;
+                .username {
+                    color: lightgray;
+                }
+            }
+            .buttons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                button {
+                    width: 120px;
+                    padding: 5px;
+                    font-size: 12px;
+                    background-color: #2BA7F3;
+                    border: 1px solid #2BA7F3;
+                    margin: 5px;
+                    color: white;
+                    border-radius: 10px;
+                    transition: 0.1s ease;
+                }
+                button:hover {
+                    cursor: pointer;
+                    background-color: #2185c4;
+                    border: 1px solid #2185c4;
+                }
+            }
+            img {
+                border-radius: 50px;
+                width: 40px;
+                height: 40px;
+            }
+            p {
+                margin-left: 10px;
+            }
+        }
+    }
 }

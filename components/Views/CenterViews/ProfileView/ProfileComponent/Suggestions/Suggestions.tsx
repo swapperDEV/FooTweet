@@ -16,13 +16,17 @@ const Suggestions = ({followedUsers, id}:suggestionsProps) => {
             snapshot.forEach((doc) => {
                 usersList.push({data: doc.data(), id: doc.id});
             });
-            let max = usersList.length 
+            let max = usersList.length
+            let loop = 3; 
+            if(usersList.length < 3) {
+                loop = usersList.length
+            } 
             let numbers:any = []
             for(let i = 0; i<3; i++) {
                 max = max - 1
-                let number = Math.floor(Math.random() * 0) + max
+                let number = Math.floor(Math.random() * (max - 0) + 0)
                 while(numbers.includes(number)) {
-                    Math.floor(Math.random() * 0) + max
+                    number = Math.floor(Math.random() * (max - 0) + 0)
                 }
                 numbers.push(number)
             }
@@ -37,7 +41,12 @@ const Suggestions = ({followedUsers, id}:suggestionsProps) => {
         const db = getFirestore()
         const userRef = doc(db, "users", `${id}`);
         const following = followedUsers
-        following.push(username)
+        if(following.includes(username)) {
+            let index = following.indexOf(username)
+            following.splice(index, 1)
+        } else {
+            following.push(username)
+        }
         await updateDoc(userRef, {
             following: following
           });
@@ -45,7 +54,7 @@ const Suggestions = ({followedUsers, id}:suggestionsProps) => {
     return (
         <div className={suggestionStyle.wrapper}>
             <div>
-                <p>You should follow</p>
+                <p>You should check</p>
             </div>
             <div>
                 {usersSuggestion.length > 0 && usersSuggestion.map((user:any, index:number) => {
@@ -56,7 +65,7 @@ const Suggestions = ({followedUsers, id}:suggestionsProps) => {
                             </div>
                             <div className={suggestionStyle.userBanerInfo}>
                                 <p>{user.data.name}</p>
-                                <p>@{user.data.username}</p>
+                                <p className={suggestionStyle.username}>@{user.data.username}</p>
                             </div>
                             <div>
                                 <div onClick={() => followUser(user.data.username)}>{followedUsers.includes(user.data.username) ? <button>Unfollow</button> : <button>Follow</button>}

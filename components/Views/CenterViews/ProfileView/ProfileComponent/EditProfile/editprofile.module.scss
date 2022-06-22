@@ -3,35 +3,82 @@
     color: white;
     min-height: 300px;
     display: flex;
+    height: 475px;
     align-items: center;
     font-size: 25px;
     justify-content: flex-start;
-    flex-direction: column;
+    flex-direction: row;
     padding: 10px;
     min-width: 600px;
     background-color: #3C424B;
     border: 1px solid #3C424B;
     border-radius: 15px;
+    .tile {
+        width: 40%;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 1px solid white;
+        padding-top: 100px;
+        padding-bottom: 100px;
+        margin: 30px;
+        transition: 0.1s ease;
+        svg {
+            margin-top: 5px;
+        }
+    }
+    .tile:hover {
+        cursor: pointer;
+        background-color: #616b79;
+    }
+    .information {
+        display: flex;
+        font-size: 30px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
     .avatar {
         margin-top: 25px;
         display: flex;
         justify-content: center;
+        width: 100%;
+        font-size: 50px;
         flex-direction: column;
         align-items: center;
         margin-bottom: 35px;
         p {
             margin-bottom: 5px;
         }
+        .btnAvatar {
+            cursor: pointer;
+            color: white;
+            background-color: #2BA7F3;
+            border: 1px solid #2BA7F3;
+            padding: 5px;
+            margin-top: 0px;
+            transition: 0.1s ease;
+            padding-left: 12px;
+            padding-right: 12px;
+            outline: none;
+            border-radius: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
     }
     .info {
         div {
-            font-size: 20px;
+            font-size: 30px;
             display: flex;
             justify-content: flex-start;
             align-items: center;
             input {
                 outline: none;
                 margin-right: 10px;
+                font-size: 20px;
                 background-color: transparent;
                 border: 1px solid transparent;
                 border-bottom: 1px solid white;
@@ -57,6 +104,13 @@
         background-color: #2181bd;
         border: 1px solid #2181bd;
     }
+    .update {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        margin-bottom: 20px;
+    }
 }
 
 .file {
@@ -64,7 +118,7 @@
 }
 
 .filebutton {
-    top: 8px;
+    top: 20px;
     width:120px;
     height:40px;
     overflow:hidden;
@@ -78,8 +132,8 @@
     font-size: 50px;
     position: absolute;
     left: 0px;
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 70px;
     opacity: 0;
     filter: alpha(opacity = 0);
     -ms-filter: "alpha(opacity=0)";

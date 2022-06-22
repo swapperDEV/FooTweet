@@ -11,7 +11,6 @@ const YourProfile = () => {
     const fbCtx = useContext(FirebaseContext)
     const [userData, setUserData]:any = useState({})
     const [sectionType, changeSection] = useState('editprofile')
-    console.log('sss', userData);
     const updateUserData = (data:object) => {
         setUserData(data)
     }
@@ -27,7 +26,7 @@ const YourProfile = () => {
                 {sectionType === 'tweets' && <UserPosts userData={userData} id={fbCtx.currentUser.uid}/>}
                 {sectionType === 'editprofile' && <EditProfile/>}
                 {sectionType === 'friends' && <Friends followedUsers={userData.following} followers={userData.followers}/>}
-                {sectionType === 'followed' && <Followed followedUsers={userData.following} id={fbCtx.currentUser.uid}/>}
+                {sectionType === 'followed' && <Followed followedUsers={userData.following} id={fbCtx.currentUser.uid} yourUsername={userData.username}/>}
             </div>
         </div>
     )

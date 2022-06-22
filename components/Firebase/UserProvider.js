@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react'
-import { getDatabase, ref, set, get, child} from "firebase/database";
 import { getDate } from '../../functions/getDate';
 import { getFirestore } from 'firebase/firestore';
-import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc} from "firebase/firestore"; 
+import { doc, setDoc, getDoc, onSnapshot } from "firebase/firestore"; 
 import { FirebaseContext } from '../../store/firebase-context';
 import { UserDataContext } from '../../store/userData-context';
+import { getStorage, ref as sRef, getDownloadURL} from 'firebase/storage';
 
 const UserProvider = (props) => {
     const FirebaseCtx = useContext(FirebaseContext)
@@ -12,7 +12,22 @@ const UserProvider = (props) => {
     const [userData, setUserData] = useState({
         email: 'Error',
     })
+    const [userAvatar, setUserAvatar] = useState(null)
     const { currentUser, auth} = FirebaseCtx
+    const getAvatar = async () => {
+        let data;
+        const storage = getStorage()
+        const db = getFirestore()
+        const userRef = doc(db, "users", userData.uid);
+        const userSnap = await getDoc(userRef)
+        if(userSnap.exists()) {
+            data = userSnap.data()
+            getDownloadURL(sRef(storage, `avatars/${data.avatarID}.jpg`))
+            .then((url) => {
+                setUserAvatar(url)
+            })
+        }
+    }
     useEffect(() => {
         if(FirebaseCtx.currentUser) {
         const db = getFirestore();
@@ -43,9 +58,15 @@ const UserProvider = (props) => {
             }
         }
     },[FirebaseCtx.currentUser])
+    useEffect(() => {
+        console.log('test', userData.uid)
+        if(userData.uid) {
+            getAvatar()
+        }
+    }, [userData.uid])
     return (
         <>
-        <UserDataContext.Provider value={{data: userData}}>
+        <UserDataContext.Provider value={{data: userData, avatar: userAvatar, getAvatar: () => getAvatar()}}>
             {props.children}
         </UserDataContext.Provider>
         </>
