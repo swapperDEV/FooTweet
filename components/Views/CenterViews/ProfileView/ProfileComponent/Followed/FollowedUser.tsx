@@ -9,9 +9,11 @@ import Router from 'next/router'
 type followedUserProps = {
     user: String,
     unFollowUser: Function
+    check1: string,
+    check2: string,
 }
 
-const FollowedUser = ({user, unFollowUser}:followedUserProps) => {
+const FollowedUser = ({user, unFollowUser, check1, check2}:followedUserProps) => {
     const [data,setData]:any = useState([{avatarID: 'standard'}])
     const getFullUserData = async () => {
         getUserData(user).then(value => { 
@@ -28,14 +30,14 @@ const FollowedUser = ({user, unFollowUser}:followedUserProps) => {
         <>
         <div className={followedStyles.followingUser}>
                 <div className={followedStyles.avatar}>
-                    {data[0].avatarID !== 'standard' ? <Avatar userID={data[0].avatarID}/> : <Image src={errorAvatar} width="40" height="40"/>} 
+                    {data[0].avatarID !== 'standard' ? <Avatar userID={data[0].avatarID}/> : <Image src={errorAvatar} width="40" height="40" onClick={() => showProfile()}/>} 
                 </div>
                 <div className={followedStyles.name}>
                     <p>{data[0].name}</p>
                     <p className={followedStyles.username}>@{data[0].username}</p>
                 </div> 
                 <div className={followedStyles.buttons}>
-                    <button onClick={() => unFollowUser(data[0].username, data[0].uid)} className={followedStyles.btn}>Unfollow</button>
+                    {check1 === check2 && <button onClick={() => unFollowUser(data[0].username, data[0].uid)} className={followedStyles.btn}>Unfollow</button>}
                     <button onClick={() => showProfile()} className={followedStyles.btn}>Show profile</button>
                 </div>
         </div>

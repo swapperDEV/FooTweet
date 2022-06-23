@@ -7,7 +7,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../assets/logo.png'
 import Wrapper from '../Wrapper/Wrapper'
-import { Fade } from 'react-awesome-reveal'
 import { ToastContainer } from 'react-toastify'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

@@ -5,6 +5,7 @@ import { getFirestore, doc, updateDoc} from 'firebase/firestore';
 import { getDate } from '../../../functions/getDate';
 import { useRef } from 'react';
 import { toast } from 'react-toastify';
+import { sendNotify } from '../../../functions/sendNotify';
 type CommentsProps = {
     type: String, 
     post: {
@@ -15,6 +16,9 @@ type CommentsProps = {
             }
             metaData: {
                 postId: string,
+            },
+            creator: {
+                uId: string,
             }
         }
     }
@@ -52,6 +56,7 @@ const Comments = ({type, post, fbCtx, userCtx, commentCreateView}:CommentsProps)
                     likes: post.data.interaction.likes
                 }
             })
+            sendNotify(post.data.creator.uId, userCtx.data.username, `${userCtx.data.username} comment your post`, 'comment')
             commentRef.current!.value = ''
         } else {
             toast.error('Your comment is too short!', {

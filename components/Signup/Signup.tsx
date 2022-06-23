@@ -14,7 +14,6 @@ import { Fade } from 'react-awesome-reveal'
 import { ToastContainer } from 'react-toastify'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { type } from 'os'
 
 const SignupComponent = () => {
     const FirebaseCtx = useContext(FirebaseContext)

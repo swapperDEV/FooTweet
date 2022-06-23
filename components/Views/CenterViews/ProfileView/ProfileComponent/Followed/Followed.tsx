@@ -2,49 +2,40 @@ import React, {useContext, useEffect, useState} from 'react'
 import followedStyles from './followed.module.scss'
 import Suggestions from '../Suggestions/Suggestions'
 import FollowedUser from './FollowedUser'
-import { getFirestore, doc, getDoc, updateDoc} from 'firebase/firestore'
-import { FirebaseContext } from '../../../../../../store/firebase-context'
+import {unfollowUser} from '../../../../../../functions/unfollowUser'
+import { UserDataContext } from '../../../../../../store/userData-context'
 type followedProps = {
     followedUsers: Array<string>
     id: any,
     yourUsername: string,
 }
 const Followed = ({followedUsers, id, yourUsername}:followedProps) => {
+    const userCtx = useContext(UserDataContext)
     const [followedUsersTable, changeFollowedUser] = useState(followedUsers)
     const unFollowUser = async (username:any, uid:any) => {
-        const users = followedUsersTable
-        let index = users.indexOf(username)
-        users.splice(index, 1)
-        const db = getFirestore()
-        const userRef = doc(db, "users", id);
-        const followingUserRef = doc(db, "users", uid);
-        await updateDoc(userRef, {
-            following: users
+        unfollowUser(username, uid, followedUsersTable, id, yourUsername).then(value => { 
+            changeFollowedUser(value)            
         })
-        let snap = await getDoc(userRef)
-        if(snap.exists()) {
-            const data = snap.data()
-            const {followers} = data
-            let index = followers.indexOf(yourUsername)
-            followers.splice(index, 1)
-            await updateDoc(followingUserRef, {
-                followers: followers
-            })
-        }
-        changeFollowedUser(users)
     }
     return (
+        <>
         <div className={followedStyles.wrapper}>
-            <div className={followedStyles.following}>
-                <p className={followedStyles.info}>The users you follow</p>
-                {followedUsersTable.map((user) => {
-                return (
-                    <FollowedUser user={user} key={user} unFollowUser={unFollowUser}/>
-                )
-                })}
+        <div className={followedStyles.following}>
+            <p className={followedStyles.info}>{userCtx.data.username === yourUsername ?` The users you follow` : `The users followed by ${yourUsername}`}</p>
+            {followedUsersTable.map((user) => {
+            return (
+                <FollowedUser check1={userCtx.data.username} check2={yourUsername} user={user} key={user} unFollowUser={unFollowUser}/>
+            )
+            })}
             </div>
-            <Suggestions followedUsers={followedUsersTable} id={id}/>
+            {
+            userCtx.data.username === yourUsername && 
+            <div className={followedStyles.wrapperRight}>
+            <Suggestions followedUsers={followedUsersTable} id={id} yourUsername={yourUsername}/>
+            </div>
+            }
         </div>
+        </>
     )
 }
 export default Followed

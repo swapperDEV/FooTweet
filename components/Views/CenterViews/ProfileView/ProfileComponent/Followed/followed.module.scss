@@ -5,15 +5,17 @@
     align-items: center;
     font-size: 25px;
     min-height: 475px;
+    min-width: 400px;
     overflow: hidden;
     justify-content: flex-start;
+    margin-right: 25px;
     flex-direction: column;
     padding: 10px;
-    min-width: 600px;
     background-color: #3C424B;
     border: 1px solid #3C424B;
     border-radius: 15px;
     .following {
+        padding: 40px;
         margin-bottom: 15px;
         font-size: 20px;
         .info {
@@ -75,4 +77,10 @@
             }
         }
     }
+}
+.wrapperRight {
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
 }

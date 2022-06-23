@@ -15,6 +15,8 @@ import { FaHashtag } from "@react-icons/all-files/fa/FaHashtag";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Avatar from '../../../../Avatar/Avatar'
+import { sendNotify } from '../../../../../functions/sendNotify'
+import { getUserData } from '../../../../../functions/getUserData'
 
 const CreatePost = () => {
     const fbCtx = useContext(FirebaseContext)
@@ -30,12 +32,20 @@ const CreatePost = () => {
     const [postTools, openPostTools] = useState(false)
     const [startedCreatingPost, changeStartedCreatingPost] = useState(false)
 
+
+    const sendNotifyToFollowers = () => {
+        userCtx.data.followers.forEach((follower:any) => {
+            getUserData(follower).then((data:any) => {
+                const id = data[0].uid 
+                sendNotify(id, userCtx.data.username, `${userCtx.data.username} push a new post!`, 'newpost')
+            })
+        })
+    }
     const createPost = async () => {
         if(hashtag.length >= 2) {
             if(postContentRef.current!.value.length >= 7) {
                 const db = getFirestore()
                 const postId = `${fbCtx.currentUser.uid}.${generateCode()}`
-                console.log('PostID', postId);
                 let haveImg = false;
                 if(imgRef !== '') {
                     haveImg = true;
@@ -69,6 +79,7 @@ const CreatePost = () => {
                 postContentRef.current!.value = ''
                 setHashtag([])
                 delImage()
+                sendNotifyToFollowers()
             } else {
                 toast.error('Write a post description!', {
                     theme: 'dark',
@@ -96,7 +107,6 @@ const CreatePost = () => {
     }
 
     const uploadFile = (postId:string) => {
-        console.log(fbCtx.currentUser.uid);
         const postImageRef = ref(storage, `images/${postId}.jpg`);
         uploadBytes(postImageRef, imgToUpload).then((snapshot) => {
             console.log(snapshot);

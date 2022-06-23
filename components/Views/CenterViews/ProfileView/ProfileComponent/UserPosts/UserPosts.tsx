@@ -6,11 +6,8 @@ import { FaRetweet } from "@react-icons/all-files/fa/FaRetweet";
 import Post from '../../../../../Posts/Post'
 import Avatar from '../../../../../Avatar/Avatar'
 type UserPostProps = {
-    userData: {
-        username: string,
-        name: string,
-    },
-    id: string
+    userData: any
+    id: any
 }
 const UserPosts = ({userData, id}: UserPostProps) => {
     const [postList, changePostList]:any = useState([]) 
@@ -73,7 +70,7 @@ const UserPosts = ({userData, id}: UserPostProps) => {
                                 </div>
                             </div>
                         )
-                    }) : <p>User dont have retweets</p>}                 
+                    }) : <p className={postStyles.error}>User dont have retweets</p>}                 
                 </div>}
             </div>
             </div>

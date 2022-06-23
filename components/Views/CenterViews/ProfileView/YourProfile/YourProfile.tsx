@@ -5,12 +5,11 @@ import UserPosts from '../ProfileComponent/UserPosts/UserPosts';
 import EditProfile from '../ProfileComponent/EditProfile/EditProfile';
 import profileStyles from './yourprofile.module.scss'
 import { FirebaseContext } from '../../../../../store/firebase-context';
-import Friends from '../ProfileComponent/Friends/Friends';
 
 const YourProfile = () => {
     const fbCtx = useContext(FirebaseContext)
     const [userData, setUserData]:any = useState({})
-    const [sectionType, changeSection] = useState('editprofile')
+    const [sectionType, changeSection] = useState('tweets')
     const updateUserData = (data:object) => {
         setUserData(data)
     }
@@ -25,7 +24,7 @@ const YourProfile = () => {
             <div className={profileStyles.sectionSecond}>
                 {sectionType === 'tweets' && <UserPosts userData={userData} id={fbCtx.currentUser.uid}/>}
                 {sectionType === 'editprofile' && <EditProfile/>}
-                {sectionType === 'friends' && <Friends followedUsers={userData.following} followers={userData.followers}/>}
+                {sectionType === 'friends'}
                 {sectionType === 'followed' && <Followed followedUsers={userData.following} id={fbCtx.currentUser.uid} yourUsername={userData.username}/>}
             </div>
         </div>

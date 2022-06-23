@@ -1,0 +1,26 @@
+.wrapper {
+    width: 100%;
+    overflow-x: hidden;
+    min-height: 100%;
+    display: flex;
+    margin-top: 160px;
+    justify-content: center;
+    align-items: flex-start;
+    .sectionFirst, .sectionSecond, .sectionThird {
+        z-index: 2;
+        word-wrap: break-word;
+        min-width: 20px;
+    }
+    .sectionFirst {
+        margin-left: 20px;
+    }
+    .sectionSecond {
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .sectionThird {
+        margin-left: 40px;
+    }
+}

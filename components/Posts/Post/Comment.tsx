@@ -8,6 +8,7 @@ import { getFirestore, doc, updateDoc} from 'firebase/firestore';
 import { getDate } from '../../../functions/getDate';
 import Reply from './Reply';
 import { Id, toast } from 'react-toastify';
+import { sendNotify } from '../../../functions/sendNotify';
 
 type CommentProps = {
     comment: {
@@ -69,6 +70,7 @@ const Comment = ({comment, post, fbCtx, userCtx, deleteComment}:CommentProps) =>
                     likes: post.data.interaction.likes
                 }
             })
+            sendNotify(comment.creatorId, userCtx.data.username, `${userCtx.data.username} reply you`, 'reply')
         } else {
             toast.error('Your reply is too short!', {
                 theme: 'dark',

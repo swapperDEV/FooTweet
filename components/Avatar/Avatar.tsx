@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import testAvatar from '../../assets/meta.png'
+import { getUsername } from '../../functions/getUsername'
 import { getStorage, getDownloadURL, ref } from 'firebase/storage';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import avatarStyles from './avatar.module.scss'
 import Router from 'next/router'
-import errorAvatar from '../../assets/meta.png'
+
 type avatarProps = {
     userID: string
 }
@@ -24,8 +24,10 @@ const Avatar = ({userID}:avatarProps) => {
             })
         }
     }
-    const redirectToProfile = () => {
-        Router.push(`/profile/${userID}`)
+    const redirectToProfile = async () => {
+        getUsername(userID).then(value => {
+            Router.push(`/profile/${value}`)
+        })
     }
     useEffect(() => {
         getAvatar()

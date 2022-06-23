@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    text-align: center;
+    text-align: left;
     .postsWrapper {
         padding: 10px;
         background-color: #3C424B;
@@ -58,4 +58,7 @@
             color: lightgray;
         }
     }
+}
+.error {
+    text-align: center;
 }

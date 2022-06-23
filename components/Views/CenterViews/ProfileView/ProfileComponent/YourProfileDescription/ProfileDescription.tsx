@@ -8,7 +8,6 @@ import { FaEye } from "@react-icons/all-files/fa/FaEye";
 import { FaRetweet } from "@react-icons/all-files/fa/FaRetweet";
 import { FaUserFriends } from "@react-icons/all-files/fa/FaUserFriends";
 import { FaEquals } from "@react-icons/all-files/fa/FaEquals";
-import { FirebaseContext } from '../../../../../../store/firebase-context';
 
 type ProfileProps = {
     updateUserData: Function,
@@ -61,8 +60,14 @@ const ProfileDescription = ({updateUserData, updateSection, sectionType}: Profil
             <div className={pdescriptionStyles.menu}>
                 <div onClick={() => updateSection('tweets')} className={sectionType === 'tweets' ? pdescriptionStyles.activeSection : ''}><FaEye/><p>Tweets</p></div>
                 <div onClick={() => updateSection('followed')} className={sectionType === 'followed' ? pdescriptionStyles.activeSection : ''}><FaRetweet/><p>Followed</p></div>
-                <div onClick={() => updateSection('friends')} className={sectionType === 'friends' ? pdescriptionStyles.activeSection : ''}><FaUserFriends/><p>Friends</p></div>
-                <div onClick={() => updateSection('editprofile')} className={sectionType === 'editprofile' ? pdescriptionStyles.activeSection : ''}><FaEquals/><p>Edit profile</p></div>
+                <>
+                { userData.username === UserCtx.data.username ? 
+                    <>
+                    <div onClick={() => updateSection('friends')} className={sectionType === 'friends' ? pdescriptionStyles.activeSection : ''}><FaUserFriends/><p>-</p></div>
+                    <div onClick={() => updateSection('editprofile')} className={sectionType === 'editprofile' ? pdescriptionStyles.activeSection : ''}><FaEquals/><p>Edit profile</p></div>
+                    </> : ''
+                }
+                </>
             </div>
         </div>
     )

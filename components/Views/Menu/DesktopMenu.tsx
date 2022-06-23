@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import menuStyles from './desktopmenu.module.scss'
 import Image from 'next/image'
 import logo from '../../../assets/logo.png'
@@ -6,14 +6,18 @@ import { FaHome } from "@react-icons/all-files/fa/FaHome"
 import { FaBell } from "@react-icons/all-files/fa/FaBell"
 import { FaUser } from "@react-icons/all-files/fa/FaUser"
 import { FaSearch } from "@react-icons/all-files/fa/FaSearch";
-import { FaMoneyBill } from "@react-icons/all-files/fa/FaMoneyBill";
+import { FaFacebookMessenger } from "@react-icons/all-files/fa/FaFacebookMessenger";
 import { FaTrophy } from "@react-icons/all-files/fa/FaTrophy";
 import { FaHashtag } from "@react-icons/all-files/fa/FaHashtag";
 import { useRouter } from 'next/router'
 import Router from 'next/router'
+import { UserDataContext } from '../../../store/userData-context'
 
 const DesktopMenu = () => {
+    const userCtx = useContext(UserDataContext)
+    const [notifyList, setNotifyList] = useState(userCtx.data.notifications)
     let path = useRouter()
+
     let hashtag = false
     if(path.pathname === '/hashtag/[hashtag]' || path.pathname === '/hashtag') {
         hashtag = true
@@ -32,6 +36,9 @@ const DesktopMenu = () => {
     const logoutAccount = () => {
         Router.push(`/logout`)
     }
+    useEffect(() => {
+        setNotifyList(userCtx.data.notifications)
+    },[userCtx])
     return (
         <div className={menuStyles.container}>
             <div className={menuStyles.logo}>
@@ -47,9 +54,9 @@ const DesktopMenu = () => {
                     <li onClick={() => Navigate('home')} className={path.pathname === '/home' ? menuStyles.actView : ''}><FaHome/><p>Home</p></li>
                     <li onClick={() => Navigate('hashtag')} className={hashtag ? menuStyles.actView : ''}><FaHashtag/><p>Hashtags</p></li>
                     <li onClick={() => Navigate('search')} className={search ? menuStyles.actView : ''}><FaSearch/><p>Search</p></li>
-                    <li className={path.pathname === 'x' ? menuStyles.actView : ''}><FaBell/><p>Notifications</p></li>
+                    <li onClick={() => Navigate('notifications')} className={path.pathname === '/notifications' ? menuStyles.actView : ''}><FaBell/><p>Notifications ({notifyList !== undefined ? notifyList.length : 0})</p></li>
                     <li onClick={() => Navigate('profile')} className={profile ? menuStyles.actView : ''}><FaUser/><p>Profile</p></li>
-                    <li className={path.pathname === 'x' ? menuStyles.actView : ''}><FaMoneyBill/><p>Transfer</p></li>
+                    <li className={path.pathname === 'x' ? menuStyles.actView : ''}><FaFacebookMessenger/><p>Messages</p></li>
                     <li className={path.pathname === 'x' ? menuStyles.actView : ''}><FaTrophy/><p>Leagues</p></li>
                 </ul>
             </div>

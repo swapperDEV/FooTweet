@@ -14,6 +14,7 @@ import SearchView from './CenterViews/SearchView/SearchView'
 import SearchByWordsView from './CenterViews/SearchByWordsView/SearchByWordsView'
 import PostView from './CenterViews/PostView/PostView'
 import ProfileView from './CenterViews/ProfileView/ProvileView'
+import NotificationsView from './CenterViews/NotificationsView/NotificationsView'
 
 const View = () => {
     const path = useRouter()
@@ -38,6 +39,7 @@ const View = () => {
                     {path.pathname === '/search/[search]' && <SearchByWordsView/>}
                     {path.pathname === '/profile/[profile]' && <ProfileView/>}
                     {path.pathname === '/profile' && <ProfileView/>}
+                    {path.pathname === '/notifications' && <NotificationsView/>}
             </div>
         </div>
     )

@@ -1,0 +1,94 @@
+.wrapper {
+    min-width: 100%;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 180px;
+    color: white;
+    .notifications {
+        flex-grow: 1;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .content {
+        padding: 20px;
+    }
+    .actView {
+        z-index: 3;
+        font-weight: bold;
+        flex-direction: column;
+        font-size: 25px;
+        border-radius: 15px;
+        background-color: #3C424B;
+        min-width: 400px;
+        min-height: 200px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: capitalize;
+        padding-top: 7px;
+        padding-bottom: 10px;
+        .notifications {
+            .notificationsList {
+                .notification {
+                    margin: 20px;
+                    max-width: 300px;
+                    padding: 10px;
+                    background-color: #2BA7F3;
+                    border-radius: 15px;
+                    word-wrap: break-word;
+                    svg {
+                        margin-right: 15px;
+                    }
+                    div {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    p {
+                        font-size: 15px;
+                        color: lightgray;
+                    }
+                    .bottomNotify {
+                        margin-top: 10px;
+                        button {
+                            margin-left: 15px;
+                            background-color: white;;
+                            border-radius: 15px;
+                            border: 1px solid white;
+                            padding: 5px;
+                            padding-left: 12px;
+                            padding-right: 12px;
+                            color: gray;
+                            transition: 0.1s ease;
+                        }
+                        button:hover {
+                            color: rgb(75, 73, 73);
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+        .top {
+            width: 70%;
+            border-bottom: 1px solid white;
+            padding-bottom: 15px;
+        }
+        .bottom {
+            width: 70%;
+            border-top: 1px solid white;
+            cursor: pointer;
+            color: lightskyblue;
+            padding-top: 5px;
+        }
+    }
+}
+
+
+

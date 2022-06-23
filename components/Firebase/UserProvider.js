@@ -5,15 +5,20 @@ import { doc, setDoc, getDoc, onSnapshot } from "firebase/firestore";
 import { FirebaseContext } from '../../store/firebase-context';
 import { UserDataContext } from '../../store/userData-context';
 import { getStorage, ref as sRef, getDownloadURL} from 'firebase/storage';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UserProvider = (props) => {
     const FirebaseCtx = useContext(FirebaseContext)
+    const [isLoaded, changeIsLoaded] = useState(false)
     const UserCtx = useContext(UserDataContext)
     const [userData, setUserData] = useState({
         email: 'Error',
+        notifications: []
     })
     const [userAvatar, setUserAvatar] = useState(null)
     const { currentUser, auth} = FirebaseCtx
+    
     const getAvatar = async () => {
         let data;
         const storage = getStorage()
@@ -31,10 +36,30 @@ const UserProvider = (props) => {
     useEffect(() => {
         if(FirebaseCtx.currentUser) {
         const db = getFirestore();
-            onSnapshot(doc(db, `users/${FirebaseCtx.currentUser.uid}`), (snapshot) => {
-            if (snapshot.exists()) {
-                setUserData(snapshot.data())
+        onSnapshot(doc(db, `users/${FirebaseCtx.currentUser.uid}`), (snapshot) => {
+        if (snapshot.exists()) {
+            const data = snapshot.data()
+            console.log('updatge')
+            console.log(data.notifications.length, userData.notifications.length)
+            if(data.notifications.length > userData.notifications.length) {
+                if(isLoaded) {
+                    toast.info('You get a notification!', {
+                        position: "bottom-right",
+                        theme: 'dark',
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
+                console.log('send a notify!')
             }
+    
+            setUserData(data)
+        }
+        changeIsLoaded(true)
         })}
     },[currentUser])
     useEffect(() => {
@@ -53,6 +78,12 @@ const UserProvider = (props) => {
                     retweets: [],
                     bio: '',
                     uid: FirebaseCtx.currentUser.uid,
+                    notifications: [{
+                        type: 'normal',
+                        content: 'Welcome on FooTweet, have a good time with us.',
+                        from: 'Admin',
+                        id: `${getDate()}${FirebaseCtx.currentUser.uid}`, 
+                    }]
                 });
                 FirebaseCtx.resetRegisterData()
             }

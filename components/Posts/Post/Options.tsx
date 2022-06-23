@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getFirestore, doc, updateDoc, setDoc } from 'firebase/firestore';
 import { UserDataContext } from '../../../store/userData-context';
+import { sendNotify } from '../../../functions/sendNotify';
 
 type OptionProps = {
     openCommentCreate: Function,
@@ -58,6 +59,7 @@ const Options = ({post, retweetActive, fbCtx, heartActive, wrapperClass, openCom
         likesNumber.push(fbCtx.currentUser.uid)
         let table = likesNumber
         updateDB(table)
+        sendNotify(post.data.creator.uId , UserCtx.data.username, `${UserCtx.data.username} like your post.`, 'like')
     }
     const dislikePost = () => {
         let index = likesNumber.indexOf(fbCtx.currentUser.uid)

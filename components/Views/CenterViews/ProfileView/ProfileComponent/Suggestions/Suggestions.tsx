@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { doc, getDocs, getFirestore, collection, updateDoc } from "firebase/firestore";
 import suggestionStyle from './suggestion.module.scss'
 import Avatar from '../../../../../Avatar/Avatar';
+import {followUser as followUserFunction} from '../../../../../../functions/followUser'
+import { UserDataContext } from '../../../../../../store/userData-context';
 
 type suggestionsProps = {
     followedUsers: Array<String>,
-    id: String
+    id: String,
+    yourUsername: String,
 }
-const Suggestions = ({followedUsers, id}:suggestionsProps) => {
+const Suggestions = ({followedUsers, id, yourUsername}:suggestionsProps) => {
+    const userCtx = useContext(UserDataContext)
     const [usersSuggestion, updateSuggestion]:any = useState([])
     useEffect(() => {
         const db = getFirestore()
@@ -22,7 +26,7 @@ const Suggestions = ({followedUsers, id}:suggestionsProps) => {
                 loop = usersList.length
             } 
             let numbers:any = []
-            for(let i = 0; i<3; i++) {
+            for(let i = 0; i<2; i++) {
                 max = max - 1
                 let number = Math.floor(Math.random() * (max - 0) + 0)
                 while(numbers.includes(number)) {
@@ -38,18 +42,7 @@ const Suggestions = ({followedUsers, id}:suggestionsProps) => {
         })
     },[])
     const followUser = async (username:String) => {
-        const db = getFirestore()
-        const userRef = doc(db, "users", `${id}`);
-        const following = followedUsers
-        if(following.includes(username)) {
-            let index = following.indexOf(username)
-            following.splice(index, 1)
-        } else {
-            following.push(username)
-        }
-        await updateDoc(userRef, {
-            following: following
-          });
+        followUserFunction(username, id, followedUsers, yourUsername)
     }
     return (
         <div className={suggestionStyle.wrapper}>
@@ -58,7 +51,13 @@ const Suggestions = ({followedUsers, id}:suggestionsProps) => {
             </div>
             <div>
                 {usersSuggestion.length > 0 && usersSuggestion.map((user:any, index:number) => {
+                    const render = !followedUsers.includes(user.data.username) 
+                    const you = user.data.username === userCtx.data.username 
                     return (
+                        <>
+                        {render ? 
+                        <>
+                        {!you ?
                         <div key={index} className={suggestionStyle.userBaner}>
                             <div>
                                 <Avatar userID={user.data.uid}/>
@@ -68,10 +67,15 @@ const Suggestions = ({followedUsers, id}:suggestionsProps) => {
                                 <p className={suggestionStyle.username}>@{user.data.username}</p>
                             </div>
                             <div>
-                                <div onClick={() => followUser(user.data.username)}>{followedUsers.includes(user.data.username) ? <button>Unfollow</button> : <button>Follow</button>}
+                                <div onClick={() => followUser(user.data.username)}>{followedUsers.includes(user.data.username) ? <button>-</button> : <button>Follow</button>}
                                 </div>
                             </div>
                         </div>
+                        : ''}
+                        </>
+                            : ''
+                        }
+                        </>
                     )
                 })}
             </div>
