@@ -8,6 +8,10 @@
     background-position: right;
     color: #ffffff;
     font-family: 'Roboto', sans-serif;
+    b {
+        text-decoration: underline;
+        cursor: pointer;
+    }
     display: flex;
     .leftSide {
         width: 40%;

@@ -15,6 +15,9 @@ const Welcome = () => {
     const loginRedirect = () => {
         Router.push('/login')
     }
+    const redirectToAbout = () => {
+        Router.push('/about')
+    }
     return (
     <Wrapper>
         <div className={welcomeStyle.wrapper}>
@@ -29,6 +32,9 @@ const Welcome = () => {
                         /> 
                     </div>   
                     <p>The best news from<br/> football <a>world</a> </p>      
+                </div>
+                <div>
+                    More <b onClick={() => redirectToAbout()}>about us</b>
                 </div>
                 <div className={welcomeStyle.social}>
                     <div className={welcomeStyle.icon}>
