@@ -37,10 +37,9 @@ const UserProvider = (props) => {
         if(FirebaseCtx.currentUser) {
         const db = getFirestore();
         onSnapshot(doc(db, `users/${FirebaseCtx.currentUser.uid}`), (snapshot) => {
+        console.log('cahnge')
         if (snapshot.exists()) {
             const data = snapshot.data()
-            console.log('updatge')
-            console.log(data.notifications.length, userData.notifications.length)
             if(data.notifications.length > userData.notifications.length) {
                 if(isLoaded) {
                     toast.info('You get a notification!', {
@@ -54,7 +53,6 @@ const UserProvider = (props) => {
                         progress: undefined,
                     });
                 }
-                console.log('send a notify!')
             }
     
             setUserData(data)

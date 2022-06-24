@@ -4,10 +4,8 @@ import { getStorage, getDownloadURL, ref } from 'firebase/storage';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import avatarStyles from './avatar.module.scss'
 import Router from 'next/router'
+import { avatarProps } from '../../types/avatar';
 
-type avatarProps = {
-    userID: string
-}
 const Avatar = ({userID}:avatarProps) => {
     const storage = getStorage()
     const db = getFirestore()

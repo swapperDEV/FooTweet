@@ -24,7 +24,6 @@ const options:Object = {
 
 const LoginComponent = () => {
     const FirebaseCtx = useContext(FirebaseContext)
-    const [error, setError] = useState('')
     const [resetPass, setResetPass] = useState(false)
     const { auth } = FirebaseCtx
     const emailRef = useRef<HTMLInputElement>(null)
@@ -42,13 +41,12 @@ const LoginComponent = () => {
     }
     const resetPasswordMode = () => {
         setResetPass(!resetPass)
-        setError('')
     }
     const resetPassword = () => {
         let emailValue = emailRef.current!.value
         sendPasswordResetEmail(auth, emailValue)
             .then(() => {
-                setError('Check inbox for instructions about reseting')
+                toast.error('Check inbox for instructions about reseting!', options);
             })
             .catch((error) => {
                 const errorCode = error.code;

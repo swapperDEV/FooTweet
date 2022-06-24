@@ -1,6 +1,7 @@
 import { getFirestore, doc, getDocs, updateDoc, collection, query, where} from 'firebase/firestore'
 import {sendNotify} from './sendNotify.js'
 export const followUser = async (username, id, followedUsers, yourUsername) => {
+    console.log('follow')
     const db = getFirestore()
     const userRef = doc(db, "users", `${id}`);
     const following = followedUsers

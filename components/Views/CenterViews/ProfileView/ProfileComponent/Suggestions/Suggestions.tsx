@@ -26,7 +26,7 @@ const Suggestions = ({followedUsers, id, yourUsername}:suggestionsProps) => {
                 loop = usersList.length
             } 
             let numbers:any = []
-            for(let i = 0; i<2; i++) {
+            for(let i = 0; i<3; i++) {
                 max = max - 1
                 let number = Math.floor(Math.random() * (max - 0) + 0)
                 while(numbers.includes(number)) {

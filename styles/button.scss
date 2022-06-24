@@ -1,0 +1,16 @@
+@mixin button {
+    background-color: #2BA7F3;
+    border: 1px solid #2BA7F3;
+    color: white;
+    padding: 5px;
+    padding-left: 12px;
+    transition: 0.1s ease;
+    padding-right: 12px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+@mixin buttonHover {
+    cursor: pointer;
+    background-color: #2081bd;
+    border: 1px solid #2081bd;
+}

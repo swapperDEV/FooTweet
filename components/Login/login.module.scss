@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import '../../styles/button.scss';
 .Toastify {
     z-index: 999;
 }
@@ -67,10 +68,7 @@
                 text-align: center;
                 margin-top: 20px;
                 .button {
-                    background-color: #1d90f5;
-                    border: 1px solid #1d90f5;
-                    border-radius: 10px;
-                    color: white;
+                    @include button;
                     display: flex;
                     padding: 10px;
                     justify-content: center;
@@ -120,9 +118,7 @@
                     width: calc(100% - 10px);
                     padding-top: 10px;
                     button {
-                        color: white;
-                        background-color: #1d90f5;
-                        border: solid 1px #1d90f5;
+                        @include button;
                         outline: none;
                         border-radius: 10px;
                         padding-top: 5px;
@@ -131,9 +127,7 @@
                         width: 100%;
                     }
                     button:hover {
-                        cursor: pointer;
-                        background-color: #156db9;
-                        border: solid 1px #156db9;
+                        @include buttonHover;
                     }
                 }
             }

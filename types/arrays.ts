@@ -1,0 +1,1 @@
+export type ArrayWithContent = Array<any>

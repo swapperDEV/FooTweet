@@ -3,15 +3,8 @@ import Avatar from '../../Avatar/Avatar'
 import { FaTrash } from '@react-icons/all-files/fa/FaTrash';
 import postStyles from '../post.module.scss'
 import { FirebaseContext } from '../../../store/firebase-context';
-type ReplyProps = {
-    reply: {
-        creatorName: string,
-        comment: string,
-        replyId: string,
-        creatorId: string,
-    },
-    deleteReply: Function
-}
+import { ReplyProps } from '../../../types/post/reply';
+
 const Reply = ({reply, deleteReply}: ReplyProps) => {
     const fbCtx = useContext(FirebaseContext)
     return (

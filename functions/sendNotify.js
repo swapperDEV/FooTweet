@@ -7,14 +7,16 @@ export const sendNotify = async (target, from, content, type) => {
     if(userSnap.exists()) {
         const data = userSnap.data()
         const notifyList = data.notifications
-        notifyList.unshift({
-            type: type,
-            content: content,
-            from: from,
-            id: `${getDate()}${target}`, 
-        })
-        await updateDoc(userRef, {
-           notifications: notifyList
-        }) 
+        if(notifyList) {
+            notifyList.unshift({
+                type: type,
+                content: content,
+                from: from,
+                id: `${getDate()}${target}`, 
+            })
+            await updateDoc(userRef, {
+               notifications: notifyList
+            }) 
+        }
     }
 }

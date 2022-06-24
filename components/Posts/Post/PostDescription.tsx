@@ -4,28 +4,8 @@ import { FaClock } from "@react-icons/all-files/fa/FaClock";
 import { FaEllipsisH } from "@react-icons/all-files/fa/FaEllipsisH";
 import { FaTrash} from "@react-icons/all-files/fa/FaTrash";
 import { FaTimes} from "@react-icons/all-files/fa/FaTimes";
+import { DescriptionProps } from '../../../types/post/postdescription';
 
-type DescriptionProps = {
-    time: String, 
-    post: {
-        data: {
-            creator: {
-                uId: String,
-                name: String,
-                username: String,
-            }
-        }
-    }
-    openSettings: Function, 
-    widgetClass: string, 
-    closeSettings: Function,
-    deletePost: Function, 
-    fbCtx: {
-        currentUser: {
-            uid: String,
-        }
-    }
-}
 const PostDescription = ({post, deletePost, closeSettings, time, fbCtx, widgetClass, openSettings}: DescriptionProps) => {
     return (
         <>

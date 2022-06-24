@@ -17,6 +17,23 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        .followBtn {
+            button {
+                color: white;
+                background-color: #2BA7F3;
+                border: 1px solid #2BA7F3;
+                border-radius: 10px;
+                padding: 5px;
+                padding-left: 12px;
+                padding-right: 12px;
+                transition: 0.1s ease;
+            }
+            button:hover {
+                cursor: pointer;
+                background-color: #1c70a5;
+                border: 1px solid #1c70a5;
+            }
+        }
         img {
             border-radius: 50px;
             margin-bottom: 0px;

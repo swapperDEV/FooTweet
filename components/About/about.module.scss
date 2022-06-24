@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import '../../styles/button.scss';
 .Toastify {
     z-index: 999;
 }
@@ -20,6 +21,37 @@
         text-align: center;
         align-items: center;
         flex-direction: column;
+        .bigText {
+            font-size: 60px;
+            font-weight: bold;
+        }
+        .smallText {
+            font-size: 25px;
+        }
+        a {
+            color: #2BA7F3;
+        }
+        div {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            align-items: center;
+            div {
+                display: flex;
+                flex-direction: column;
+                padding: 20px;
+            }
+            .statsCenter {
+                border-left: 1px solid white;
+                border-right: 1px solid white;
+            }
+            button {
+                @include button;
+            }
+            button:hover {
+                @include buttonHover;
+            }
+        }
     }
     .rightSide {
         width: 60%;

@@ -4,51 +4,7 @@ import postsStyles from './post.module.scss'
 import { getDocs, collection, getFirestore, onSnapshot } from 'firebase/firestore';
 import { FirebaseContext } from '../../store/firebase-context';
 import Post from './Post';
-
-type PostsProps = {
-    requirements: any,
-    requirementsType: string | undefined,
-}
-
-
-type PostListType = {
-    data: {
-        metaData: {
-            createDate: number,
-            postId: string,
-        }
-        content: {
-            description: String,
-            hashtag: Array<String>,
-            haveImg: boolean,
-        }
-        creator: {
-            email: string,
-            name: string,
-            uId: string,
-            username: string,
-        }
-        interaction: {
-            comments: Array<any>
-            likes: Array<string>
-        }
-    },
-    id: string,
-}
-
-interface IPostList {
-    data:  {
-        content: {
-            description: String,
-            hashtag: Array<String>
-            haveImg: boolean,
-        }
-        metaData: {
-            createDate: number,
-            postId: string,
-        }
-    }
-}
+import { PostsProps, PostListType, IPostList } from '../../types/post/postsmapper';
 
 const Posts = ({requirements, requirementsType}: PostsProps) => {
     const [posts, setPosts] = useState<IPostList[]|any>([])

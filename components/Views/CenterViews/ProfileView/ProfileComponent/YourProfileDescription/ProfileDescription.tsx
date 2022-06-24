@@ -8,6 +8,8 @@ import { FaEye } from "@react-icons/all-files/fa/FaEye";
 import { FaRetweet } from "@react-icons/all-files/fa/FaRetweet";
 import { FaUserFriends } from "@react-icons/all-files/fa/FaUserFriends";
 import { FaEquals } from "@react-icons/all-files/fa/FaEquals";
+import {unfollowUser} from '../../../../../../functions/unfollowUser'
+import { followUser } from '../../../../../../functions/followUser';
 
 type ProfileProps = {
     updateUserData: Function,
@@ -17,7 +19,7 @@ type ProfileProps = {
 const ProfileDescription = ({updateUserData, updateSection, sectionType}: ProfileProps) => {
     const path = useRouter() 
     const UserCtx = useContext(UserDataContext) 
-    const [userData, setUserData] = useState({name: '', username: '', bio: '', location: '', following: [], followers: []})
+    const [userData, setUserData] = useState({name: '', username: '', bio: '', location: '', following: [], followers: [], uid: ''})
     const searchData = async (searchingUser:String) => {
         await getUserData(searchingUser).then(value => { 
             setUserData(value[0])
@@ -40,6 +42,17 @@ const ProfileDescription = ({updateUserData, updateSection, sectionType}: Profil
                 <img src={UserCtx.avatar} width="50" height="50"/>
                 <p className={pdescriptionStyles.name}>{userData.name}</p>
                 <p className={pdescriptionStyles.username}>@{userData.username}</p>
+                <>
+                { userData.username !== UserCtx.data.username && 
+                <div className={pdescriptionStyles.followBtn}>  
+                    { UserCtx.data.following !== undefined &&
+                    <>
+                    {UserCtx.data.following.includes(userData.username) ? <button onClick={() => unfollowUser(userData.following, userData.uid, UserCtx.data.following, UserCtx.data.uid, UserCtx.data.username)}>Unfollow</button> : <button onClick={() => followUser(userData.username, UserCtx.data.uid, UserCtx.data.following, UserCtx.data.username)}>Follow</button>}
+                    </>
+                    }
+                </div>
+                }
+                </>
                 <p className={pdescriptionStyles.bio}>{userData.bio}</p>
                 <p className={pdescriptionStyles.location}><FaLocationArrow/>{userData.location}</p>
                 <div className={pdescriptionStyles.stats}>

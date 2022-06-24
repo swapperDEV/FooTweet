@@ -9,37 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getFirestore, doc, updateDoc, setDoc } from 'firebase/firestore';
 import { UserDataContext } from '../../../store/userData-context';
 import { sendNotify } from '../../../functions/sendNotify';
+import { OptionProps } from '../../../types/post/options';
 
-type OptionProps = {
-    openCommentCreate: Function,
-    post: {
-        data: {
-            interaction: {
-                comments: Array<String> 
-                likes: Array<string>
-            }
-            metaData: {
-                postId: string, 
-            }
-            creator: {
-                uId: string,
-            }
-            retweets: Array<String>,
-        }
-    }
-    fbCtx: {
-        currentUser: {
-            uid: string
-        }
-    }
-    heartActive: any, 
-    wrapperClass: any, 
-    commentCreateView: boolean,
-    commentActive: any,
-    redirectToPost: Function,
-    pType: String,
-    retweetActive: any,
-}
 const Options = ({post, retweetActive, fbCtx, heartActive, wrapperClass, openCommentCreate, commentCreateView, commentActive, pType, redirectToPost}: OptionProps) => {
     const commentNumber = post.data.interaction.comments
     const [isUserRetweet, updateIsUserRetweet] = useState(post.data.retweets.includes(fbCtx.currentUser.uid))

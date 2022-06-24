@@ -9,50 +9,20 @@ import { getDate } from '../../../functions/getDate';
 import Reply from './Reply';
 import { Id, toast } from 'react-toastify';
 import { sendNotify } from '../../../functions/sendNotify';
+import { CommentProps, table} from '../../../types/post/comment';
+import { ArrayWithContent } from '../../../types/arrays';
 
-type CommentProps = {
-    comment: {
-        likes: Array<string>
-        commentId: string,
-        comment: String,
-        creatorName: string,
-        commentReply: Array<Object>
-        creatorId: string,
-    }
-    post: {
-        data: {
-            interaction: {
-                likes: Array<string>
-                comments: Array<any>
-            }
-            metaData: {
-                postId: string
-            }
-        }
-    }
-    fbCtx: {
-        currentUser: {
-            uid: string,
-        }
-    }
-    userCtx: {
-        data: {
-            username: String
-        }
-    },
-    deleteComment: Function
-}
 const Comment = ({comment, post, fbCtx, userCtx, deleteComment}:CommentProps) => {
     const replyRef:any = useRef()
     const [showReply, changeReplyShow] = useState(false)
-    let [likesNumber, setLikesNumber]:any = useState(comment.likes)
+    let [likesNumber, setLikesNumber]:ArrayWithContent = useState(comment.likes)
     const pushReply = () => {
         const reply = replyRef.current.value
         if(reply.length > 0) {
             const db = getFirestore()
             const dbRef = doc(db, "posts", post.data.metaData.postId)
             const table = post.data.interaction.comments
-            table.forEach((tb:any, index: any) => {
+            table.forEach((tb:table, index: number) => {
                 if(tb.commentId === comment.commentId) {
                     table[index].commentReply.push ({
                         comment: replyRef.current.value, 
@@ -87,11 +57,11 @@ const Comment = ({comment, post, fbCtx, userCtx, deleteComment}:CommentProps) =>
     const handleShowReply = () => {
         changeReplyShow(!showReply)
     }
-    const updateLikeDB = (likeTable:Array<any>) => {
+    const updateLikeDB = (likeTable:ArrayWithContent) => {
         const db = getFirestore()
         const dbRef = doc(db, "posts", post.data.metaData.postId)
         const table = post.data.interaction.comments
-        table.forEach((tb:any, index: any) => {
+        table.forEach((tb:table, index: number) => {
             if(tb.commentId === comment.commentId) {
                 table[index].likes = likesNumber
             }
@@ -103,12 +73,12 @@ const Comment = ({comment, post, fbCtx, userCtx, deleteComment}:CommentProps) =>
             }
         })
     }
-    const likeComment = (index:any) => {
+    const likeComment = () => {
         let table = likesNumber
         table.push(fbCtx.currentUser.uid)
         updateLikeDB(table)
     }
-    const dislikeComment = (index:any) => {
+    const dislikeComment = () => {
         let indexX = likesNumber.indexOf(fbCtx.currentUser.uid)
         let table = likesNumber
         table.splice(indexX, 1)
@@ -116,13 +86,13 @@ const Comment = ({comment, post, fbCtx, userCtx, deleteComment}:CommentProps) =>
     }
     const handleLikeComment = () => {
         const table = post.data.interaction.comments
-        table.forEach((tb:any, index: any) => {
+        table.forEach((tb:table, index: number) => {
             if(tb.commentId === comment.commentId) {
                 if(tb.creatorId !== fbCtx.currentUser.uid) {
                     if(!likesNumber.includes(fbCtx.currentUser.uid)) {
-                        likeComment(index)
+                        likeComment()
                     } else {
-                        dislikeComment(index)
+                        dislikeComment()
                     }
                 } else {
                 toast.error('You cant like your reply!', {
@@ -143,8 +113,8 @@ const Comment = ({comment, post, fbCtx, userCtx, deleteComment}:CommentProps) =>
         const table = post.data.interaction.comments
         let postIndexV:any
         let replyIndexV
-        table.forEach((tb:any, postIndex: any) => {
-            tb.commentReply.forEach((rb:any, replyIndex:any) => {
+        table.forEach((tb:table, postIndex: number) => {
+            tb.commentReply.map((rb: any, replyIndex:number) => {
                 if(rb.replyId === replyId) {
                     postIndexV = postIndex
                     replyIndexV = replyIndex

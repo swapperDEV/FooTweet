@@ -14,36 +14,9 @@ import Comments from './Post/Comments';
 import { useRouter } from 'next/router';
 import { UserDataContext } from '../../store/userData-context';
 import { getTime } from '../../functions/getTime'
-
-type DataType = {
- data: {
-        metaData: {
-            createDate: number,
-            postId: string,
-        }
-        content: {
-            description: String,
-            hashtag: Array<String>,
-            haveImg: boolean,
-        }
-        creator: {
-            email: string,
-            name: string,
-            uId: string,
-            username: string,
-        }
-        interaction: {
-            comments: Array<any>
-            likes: Array<string>
-        },
-        retweets: Array<string>
-    },
-}
-type PostProps = {
-    data: DataType,
-    type: String,
-    avatar: boolean,
-}
+import { DataType } from '../../types/post/post';
+import { PostProps } from '../../types/post/post';
+import { Event } from '../../types/post/post';
 
 const Post = ({data, type, avatar}: PostProps) => {
     const [widgetClass, changeWidgetClass] = useState(postStyles.settingsWidget)
@@ -78,7 +51,7 @@ const Post = ({data, type, avatar}: PostProps) => {
         closeSettings()
         Router.push('/')
     }
-    const redirectToPost = (event:any) => {
+    const redirectToPost = (event:Event) => {
         if(event.target.className === 'post_image__tv_2H' || event.target.className === 'post_img__0j3rv' || event.target.className === 'post_img__0j3rv' || event.target.className === 'post_description__wkjLG' || event.target.className === 'post_hashtags__QN9_o' || event.target.className === 'post_right__qpBts' || event.target.className === 'post_infoR__XLGVJ' ) {
             if(path.pathname !== "/post/[postId]") {
                 Router.push(`/post/${post.data.metaData.postId}`)

@@ -3,14 +3,8 @@ import hashtagsStyles from './hashtag.module.scss'
 import { FaStream } from "@react-icons/all-files/fa/FaStream";
 import { getFirestore, onSnapshot, collection } from 'firebase/firestore';
 import Router from 'next/router';
+import { postTypes } from '../../types/hashtags';
 
-type postTypes = {
-    data: {
-        content: {
-            hashtag: Array<string>
-        }
-    }
-}
 const Hashtags = () => {
     const hashtagSearchRef = useRef<HTMLInputElement>(null)
     const [allHashtag, setAllHashtag] = useState(false)
