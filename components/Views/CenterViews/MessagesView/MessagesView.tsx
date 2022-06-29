@@ -3,7 +3,7 @@ import viewStyles from '../../styles/view.module.scss'
 const MessagesView = () => {
     return (
         <>
-            <div className={viewStyles.searchContainer}>
+            <div className={viewStyles.messageContainer}>
                 
             </div>     
         </>

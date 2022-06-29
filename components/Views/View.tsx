@@ -16,6 +16,7 @@ import PostView from './CenterViews/PostView/PostView'
 import ProfileView from './CenterViews/ProfileView/ProvileView'
 import NotificationsView from './CenterViews/NotificationsView/NotificationsView'
 import MessagesView from './CenterViews/MessagesView/MessagesView'
+import MessageView from './CenterViews/MessageView/MessageView'
 
 const View = () => {
     const path = useRouter()
@@ -42,6 +43,7 @@ const View = () => {
                     {path.pathname === '/profile' && <ProfileView/>}
                     {path.pathname === '/notifications' && <NotificationsView/>}
                     {path.pathname === '/messages' && <MessagesView/>}
+                    {path.pathname === '/messages/[message]' && <MessageView/>}
             </div>
         </div>
     )

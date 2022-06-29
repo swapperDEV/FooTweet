@@ -10,6 +10,7 @@ import { FaUserFriends } from "@react-icons/all-files/fa/FaUserFriends";
 import { FaEquals } from "@react-icons/all-files/fa/FaEquals";
 import {unfollowUser} from '../../../../../../functions/unfollowUser'
 import { followUser } from '../../../../../../functions/followUser';
+import Router from 'next/router'
 
 type ProfileProps = {
     updateUserData: Function,
@@ -25,6 +26,11 @@ const ProfileDescription = ({updateUserData, updateSection, sectionType}: Profil
             setUserData(value[0])
             updateUserData(value[0])
     })}  
+    const messageUser = () => {
+        const you = UserCtx.data.username 
+        const he = userData.username
+        Router.push(`/messages/${you}+${he}`)
+    }
     useEffect(() => {
         if(UserCtx.data.username) {
             let searchingUser
@@ -49,6 +55,9 @@ const ProfileDescription = ({updateUserData, updateSection, sectionType}: Profil
                     <>
                     {UserCtx.data.following.includes(userData.username) ? <button onClick={() => unfollowUser(userData.following, userData.uid, UserCtx.data.following, UserCtx.data.uid, UserCtx.data.username)}>Unfollow</button> : <button onClick={() => followUser(userData.username, UserCtx.data.uid, UserCtx.data.following, UserCtx.data.username)}>Follow</button>}
                     </>
+                    }
+                    {
+                        <button onClick={() => messageUser()}>Message</button>
                     }
                 </div>
                 }
