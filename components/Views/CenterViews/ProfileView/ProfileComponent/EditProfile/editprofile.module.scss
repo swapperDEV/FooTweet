@@ -142,3 +142,29 @@
     margin: 0;
     padding:0;
 }
+
+@media (max-width: 600px) {
+    .wrapper {
+        min-width: 400px;
+        height: 200px;
+        .tile {
+            flex-grow: 1;
+            height: 50px;
+            width: 100%;
+        }
+        .avatar {
+            font-size: 40px;
+        }
+        .info {
+            div {
+                font-size: 20px;
+                input {
+                    width: 90px;
+                }
+            }
+        }
+    }
+    .filebutton {
+        top: 16px;
+    }
+}

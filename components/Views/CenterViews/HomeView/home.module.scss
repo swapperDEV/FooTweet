@@ -14,5 +14,21 @@
     }
 }
 
+@media (max-width: 700px) {
+    .wrapper {
+        .content {
+            padding: 5px;
+        }
+    }
+}
 
-
+@media (max-width: 460px) {
+    .wrapper {
+        .content {
+            .actView {
+                font-size: 20px;
+                padding-left: 10px;
+            }
+        }
+    }
+}

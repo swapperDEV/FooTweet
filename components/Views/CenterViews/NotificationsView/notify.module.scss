@@ -90,5 +90,18 @@
     }
 }
 
-
-
+@media (max-width: 450px) {
+    .wrapper {
+        .actView {
+            min-width: 100px;
+            .notifications {
+                margin-left: 10px;
+                margin-right: 10px;
+                .notificationsList {
+                    margin-left: 10px;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}

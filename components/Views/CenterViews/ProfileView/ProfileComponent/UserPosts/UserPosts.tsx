@@ -54,7 +54,7 @@ const UserPosts = ({userData, id}: UserPostProps) => {
                         return (
                             <Post data={{data: post}} type={'short'} key={post.metaData.postId} avatar={true}/>
                         )
-                    }) : <p>User dont have posts</p>}                 
+                    }) : <p className={postStyles.error}>User dont have posts</p>}                 
                 </div>}
                 {actSection === 'Retweets' && 
                 <div>

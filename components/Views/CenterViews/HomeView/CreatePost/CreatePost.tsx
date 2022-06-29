@@ -34,8 +34,8 @@ const CreatePost = () => {
 
 
     const sendNotifyToFollowers = () => {
-        userCtx.data.followers.forEach((follower:any) => {
-            getUserData(follower).then((data:any) => {
+        userCtx.data.followers.forEach((follower:Array<string>) => {
+            getUserData(follower).then((data) => {
                 const id = data[0].uid 
                 sendNotify(id, userCtx.data.username, `${userCtx.data.username} push a new post!`, 'newpost')
             })
@@ -171,17 +171,18 @@ const CreatePost = () => {
                 <img src={photoPreview} className={createPostStyles.previewImage}/>
                 {photoPreview && <FaWindowClose onClick={() => delImage()} className={createPostStyles.close}/>}
                 <div className={createPostStyles.postSettings}>
-                    <div>
-                        <FaGlobe/>
-                    </div>
-                    <div>
-                        <label className={createPostStyles.filebutton}>
-                        <FaImage/>
-                        <span><input onClick={handleWrite} className={createPostStyles.file} accept="image/*" type="file" value={imgRef} onChange={e => changeImg(e)}/></span>
-                        </label>
+                    <div className={createPostStyles.icons}>
+                        <div>
+                            <label className={createPostStyles.filebutton}>
+                            <FaImage/>
+                            <span><input onClick={handleWrite} className={createPostStyles.file} accept="image/*" type="file" value={imgRef} onChange={e => changeImg(e)}/></span>
+                            </label>
+                        </div>
+                        <div>
+                            <FaHashtag onClick={() => openHashTagList()}/>
+                        </div>
                     </div>
                     <div className={createPostStyles.hashtags}>
-                        <FaHashtag onClick={() => openHashTagList()}/>
                         <div className={hashtagStyles}>Hasztag list <br/> 
                             <ul>{hashtag.map((h:String, index:number) => (
                                 <li key={index}>{`#${h}`}</li>    
@@ -193,7 +194,7 @@ const CreatePost = () => {
                         <button onClick={() => addHashtag()}>Add</button>
                     </div>
                     <div className={createPostStyles.button}>
-                        <button onClick={() => createPost()}>Tweet it!</button>
+                        <button onClick={() => createPost()}>Tweet</button>
                     </div>
                 </div> 
                 </div>

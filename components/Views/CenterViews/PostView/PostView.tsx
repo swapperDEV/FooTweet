@@ -6,7 +6,7 @@ import { getFirestore, doc, getDoc, onSnapshot} from 'firebase/firestore'
 import Router from 'next/router'
 
 const PostView = () => {
-    const [data, setData]:any = useState(null)
+    const [data, setData]:Array<any> = useState(null)
     const path = useRouter()
     useEffect(() => {
         if(path.query) {

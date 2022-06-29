@@ -3,12 +3,17 @@ import { FaCircle } from "@react-icons/all-files/fa/FaCircle";
 import { UserDataContext } from '../../../../store/userData-context'
 import notifyStyles from './notify.module.scss'
 import { getFirestore, updateDoc, doc} from 'firebase/firestore';
+
+type listObject = {
+    id: String,
+}
+
 const NotificationsView = () => {
     const userCtx = useContext(UserDataContext)
     const [notifications, addNotifications] = useState(userCtx.data.notifications)
     const readNotify = async (id:String) => {
         const list = notifications 
-        const index = list.findIndex((l:any) => l.id === id)
+        const index = list.findIndex((l:listObject) => l.id === id)
         console.log(index);
         list.splice(index, 1)
         const db = getFirestore()

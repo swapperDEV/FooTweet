@@ -13,7 +13,7 @@
         border: 1px solid #3C424B;
         border-radius: 15px;
         min-height: 500px;
-        width: 600px;
+        min-width: 600px;
     }
     .tweetsMenu {
         width: 100%;
@@ -61,4 +61,21 @@
 }
 .error {
     text-align: center;
+}
+
+@media (max-width: 650px) {
+    .wrapper {
+        .postsWrapper {
+            min-width: 400px;
+        }
+    }
+}
+
+
+@media (max-width: 500px) {
+    .wrapper {
+        .postsWrapper {
+            min-width: 300px;
+        }
+    }
 }

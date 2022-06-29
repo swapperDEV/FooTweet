@@ -8,7 +8,7 @@
     min-width: 400px;
     overflow: hidden;
     justify-content: flex-start;
-    margin-right: 25px;
+    margin-right: 0px;
     flex-direction: column;
     padding: 10px;
     background-color: #3C424B;
@@ -83,4 +83,16 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+}
+
+@media (max-width: 500px) {
+    .wrapper {
+        font-size: 20px;
+        min-width: 200px;
+        .following {
+            .info {
+                font-size: 20px;
+            }
+        }
+    }
 }

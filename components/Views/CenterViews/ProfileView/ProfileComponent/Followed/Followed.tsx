@@ -21,12 +21,18 @@ const Followed = ({followedUsers, id, yourUsername}:followedProps) => {
         <>
         <div className={followedStyles.wrapper}>
         <div className={followedStyles.following}>
-            <p className={followedStyles.info}>{userCtx.data.username === yourUsername ?` The users you follow` : `The users followed by ${yourUsername}`}</p>
-            {followedUsersTable.map((user) => {
-            return (
-                <FollowedUser check1={userCtx.data.username} check2={yourUsername} user={user} key={user} unFollowUser={unFollowUser}/>
-            )
-            })}
+            {
+                <> { followedUsersTable.length !== 0 ?
+                    <>
+                    <p className={followedStyles.info}>{userCtx.data.username === yourUsername ?` The users you follow` : `The users followed by ${yourUsername}`}</p>
+                    {followedUsersTable.map((user) => {
+                    return (
+                        <FollowedUser check1={userCtx.data.username} check2={yourUsername} user={user} key={user} unFollowUser={unFollowUser}/>
+                    )
+                    })} </>
+                    : <p>Users dont follow anyone</p>}
+                </>
+            }
             </div>
             {
             userCtx.data.username === yourUsername && 

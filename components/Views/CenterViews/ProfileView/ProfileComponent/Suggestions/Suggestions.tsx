@@ -18,15 +18,18 @@ const Suggestions = ({followedUsers, id, yourUsername}:suggestionsProps) => {
         getDocs(collection(db, `users`)).then((snapshot) => {
             let usersList:any = []
             snapshot.forEach((doc) => {
-                usersList.push({data: doc.data(), id: doc.id});
+                let data = doc.data()
+                if(!followedUsers.includes(userCtx.data.username)) {
+                    usersList.push({data: data, id: doc.id});
+                }
             });
             let max = usersList.length
-            let loop = 3; 
-            if(usersList.length < 3) {
+            let loop = 5; 
+            if(usersList.length < 5) {
                 loop = usersList.length
             } 
             let numbers:any = []
-            for(let i = 0; i<3; i++) {
+            for(let i = 0; i<loop; i++) {
                 max = max - 1
                 let number = Math.floor(Math.random() * (max - 0) + 0)
                 while(numbers.includes(number)) {

@@ -129,13 +129,30 @@
 
 @media (max-width: 1020px) {
     .wrapper {
-        flex-direction: row;
+        flex-direction: column;
         .menu {
             flex-grow: 1;
             width: 80%;
             flex-direction: row;
             div {
                 width: 80px;
+            }
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    .wrapper {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 400px) {
+    .wrapper {
+        .menu {
+            width: 90vw;
+            div {
+                width: 25%;
             }
         }
     }

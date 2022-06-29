@@ -1,10 +1,9 @@
 .wrapper {
     width: 100%;
-    background-color: #3C424B;
     font-family: 'JetBrains Mono', monospace;
     padding: 20px;
     border-radius: 10px;
-    margin-right: 15px;
+    background-color: #3C424B;
     .search {
         display: flex;
         justify-content: center;
@@ -54,3 +53,14 @@
     color: lightgray;
 }
 
+
+@media (max-width: 1000px) {
+    .wrapper {
+        margin-right: 0px;
+        .serch {
+            .input {
+                width: 80%;
+            }
+        }
+    }
+}

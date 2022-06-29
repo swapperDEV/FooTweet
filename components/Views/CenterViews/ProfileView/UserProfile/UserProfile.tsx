@@ -4,7 +4,7 @@ import ProfileDescription from '../ProfileComponent/YourProfileDescription/Profi
 import UserPosts from '../ProfileComponent/UserPosts/UserPosts'
 import Followed from '../ProfileComponent/Followed/Followed'
 const UserProfile = () => {
-    const [userData, setUserData]:any = useState({})
+    const [userData, setUserData]:Array<any> = useState({})
     const [sectionType, changeSection] = useState('tweets')
     const updateUserData = (data:object) => {
         setUserData(data)

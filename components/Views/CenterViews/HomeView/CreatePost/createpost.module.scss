@@ -22,6 +22,9 @@
             padding-top: 10px;
             justify-content: flex-start;
             align-items: center;
+            .icons {
+                display: flex;
+            }
             .hashtags {
                 display: flex;
                 justify-content: center;
@@ -97,6 +100,7 @@
                     padding: 5px;
                     padding-left: 15px;
                     padding-right: 15px;
+                    margin-bottom: 4px;
                     transition: 0.1s ease;
                     align-self: flex-end;
                 }
@@ -169,5 +173,42 @@
     }
     100% {
         opacity: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .createPost {
+        padding-left: 0px;
+        font-size: 5px;
+        padding-right: 0px;
+        .createPostRight {
+            width: 100%;
+            .inputText {
+                width: 80%;
+            }
+            .animate {
+                font-size: 10px;
+            }
+        }
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 450px) {
+    .createPost {
+        .createPostRight {
+            .animate {
+                .postSettings {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    .icons {
+                        display: flex;
+                        flex-direction: row;
+                    }
+                }
+            }
+        }
     }
 }

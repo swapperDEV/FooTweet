@@ -26,3 +26,16 @@
         outline: none;
     }
 }
+
+@media (max-width: 650px) {
+    .container {
+        font-size: 20px;
+        p {
+            font-size: 20px;
+        }
+        input {
+            font-size: 20px;
+            border-bottom: 0px;
+        }
+    }
+}

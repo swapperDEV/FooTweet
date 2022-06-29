@@ -30,6 +30,10 @@ const DesktopMenu = () => {
     if(path.pathname === '/profile/[profile]' || path.pathname === '/profile') {
         profile = true
     }
+    let messages = false
+    if(path.pathname === '/messages/[message]' || path.pathname === '/messages') {
+        messages = true
+    }
     const Navigate = (path:String) => {
         Router.push(`/${path}`)
     }
@@ -56,7 +60,7 @@ const DesktopMenu = () => {
                     <li onClick={() => Navigate('search')} className={search ? menuStyles.actView : ''}><FaSearch/><p>Search</p></li>
                     <li onClick={() => Navigate('notifications')} className={path.pathname === '/notifications' ? menuStyles.actView : ''}><FaBell/><p>Notifications ({notifyList !== undefined ? notifyList.length : 0})</p></li>
                     <li onClick={() => Navigate('profile')} className={profile ? menuStyles.actView : ''}><FaUser/><p>Profile</p></li>
-                    <li className={path.pathname === 'x' ? menuStyles.actView : ''}><FaFacebookMessenger/><p>Messages</p></li>
+                    <li onClick={() => Navigate('messages')} className={messages ? menuStyles.actView : ''}><FaFacebookMessenger/><p>Messages</p></li>
                     <li className={path.pathname === 'x' ? menuStyles.actView : ''}><FaTrophy/><p>Leagues</p></li>
                 </ul>
             </div>

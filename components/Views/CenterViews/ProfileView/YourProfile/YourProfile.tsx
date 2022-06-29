@@ -8,7 +8,7 @@ import { FirebaseContext } from '../../../../../store/firebase-context';
 
 const YourProfile = () => {
     const fbCtx = useContext(FirebaseContext)
-    const [userData, setUserData]:any = useState({})
+    const [userData, setUserData]:Array<any> = useState({})
     const [sectionType, changeSection] = useState('tweets')
     const updateUserData = (data:object) => {
         setUserData(data)
