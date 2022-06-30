@@ -2,13 +2,18 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { query, where, collection, getFirestore, getDocs, doc, setDoc, onSnapshot } from "firebase/firestore";  
 import viewStyles from '../../styles/view.module.scss'
+import messageStyles from './message.module.scss'
 import { getDate } from '../../../../functions/getDate';
 import { UserDataContext } from '../../../../store/userData-context';
 import { getUserData } from '../../../../functions/getUserData';
+import { FaInfo } from "@react-icons/all-files/fa/FaInfo";
+import Router from 'next/router';
 import Avatar from '../../../Avatar/Avatar';
+
 const MessageView = () => {
     const path = useRouter();
     const messageValue:any = useRef('')
+    const messagesEndRef:any = useRef(null)
     const [conversation, setConversation]:Array<any> = useState({});
     const [targetUser, setTargetUser]:Array<any> = useState({username: ''});
     const userCtx = useContext(UserDataContext);
@@ -73,16 +78,29 @@ const MessageView = () => {
     }
     const pushMessage = async () => {
         const value = messageValue.current.value
-        const messages = conversation.messages 
-        messages.push({
-            creator: userCtx.data.username,
-            value: value, 
-            time: getDate(),
-        })
-        const conversationToPush = conversation 
-        conversationToPush.messages = messages
-        await setDoc(doc(db, "messages", conversation.id), conversationToPush);
-        messageValue.current.value = ''
+        if(value.length > 0) {
+            const messages = conversation.messages 
+            messages.push({
+                creator: userCtx.data.username,
+                value: value, 
+                time: getDate(),
+            })
+            const conversationToPush = conversation 
+            conversationToPush.messages = messages
+            await setDoc(doc(db, "messages", conversation.id), conversationToPush);
+            messageValue.current.value = ''
+        }
+    }
+    const handlePushMessage = (e:React.KeyboardEvent<HTMLElement>) => {
+        if (e.key === 'Enter') {
+            pushMessage()
+        }
+    }
+    const scrollToBottom = () => {
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+    }
+    const redirectToProfile = () => {
+        Router.push(`/profile/${targetUser.username}`)
     }
     useEffect(() => {
         let canYouSee = path.query.message
@@ -93,26 +111,45 @@ const MessageView = () => {
                 if(canYouSee.includes(userCtx.data.username)) {
                     messageSearch()
                 } else {
-                    alert('ZAKAZANE')
+                    Router.push('/messages')
                 }
             }
         }
     },[userCtx])
+    useEffect(scrollToBottom, [conversation]);
     return (
         <>
             <div className={viewStyles.messageContainer}>
-                {targetUser.uid && <Avatar userID={targetUser.uid}/>}
-                {targetUser.username}
-                lista<br/>
-                <ul>
-                    {conversation.messages && conversation.messages.map((message:any, index:number) => {
-                        console.log(message);
-                        return (
-                            <li key={index}>{message.value}</li>
-                        )
-                    })}
-                    <input placeholder='write' ref={messageValue}/><button onClick={() => pushMessage()}>push</button>
-                </ul>
+                <div className={messageStyles.wrapper}>
+                    <div className={messageStyles.info}>
+                        {targetUser.uid && <Avatar userID={targetUser.uid}/>}<p>{targetUser.username}</p>
+                        <div onClick={() => redirectToProfile()}><FaInfo/></div>
+                    </div>
+                    <div className={messageStyles.messages}>
+                        {conversation.messages.length > 0 ?
+                        <ul> 
+                            {conversation.messages.map((message:any, index:number) => {
+                                const you = userCtx.data.username === message.creator
+                                return (
+                                    <li className={you ? messageStyles.right : messageStyles.left} key={index}>
+                                        <div>
+                                            {you ? '' : <Avatar userID={targetUser.uid !== undefined && targetUser.uid}/>}<div className={messageStyles.messageValue}>{message.value}</div>
+                                        </div>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                        :
+                        <p>Send a first message</p>
+                        }
+                        <div ref={messagesEndRef} />
+                    </div>
+                    <div className={messageStyles.push}>
+                        <div>
+                            <input onKeyDown={handlePushMessage} placeholder='write' ref={messageValue}/><button onClick={() => pushMessage()}>push</button>
+                        </div>
+                    </div>
+                </div>
             </div>     
         </>
     )

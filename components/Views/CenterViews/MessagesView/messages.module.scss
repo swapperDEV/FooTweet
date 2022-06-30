@@ -1,0 +1,38 @@
+.wrapper {
+    ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+        flex-direction: column;
+        list-style-type: none;
+        li {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #262D37;
+            border-radius: 15px;
+            padding: 5px;
+            margin-bottom: 15px;
+            transition: 0.3s ease;
+            img {
+                border-radius: 50px;
+            }
+            p {
+                font-size: 30px;
+                margin-left: 15px;
+            }
+        }
+        li:hover {
+            cursor: pointer;
+            background-color: #384352;
+        }
+    }
+}
+
+.title {
+    font-size: 40px;
+    padding-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+}

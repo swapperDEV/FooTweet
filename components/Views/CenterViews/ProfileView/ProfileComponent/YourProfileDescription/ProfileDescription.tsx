@@ -11,6 +11,7 @@ import { FaEquals } from "@react-icons/all-files/fa/FaEquals";
 import {unfollowUser} from '../../../../../../functions/unfollowUser'
 import { followUser } from '../../../../../../functions/followUser';
 import Router from 'next/router'
+import Avatar from '../../../../../Avatar/Avatar';
 
 type ProfileProps = {
     updateUserData: Function,
@@ -45,7 +46,7 @@ const ProfileDescription = ({updateUserData, updateSection, sectionType}: Profil
     return (
         <div className={pdescriptionStyles.wrapper}>
             <div className={pdescriptionStyles.info}>
-                <img src={UserCtx.avatar} width="50" height="50"/>
+                {userData.uid !== '' && <Avatar userID={userData.uid}/>}
                 <p className={pdescriptionStyles.name}>{userData.name}</p>
                 <p className={pdescriptionStyles.username}>@{userData.username}</p>
                 <>

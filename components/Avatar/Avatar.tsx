@@ -7,19 +7,22 @@ import Router from 'next/router'
 import { avatarProps } from '../../types/avatar';
 
 const Avatar = ({userID}:avatarProps) => {
+    console.log(userID, 'wazny test')
     const storage = getStorage()
     const db = getFirestore()
     const [image, setImage] = useState('')
     const getAvatar = async () => {
-        let data;
-        const userRef = doc(db, "users", userID);
-        const userSnap = await getDoc(userRef)
-        if(userSnap.exists()) {
-            data = userSnap.data()
-            getDownloadURL(ref(storage, `avatars/${data.avatarID}.jpg`))
-            .then((url) => {
-                setImage(url)
-            })
+        if(typeof(userID) === 'string') {
+            let data;
+            const userRef = doc(db, "users", userID);
+            const userSnap = await getDoc(userRef)
+            if(userSnap.exists()) {
+                data = userSnap.data()
+                getDownloadURL(ref(storage, `avatars/${data.avatarID}.jpg`))
+                .then((url) => {
+                    setImage(url)
+                })
+            }
         }
     }
     const redirectToProfile = async () => {
