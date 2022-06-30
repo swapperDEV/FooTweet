@@ -26,7 +26,7 @@ const About = () => {
                         <div><p>1 month</p><a>activity</a></div>
                     </div>
                     <div>
-                        <button onClick={redirectBack}>Back to portal</button>
+                        <button onClick={() => redirectBack()}>Back to portal</button>
                     </div>
                 </div>
                 <div className={aboutStyle.rightSide}>

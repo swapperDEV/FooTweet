@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import { firebaseConfig } from './firebase-config';
+import { firebaseConfig } from '../../store/firebase-config';
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth"
 import { FirebaseContext } from '../../store/firebase-context';
 import { signOut } from "firebase/auth"
 import "firebase/firestore"
+import { getDate } from '../../functions/getDate'
+import { getFirestore } from 'firebase/firestore';
+import Image from 'next/image';
 import ImageStyle from './firebase.module.scss'
+import logo from '../../assets/logo.png'
 import UserProvider from './UserProvider'
 
 const Firebase = (props) => {
@@ -22,9 +26,10 @@ const Firebase = (props) => {
         setCurrentUser(user)
         setCanLogged(true)
     })})
-    const setData = (username, name, email) => {
+    const setData = (data1, data2, data3) => {
+        console.log(data1, data2, data3)
         setDataState({
-            username, name, email
+            data1, data2, data3
         })
     }
     const resetRegisterData = () => {

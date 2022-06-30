@@ -7,9 +7,9 @@ import { FaTrash } from '@react-icons/all-files/fa/FaTrash';
 import { getFirestore, doc, updateDoc} from 'firebase/firestore';
 import { getDate } from '../../../functions/getDate';
 import Reply from './Reply';
-import { toast } from 'react-toastify';
+import { Id, toast } from 'react-toastify';
 import { sendNotify } from '../../../functions/sendNotify';
-import { CommentProps, table } from '../../../types/post/comment';
+import { CommentProps, table} from '../../../types/post/comment';
 import { ArrayWithContent } from '../../../types/arrays';
 
 const Comment = ({comment, post, fbCtx, userCtx, deleteComment}:CommentProps) => {
@@ -22,7 +22,7 @@ const Comment = ({comment, post, fbCtx, userCtx, deleteComment}:CommentProps) =>
             const db = getFirestore()
             const dbRef = doc(db, "posts", post.data.metaData.postId)
             const table = post.data.interaction.comments
-            table.map((tb:table, index: number) => {
+            table.forEach((tb:table, index: number) => {
                 if(tb.commentId === comment.commentId) {
                     table[index].commentReply.push ({
                         comment: replyRef.current.value, 

@@ -1,11 +1,11 @@
 export type DescriptionProps = {
-    time: string, 
+    time: String, 
     post: {
         data: {
             creator: {
-                uId: string,
-                name: string,
-                username: string,
+                uId: String,
+                name: String,
+                username: String,
             }
         }
     }
@@ -15,7 +15,7 @@ export type DescriptionProps = {
     deletePost: Function, 
     fbCtx: {
         currentUser: {
-            uid: string,
+            uid: String,
         }
     }
 }

@@ -3,15 +3,7 @@ export type CommentsProps = {
     post: {
         data: {
             interaction: {
-                comments: Array<{
-                    likes: Array<string>
-                    commentId: string,
-                    comment: String,
-                    creatorName: string,
-                    commentReply: Array<{comment: string, creatorId: string, creatorName: string, creatorDate: string, replyId: string}>
-                    creatorId: string,
-                    createDate: number,
-                }>,
+                comments: Array<any>,
                 likes: Array<string>
             }
             metaData: {

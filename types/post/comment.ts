@@ -4,7 +4,7 @@ export type CommentProps = {
         commentId: string,
         comment: String,
         creatorName: string,
-        commentReply: Array<{comment: string, creatorId: string, creatorName: string, creatorDate: string, replyId: string}>
+        commentReply: Array<Object>
         creatorId: string,
     }
     post: {
