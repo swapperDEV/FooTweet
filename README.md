@@ -1,3 +1,5 @@
-FooTweet is a app inspired twitter, for football fans from around the world.
-Stack: TYPESCRIPT, JS, REACT, NEXT JS, FIREBASE, DATA - REACT CONTEXT
-https://comforting-gelato-5ad664.netlify.app/welcome
+# <p align="center"> [FooTweet] https://comforting-gelato-5ad664.netlify.app/welcome </p>
+FooTweet is an application that brings together football fans from all over the world, it is my first functional portal created. The website has many features to post the best things in the world of football.
+
+
+
