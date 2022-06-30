@@ -1,5 +1,5 @@
-# <a align="center" href="https://comforting-gelato-5ad664.netlify.app/welcome"> [FooTweet]</p>
-FooTweet is an application that brings together football fans from all over the world, it is my first functional portal created. The website has many features to post the best things in the world of football.
-
+<a align="center" href="https://comforting-gelato-5ad664.netlify.app/welcome"> [FooTweet]</a>
+<p>FooTweet is an application that brings together football fans from all over the world, it is my first functional portal created. The website has many features to post the best things in the world of football.
+</p>
 
 
