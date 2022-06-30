@@ -5,7 +5,7 @@ export type DataType = {
                postId: string,
            }
            content: {
-               description: String,
+               description: string,
                hashtag: Array<String>,
                haveImg: boolean,
            }

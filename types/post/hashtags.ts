@@ -2,7 +2,7 @@ export type HashtagsProps = {
     post: {
         data: {
             content: {
-                description: String,
+                description: string,
                 hashtag: Array<String>
             }
         }
