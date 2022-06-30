@@ -36,7 +36,7 @@ export const MessagesView = () => {
                             <p className={messagesStyles.title}>Your conversations</p>
                             <ul>{
                             messages.map((conversation:any) => {
-                                return (<Conversation conversation={conversation} userCtx={userCtx} key={conversation.id}/>)            
+                                return (<Conversation conversation={conversation} key={conversation.id}/>)            
                             })
                             }</ul> 
                         </>
