@@ -1,10 +1,10 @@
 .wrapper {
     min-height: 300px;
+    font-family: 'Roboto', sans-serif;
     ul {
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: 'Roboto', sans-serif;
         flex-direction: column;
         list-style-type: none;
         li {
@@ -23,6 +23,7 @@
             p {
                 font-size: 30px;
                 margin-left: 15px;
+                font-family: 'Roboto', sans-serif;
             }
         }
         li:hover {
