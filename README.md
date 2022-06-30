@@ -3,3 +3,18 @@
 </p>
 
 
+## 📦 Technologies
+
+| For What   | I used                      |
+| ---------- | --------------------------- |
+| Framework  | React                       |
+| Code Lang  | JS + TS                     |
+| Data Manage| React Context               |
+| Routes     | Next JS                     |
+| Styles     | SCSS Modules                |
+| Backend    | Firebase                    |
+
+# 💻 Instalation
+- Download files by **git clone _repository-name_**
+- Use **npm i**
+- Use **npm start**
