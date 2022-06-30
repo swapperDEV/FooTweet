@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 .wrapper {
     width: 100%;
     min-height: 300px;
+    font-family: 'Roboto', sans-serif;
     .content {
         padding: 20px;
         min-height: 300px;
@@ -14,6 +16,7 @@
             border-radius: 15px;
             padding: 5px;
             margin-left: 15px;
+            font-family: 'Roboto', sans-serif;
             font-size: 13px;
             transition: 0.1s ease;
             padding-left: 20px;
