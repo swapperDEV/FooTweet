@@ -7,7 +7,6 @@ import Router from 'next/router'
 import { avatarProps } from '../../types/avatar';
 
 const Avatar = ({userID}:avatarProps) => {
-    console.log(userID, 'wazny test')
     const storage = getStorage()
     const db = getFirestore()
     const [image, setImage] = useState('')

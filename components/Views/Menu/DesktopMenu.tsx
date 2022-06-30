@@ -15,6 +15,7 @@ import { UserDataContext } from '../../../store/userData-context'
 
 const DesktopMenu = () => {
     const userCtx = useContext(UserDataContext)
+    const [newMessages, changeNewMessages] = useState(0)
     const [notifyList, setNotifyList] = useState(userCtx.data.notifications)
     let path = useRouter()
 
@@ -42,6 +43,13 @@ const DesktopMenu = () => {
     }
     useEffect(() => {
         setNotifyList(userCtx.data.notifications)
+        if(userCtx.data.messages) {
+            userCtx.data.messages.map((message:any) => {
+                let number = newMessages 
+                number = number + message.new 
+                changeNewMessages(number)
+            })
+        }
     },[userCtx])
     return (
         <div className={menuStyles.container}>
@@ -60,7 +68,7 @@ const DesktopMenu = () => {
                     <li onClick={() => Navigate('search')} className={search ? menuStyles.actView : ''}><FaSearch/><p>Search</p></li>
                     <li onClick={() => Navigate('notifications')} className={path.pathname === '/notifications' ? menuStyles.actView : ''}><FaBell/><p>Notifications ({notifyList !== undefined ? notifyList.length : 0})</p></li>
                     <li onClick={() => Navigate('profile')} className={profile ? menuStyles.actView : ''}><FaUser/><p>Profile</p></li>
-                    <li onClick={() => Navigate('messages')} className={messages ? menuStyles.actView : ''}><FaFacebookMessenger/><p>Messages</p></li>
+                    <li onClick={() => Navigate('messages')} className={messages ? menuStyles.actView : ''}><FaFacebookMessenger/><p>Messages ({newMessages})</p></li>
                     <li className={path.pathname === 'x' ? menuStyles.actView : ''}><FaTrophy/><p>Leagues</p></li>
                 </ul>
             </div>

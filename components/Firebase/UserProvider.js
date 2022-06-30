@@ -74,6 +74,7 @@ const UserProvider = (props) => {
                     followers: [],
                     following: [],
                     retweets: [],
+                    messages: [],
                     bio: '',
                     uid: FirebaseCtx.currentUser.uid,
                     notifications: [{

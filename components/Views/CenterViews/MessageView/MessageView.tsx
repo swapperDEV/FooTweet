@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
-import { query, where, collection, getFirestore, getDocs, doc, setDoc, onSnapshot } from "firebase/firestore";  
+import { query, where, collection, getFirestore, getDocs, doc, setDoc, onSnapshot, updateDoc } from "firebase/firestore";  
 import viewStyles from '../../styles/view.module.scss'
 import messageStyles from './message.module.scss'
 import { getDate } from '../../../../functions/getDate';
@@ -39,7 +39,34 @@ const MessageView = () => {
             })
         }
         setConversation(newConversation)
-
+        
+        //add a information about message that user dont read
+        users.map((user) => {
+            getUserData(user).then((value) => {
+                const data = value[0]
+                const userRef = doc(db, 'users', data.uid);
+                const messages = data.messages
+                messages.push({
+                    id: users.join(),
+                    new: 0, 
+                })
+                updateDoc(userRef, {
+                    messages: messages
+                })
+            })
+        })
+    }
+    const updateUserViewedMessages = async () => {
+        //clearing a information about message that user dont read
+        const userRef = doc(db, 'users', userCtx.data.uid);
+        const messages = userCtx.data.messages 
+        messages.map((message:any) => {
+            message.id === conversation.id
+            message.new = 0;
+        })
+        await updateDoc(userRef, {
+            messages: messages
+        })
     }
     const messageSearch = async () => {
         const queryUsers = path.query.message;
@@ -70,6 +97,7 @@ const MessageView = () => {
                             setTargetUser(value[0])
                         })
                     }
+                    updateUserViewedMessages()
                 } else {
                     createConversation(users)
                 }
@@ -89,7 +117,26 @@ const MessageView = () => {
             conversationToPush.messages = messages
             await setDoc(doc(db, "messages", conversation.id), conversationToPush);
             messageValue.current.value = ''
+            const newMessages = targetUser.messages 
+            targetUser.messages.map((notify:any,index:number) => {
+                let number = notify.new 
+                number = number + 1
+                if(notify.id === conversation.id) {
+                    const message = {
+                        id: conversation.id,
+                        new: number
+                    }
+                    newMessages[index] = message 
+                }
+            })
+            const userRef = doc(db, 'users', targetUser.uid);
+            console.log(newMessages);
+            await updateDoc(userRef, {
+                messages: newMessages
+            })
+
         }
+
     }
     const handlePushMessage = (e:React.KeyboardEvent<HTMLElement>) => {
         if (e.key === 'Enter') {
