@@ -126,6 +126,7 @@ const MessageView = () => {
                         <div onClick={() => redirectToProfile()}><FaInfo/></div>
                     </div>
                     <div className={messageStyles.messages}>
+                        {conversation.messages && <>
                         {conversation.messages.length > 0 ?
                         <ul> 
                             {conversation.messages.map((message:any, index:number) => {
@@ -141,7 +142,8 @@ const MessageView = () => {
                         </ul>
                         :
                         <p>Send a first message</p>
-                        }
+                    }                       
+                     </>}
                         <div ref={messagesEndRef} />
                     </div>
                     <div className={messageStyles.push}>
