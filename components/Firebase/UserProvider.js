@@ -64,6 +64,7 @@ const UserProvider = (props) => {
         if(FirebaseCtx.currentUser) {
             const db = getFirestore();
             if(FirebaseCtx.registerData) {
+                clearData()
                 setDoc(doc(db, "users", `${FirebaseCtx.currentUser.uid}`), {
                     username: FirebaseCtx.registerData.data2,
                     email: FirebaseCtx.registerData.data1,
@@ -88,6 +89,13 @@ const UserProvider = (props) => {
             }
         }
     },[FirebaseCtx.currentUser])
+    const clearData = () => {
+        setUserData({
+            email: 'Error',
+            notifications: []
+        })
+        setUserAvatar(null)
+    }
     useEffect(() => {
         console.log('test', userData.uid)
         if(userData.uid) {
@@ -96,7 +104,7 @@ const UserProvider = (props) => {
     }, [userData.uid])
     return (
         <>
-        <UserDataContext.Provider value={{data: userData, avatar: userAvatar, getAvatar: () => getAvatar()}}>
+        <UserDataContext.Provider value={{data: userData, avatar: userAvatar, getAvatar: () => getAvatar(), clearData: () => clearData()}}>
             {props.children}
         </UserDataContext.Provider>
         </>

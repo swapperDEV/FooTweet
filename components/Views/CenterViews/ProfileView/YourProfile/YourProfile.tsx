@@ -1,12 +1,12 @@
 import React, {useContext, useState} from 'react'
-import ProfileDescription from '../ProfileComponent/YourProfileDescription/ProfileDescription';
-import Followed from '../ProfileComponent/Followed/Followed';
-import UserPosts from '../ProfileComponent/UserPosts/UserPosts';
-import EditProfile from '../ProfileComponent/EditProfile/EditProfile';
+import {ProfileDescription} from '../ProfileComponent/YourProfileDescription/ProfileDescription';
+import {Followed} from '../ProfileComponent/Followed/Followed';
+import {UserPosts} from '../ProfileComponent/UserPosts/UserPosts';
+import {EditProfile} from '../ProfileComponent/EditProfile/EditProfile';
 import profileStyles from './yourprofile.module.scss'
 import { FirebaseContext } from '../../../../../store/firebase-context';
 
-const YourProfile = () => {
+export const YourProfile = () => {
     const fbCtx = useContext(FirebaseContext)
     const [userData, setUserData]:Array<any> = useState({})
     const [sectionType, changeSection] = useState('tweets')
@@ -30,4 +30,3 @@ const YourProfile = () => {
         </div>
     )
 }
-export default YourProfile;

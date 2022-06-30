@@ -1,8 +1,8 @@
 import React, {useContext, useRef} from 'react'
 import homeStyles from './home.module.scss'
-import CreatePost from './CreatePost/CreatePost'
+import {CreatePost} from './CreatePost/CreatePost'
 import Posts from '../../../Posts/PostsMapper'
-const Home = () => {
+export const Home = () => {
     return (
         <div className={homeStyles.wrapper}>
             <div className={homeStyles.content}>
@@ -13,4 +13,3 @@ const Home = () => {
     )
 }
 
-export default Home;

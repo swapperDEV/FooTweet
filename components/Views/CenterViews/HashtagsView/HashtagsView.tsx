@@ -1,8 +1,8 @@
 import React from 'react'
 import Hashtags from '../../../Hashtags/Hashtags';
-import HashtagsSearch from './HashtagsSearch';
+import {HashtagsSearch} from './HashtagsSearch';
 import viewStyles from '../../styles/view.module.scss'
-const HashtagsView = () => {
+export const HashtagsView = () => {
     return (
         <>
             <div className={viewStyles.cover}>
@@ -16,4 +16,3 @@ const HashtagsView = () => {
         </>
     )
 }
-export default HashtagsView;

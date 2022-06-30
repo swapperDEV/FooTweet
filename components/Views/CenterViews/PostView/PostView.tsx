@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { getFirestore, doc, getDoc, onSnapshot} from 'firebase/firestore'
 import Router from 'next/router'
 
-const PostView = () => {
+export const PostView = () => {
     const [data, setData]:Array<any> = useState(null)
     const path = useRouter()
     useEffect(() => {
@@ -30,4 +30,3 @@ const PostView = () => {
         </>
     )
 }
-export default PostView;

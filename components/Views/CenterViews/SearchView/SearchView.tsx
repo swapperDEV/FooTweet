@@ -4,7 +4,7 @@ import searchStyle from './searchview.module.scss'
 import Router from 'next/router'
 import Image from 'next/image';
 import offer from '../../../../assets/offer.svg'
-const SearchView = () => {
+export const SearchView = () => {
     const searchRef = useRef<HTMLInputElement>(null)
     const searchByKeyWords = (e: React.KeyboardEvent<HTMLInputElement>) => {  
         if(e.key === 'Enter') {
@@ -30,4 +30,3 @@ const SearchView = () => {
         </div>
     )
 }
-export default SearchView;

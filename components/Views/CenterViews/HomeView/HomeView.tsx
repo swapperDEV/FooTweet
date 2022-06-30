@@ -1,8 +1,8 @@
 import React from 'react'
-import Home from './Home'
+import {Home} from './Home'
 import Hashtags from '../../../Hashtags/Hashtags'
 import viewStyles from '../../styles/view.module.scss'
-const HomeView = () => {
+export const HomeView = () => {
     return (
         <>
         <div className={viewStyles.cover}>
@@ -16,4 +16,3 @@ const HomeView = () => {
         </>
     )
 }
-export default HomeView;

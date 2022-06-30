@@ -9,7 +9,7 @@ type UserPostProps = {
     userData: any
     id: any
 }
-const UserPosts = ({userData, id}: UserPostProps) => {
+export const UserPosts = ({userData, id}: UserPostProps) => {
     const [postList, changePostList]:any = useState([]) 
     const [retweetList, changeRetweets]:any = useState([])
     const [actSection, changeSection] = useState('Tweets')
@@ -77,4 +77,3 @@ const UserPosts = ({userData, id}: UserPostProps) => {
         </div>
     )
 }
-export default UserPosts;

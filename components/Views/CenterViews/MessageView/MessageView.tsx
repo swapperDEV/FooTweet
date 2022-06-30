@@ -10,10 +10,10 @@ import { FaInfo } from "@react-icons/all-files/fa/FaInfo";
 import Router from 'next/router';
 import Avatar from '../../../Avatar/Avatar';
 
-const MessageView = () => {
+export const MessageView = () => {
     const path = useRouter();
-    const messageValue:any = useRef('')
-    const messagesEndRef:any = useRef(null)
+    const messageValue = useRef<HTMLInputElement>(null)
+    const messagesEndRef = useRef<HTMLInputElement>(null)
     const [conversation, setConversation]:Array<any> = useState({});
     const [targetUser, setTargetUser]:Array<any> = useState({username: ''});
     const userCtx = useContext(UserDataContext);
@@ -105,7 +105,7 @@ const MessageView = () => {
         }
     }
     const pushMessage = async () => {
-        const value = messageValue.current.value
+        const value = messageValue.current!.value
         if(value.length > 0) {
             const messages = conversation.messages 
             messages.push({
@@ -116,7 +116,7 @@ const MessageView = () => {
             const conversationToPush = conversation 
             conversationToPush.messages = messages
             await setDoc(doc(db, "messages", conversation.id), conversationToPush);
-            messageValue.current.value = ''
+            messageValue.current!.value = ''
             const newMessages = targetUser.messages 
             targetUser.messages.map((notify:any,index:number) => {
                 let number = notify.new 
@@ -144,7 +144,7 @@ const MessageView = () => {
         }
     }
     const scrollToBottom = () => {
-        messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+        messagesEndRef.current!.scrollIntoView({ behavior: "smooth" })
     }
     const redirectToProfile = () => {
         Router.push(`/profile/${targetUser.username}`)
@@ -203,4 +203,3 @@ const MessageView = () => {
         </>
     )
 }
-export default MessageView;

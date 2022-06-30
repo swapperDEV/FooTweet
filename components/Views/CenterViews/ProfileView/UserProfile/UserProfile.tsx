@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import profileStyles from './userprofile.module.scss'
-import ProfileDescription from '../ProfileComponent/YourProfileDescription/ProfileDescription'
-import UserPosts from '../ProfileComponent/UserPosts/UserPosts'
-import Followed from '../ProfileComponent/Followed/Followed'
-const UserProfile = () => {
+import {ProfileDescription} from '../ProfileComponent/YourProfileDescription/ProfileDescription'
+import {UserPosts} from '../ProfileComponent/UserPosts/UserPosts'
+import {Followed} from '../ProfileComponent/Followed/Followed'
+export const UserProfile = () => {
     const [userData, setUserData]:Array<any> = useState({})
     const [sectionType, changeSection] = useState('tweets')
     const updateUserData = (data:object) => {
@@ -25,4 +25,3 @@ const UserProfile = () => {
         </div>
     )
 }
-export default UserProfile;

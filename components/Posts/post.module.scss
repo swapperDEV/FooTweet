@@ -332,3 +332,14 @@
         text-align: left;
     }
 }
+
+@media(max-width: 600px) {
+    .post {
+        .bottom {
+            margin-right: 0px;
+            input {
+                width: 100px!important;
+            }
+    }
+}
+}

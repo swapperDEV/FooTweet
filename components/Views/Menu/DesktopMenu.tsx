@@ -13,7 +13,7 @@ import { useRouter } from 'next/router'
 import Router from 'next/router'
 import { UserDataContext } from '../../../store/userData-context'
 
-const DesktopMenu = () => {
+export const DesktopMenu = () => {
     const userCtx = useContext(UserDataContext)
     const [newMessages, changeNewMessages] = useState(0)
     const [notifyList, setNotifyList] = useState(userCtx.data.notifications)
@@ -69,7 +69,6 @@ const DesktopMenu = () => {
                     <li onClick={() => Navigate('notifications')} className={path.pathname === '/notifications' ? menuStyles.actView : ''}><FaBell/><p>Notifications ({notifyList !== undefined ? notifyList.length : 0})</p></li>
                     <li onClick={() => Navigate('profile')} className={profile ? menuStyles.actView : ''}><FaUser/><p>Profile</p></li>
                     <li onClick={() => Navigate('messages')} className={messages ? menuStyles.actView : ''}><FaFacebookMessenger/><p>Messages ({newMessages})</p></li>
-                    <li className={path.pathname === 'x' ? menuStyles.actView : ''}><FaTrophy/><p>Leagues</p></li>
                 </ul>
             </div>
             <div className={menuStyles.twtButtonWrapper}>
@@ -78,5 +77,3 @@ const DesktopMenu = () => {
         </div>
     )
 }
-
-export default DesktopMenu;

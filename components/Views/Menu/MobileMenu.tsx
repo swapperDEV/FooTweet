@@ -14,7 +14,7 @@ import Router from 'next/router'
 import { useRouter } from 'next/router'
 import { UserDataContext } from '../../../store/userData-context'
 
-const MobileMenu = () => {
+export const MobileMenu = () => {
     const [navDisplay, changeNavDisplay] = useState(false)
     const userCtx = useContext(UserDataContext)
     const searchRef = useRef<HTMLInputElement>(null)
@@ -120,5 +120,3 @@ const MobileMenu = () => {
         </>
     )
 }
-
-export default MobileMenu

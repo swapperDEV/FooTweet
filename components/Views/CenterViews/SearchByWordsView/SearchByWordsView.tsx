@@ -1,7 +1,7 @@
 import React from 'react'
-import SearchByWords from './SearchByWords'
+import {SearchByWords} from './SearchByWords'
 import viewStyles from '../../styles/view.module.scss'
-const SearchByWordsView = () => {
+export const SearchByWordsView = () => {
     return (
         <>
             <div className={viewStyles.posts}>
@@ -10,4 +10,3 @@ const SearchByWordsView = () => {
         </>
     )
 }
-export default SearchByWordsView;

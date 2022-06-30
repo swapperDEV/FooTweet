@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
-import UserProfile from './UserProfile/UserProfile'
-import YourProfile from './YourProfile/YourProfile'
+import {UserProfile} from './UserProfile/UserProfile'
+import {YourProfile} from './YourProfile/YourProfile'
 import { UserDataContext } from '../../../../store/userData-context'
 import { useRouter } from 'next/router'
 
-const ProfileView = () => {
+export const ProfileView = () => {
     const path = useRouter()
     const UserCtx = useContext(UserDataContext)
     let anotherUser = false
@@ -19,4 +19,3 @@ const ProfileView = () => {
         </>
     )
 }
-export default ProfileView

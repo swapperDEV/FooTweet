@@ -3,12 +3,18 @@ import { getUserData } from "../../../../functions/getUserData";
 import Router from 'next/router';
 import Avatar from "../../../Avatar/Avatar";
 import { UserDataContext } from '../../../../store/userData-context';
-const Conversation = (props:any) => {
+
+type ConversationProps = {
+    conversation: {
+        id: string, 
+        users: Array<any>
+    }
+}
+export const Conversation = ({conversation}:ConversationProps) => {
     const [id, changeId] = useState('')
     const userCtx = useContext(UserDataContext)
     const [target, changeTarget] = useState(null)
     const [number, setNumber] = useState(0)
-    const {conversation} = props
 
     useEffect(() => {
         if(userCtx.data)  {
@@ -19,7 +25,7 @@ const Conversation = (props:any) => {
             })
         }
         if(conversation) {
-            if(conversation.users[0] === props.userCtx.data.username) {
+            if(conversation.users[0] === userCtx.data.username) {
                 changeTarget(conversation.users[1])
             } else {
                 changeTarget(conversation.users[0])
@@ -42,4 +48,3 @@ const Conversation = (props:any) => {
         </li>
     )
 }
-export default Conversation;

@@ -18,7 +18,7 @@ type ProfileProps = {
     updateSection: Function,
     sectionType: string,
 }
-const ProfileDescription = ({updateUserData, updateSection, sectionType}: ProfileProps) => {
+export const ProfileDescription = ({updateUserData, updateSection, sectionType}: ProfileProps) => {
     const path = useRouter() 
     const UserCtx = useContext(UserDataContext) 
     const [userData, setUserData] = useState({name: '', username: '', bio: '', location: '', following: [], followers: [], uid: ''})
@@ -95,4 +95,3 @@ const ProfileDescription = ({updateUserData, updateSection, sectionType}: Profil
         </div>
     )
 }
-export default ProfileDescription;

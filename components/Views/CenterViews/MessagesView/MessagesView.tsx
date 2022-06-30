@@ -3,8 +3,8 @@ import { getFirestore, collection, query, where, onSnapshot} from 'firebase/fire
 import { UserDataContext } from '../../../../store/userData-context'
 import viewStyles from '../../styles/view.module.scss'
 import messagesStyles from './messages.module.scss'
-import Conversation from './Conversation'
-const MessagesView = () => {
+import {Conversation} from './Conversation'
+export const MessagesView = () => {
     const userCtx = useContext(UserDataContext);
     const [messages, setMessages]:Array<any> = useState([]);
     const db = getFirestore();
@@ -50,4 +50,3 @@ const MessagesView = () => {
         </>
     )
 }
-export default MessagesView;

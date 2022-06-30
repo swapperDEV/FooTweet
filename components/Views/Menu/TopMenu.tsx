@@ -8,7 +8,7 @@ import Router from 'next/router'
 import Avatar from '../../Avatar/Avatar'
 import { FirebaseContext } from '../../../store/firebase-context'
 
-const TopMenu = () => {
+export const TopMenu = () => {
     const fbCtx = useContext(FirebaseContext)
     const userCtx = useContext(UserDataContext)
     const searchRef = useRef<HTMLInputElement>(null)
@@ -54,4 +54,3 @@ const TopMenu = () => {
         </div>
     )
 }
-export default TopMenu;

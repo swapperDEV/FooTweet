@@ -13,7 +13,7 @@ type followedUserProps = {
     check2: string,
 }
 
-const FollowedUser = ({user, unFollowUser, check1, check2}:followedUserProps) => {
+export const FollowedUser = ({user, unFollowUser, check1, check2}:followedUserProps) => {
     const [data,setData]:any = useState([{avatarID: 'standard'}])
     const getFullUserData = async () => {
         getUserData(user).then(value => { 
@@ -44,4 +44,3 @@ const FollowedUser = ({user, unFollowUser, check1, check2}:followedUserProps) =>
         </>
     )
 }
-export default FollowedUser

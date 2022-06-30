@@ -10,7 +10,7 @@ type suggestionsProps = {
     id: String,
     yourUsername: String,
 }
-const Suggestions = ({followedUsers, id, yourUsername}:suggestionsProps) => {
+export const Suggestions = ({followedUsers, id, yourUsername}:suggestionsProps) => {
     const userCtx = useContext(UserDataContext)
     const [usersSuggestion, updateSuggestion]:any = useState([])
     useEffect(() => {
@@ -85,4 +85,3 @@ const Suggestions = ({followedUsers, id, yourUsername}:suggestionsProps) => {
         </div>
     )
 }
-export default Suggestions;

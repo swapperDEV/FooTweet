@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import followedStyles from './followed.module.scss'
-import Suggestions from '../Suggestions/Suggestions'
-import FollowedUser from './FollowedUser'
+import {Suggestions} from '../Suggestions/Suggestions'
+import {FollowedUser} from './FollowedUser'
 import {unfollowUser} from '../../../../../../functions/unfollowUser'
 import { UserDataContext } from '../../../../../../store/userData-context'
 type followedProps = {
@@ -9,7 +9,7 @@ type followedProps = {
     id: any,
     yourUsername: string,
 }
-const Followed = ({followedUsers, id, yourUsername}:followedProps) => {
+export const Followed = ({followedUsers, id, yourUsername}:followedProps) => {
     const userCtx = useContext(UserDataContext)
     const [followedUsersTable, changeFollowedUser] = useState(followedUsers)
     const unFollowUser = async (username:any, uid:any) => {
@@ -44,4 +44,3 @@ const Followed = ({followedUsers, id, yourUsername}:followedProps) => {
         </>
     )
 }
-export default Followed

@@ -2,7 +2,7 @@ import React from 'react'
 import hashtagsStyles from './hashtagssearch.module.scss'
 import Posts from '../../../Posts/PostsMapper';
 import { useRouter } from 'next/router';
-const HashtagsSearch = () => {
+export const HashtagsSearch = () => {
     const path = useRouter()
     return (
         <>
@@ -14,4 +14,3 @@ const HashtagsSearch = () => {
         </>
     )
 }
-export default HashtagsSearch;

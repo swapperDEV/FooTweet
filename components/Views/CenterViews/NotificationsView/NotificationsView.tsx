@@ -8,7 +8,7 @@ type listObject = {
     id: String,
 }
 
-const NotificationsView = () => {
+export const NotificationsView = () => {
     const userCtx = useContext(UserDataContext)
     const [notifications, addNotifications] = useState(userCtx.data.notifications)
     const readNotify = async (id:String) => {
@@ -52,5 +52,3 @@ const NotificationsView = () => {
         </div>
     )
 }
-
-export default NotificationsView;

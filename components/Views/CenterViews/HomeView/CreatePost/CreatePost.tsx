@@ -18,7 +18,7 @@ import Avatar from '../../../../Avatar/Avatar'
 import { sendNotify } from '../../../../../functions/sendNotify'
 import { getUserData } from '../../../../../functions/getUserData'
 
-const CreatePost = () => {
+export const CreatePost = () => {
     const fbCtx = useContext(FirebaseContext)
     const userCtx = useContext(UserDataContext)
     const postContentRef= useRef<HTMLTextAreaElement>(null)
@@ -216,4 +216,3 @@ const CreatePost = () => {
     )
 }
 
-export default CreatePost;

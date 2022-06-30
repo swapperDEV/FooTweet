@@ -21,7 +21,7 @@ const toastOptions:any = {
     progress: undefined,
 }
 
-const EditProfile = () => {
+export const EditProfile = () => {
     const fbCtx = useContext(FirebaseContext)
     const userCtx = useContext(UserDataContext)
     const [imgRef, changeImgRef] = useState('')
@@ -142,5 +142,3 @@ const EditProfile = () => {
         </div>
     )
 }
-export default EditProfile;
-
