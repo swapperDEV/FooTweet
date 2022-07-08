@@ -1,7 +1,7 @@
 export type UserPostProps = {
   userData: {
     username: string;
-    name: string;
+    name?: string;
   };
   id: string;
 };

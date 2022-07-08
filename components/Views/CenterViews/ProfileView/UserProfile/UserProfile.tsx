@@ -7,13 +7,17 @@ import { Loader } from "../../../../Loader/Loader";
 import { useRouter } from "next/router";
 
 type UserData = {
-  following?: Array<string>;
-  username?: string;
-  uid?: string;
+  following: Array<string>;
+  username: string;
+  uid: string;
 };
 
 export const UserProfile = () => {
-  const [userData, setUserData] = useState<UserData>({});
+  const [userData, setUserData] = useState<UserData>({
+    following: [],
+    username: "",
+    uid: "",
+  });
   const [sectionType, changeSection] = useState("tweets");
   const path = useRouter();
   const updateUserData = (data: UserData) => {
