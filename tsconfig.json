@@ -19,7 +19,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components/Firebase/Firebase.tsx"
+    "components/Firebase/Firebase.tsxx",
+    "components/Firebase/UserProvider.js"
   ],
   "exclude": ["node_modules"]
 }

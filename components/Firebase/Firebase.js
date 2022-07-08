@@ -27,6 +27,7 @@ const Firebase = (props) => {
       setCanLogged(true);
     });
   });
+  //TO CHANGE -> NAMES OF PARAMS.
   const setData = (data1, data2, data3) => {
     console.log(data1, data2, data3);
     setDataState({

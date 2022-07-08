@@ -25,7 +25,7 @@ const Avatar = ({ userID }: IAvatarProps) => {
       }
     }
   };
-  const redirectToProfile = async () => {
+  const redirectToProfile = () => {
     getUsername(userID).then((value) => {
       Router.push(`/profile/${value}`);
     });
@@ -41,7 +41,7 @@ const Avatar = ({ userID }: IAvatarProps) => {
         width="50px"
         height="50px"
         className={avatarStyles.img}
-        onClick={() => redirectToProfile()}
+        onClick={redirectToProfile}
       />
     </>
   );

@@ -1,17 +1,17 @@
-import React from 'react'
-import View from '../../components/Views/View';
-import PrivateRoute from '../../routes/PrivateRoute';
-import Head from 'next/head';
+import React from "react";
+import View from "../../components/Views/View";
+import PrivateRoute from "../../routes/PrivateRoute";
+import Head from "next/head";
 
 export default function Message() {
-    return (
+  return (
     <>
-        <Head>
-            <title>Message</title>
-        </Head>
-        <PrivateRoute>
-            <View/>
-        </PrivateRoute>
+      <Head>
+        <title>Message</title>
+      </Head>
+      <PrivateRoute>
+        <View />
+      </PrivateRoute>
     </>
-    )
+  );
 }
