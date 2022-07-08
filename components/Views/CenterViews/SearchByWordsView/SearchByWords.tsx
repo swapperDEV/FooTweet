@@ -40,7 +40,16 @@ export const SearchByWords = () => {
           <button onClick={() => switchContent("users")}>Users</button>
         </div>
         {displayContent === "posts" && (
-          <Posts requirements={path.query.search} requirementsType="words" />
+          <>
+            {typeof path.query.search === "string" ? (
+              <>
+                <Posts
+                  requirements={path.query.search}
+                  requirementsType="words"
+                />
+              </>
+            ) : null}
+          </>
         )}
         {displayContent === "users" && (
           <div>

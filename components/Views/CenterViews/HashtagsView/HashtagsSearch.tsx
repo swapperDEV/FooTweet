@@ -4,7 +4,6 @@ import Posts from "../../../Posts/PostsMapper";
 import { useRouter } from "next/router";
 export const HashtagsSearch = () => {
   const path = useRouter();
-  console.log(typeof path.query.hashtag, "zwraca");
   return (
     <>
       <div className={hashtagsStyles.wrapper}>
