@@ -8,8 +8,8 @@ import { FirebaseContext } from "../../../../../store/firebase-context";
 import { Loader } from "../../../../Loader/Loader";
 
 type UserData = {
-  following?: Array<string>;
-  username?: string;
+  following: Array<string>;
+  username: string;
 };
 
 export const YourProfile = () => {
