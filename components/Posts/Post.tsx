@@ -21,7 +21,7 @@ const Post = ({ data, type, avatar }: PostProps) => {
   let [time, changeTime] = useState(0);
   const [pType, changeType] = useState(type);
   const [image, setImage] = useState("");
-  const [commentCreateView, changeCommentCreateView] = useState(false);
+  const [commentCreateView, changeCommentCreateView] = useState(true);
   const wrapperBox = useRef(null);
   const fbCtx = useContext(FirebaseContext);
   const userCtx = useContext(UserDataContext);
