@@ -23,8 +23,24 @@ export type PostTypes = {
     username: string;
   };
   interaction: {
-    comments: Array<string>;
+    comments: Array<{
+      likes: Array<string>;
+      commentId: string;
+      comment: string;
+      creatorName: string;
+      commentReply: Array<ReplyTypes>;
+      creatorId: string;
+      createDate: number;
+    }>;
     likes: Array<string>;
   };
   retweets: Array<string>;
+};
+
+type ReplyTypes = {
+  creatorName: string;
+  comment: string;
+  replyId: string;
+  createDate: number;
+  creatorId: string;
 };
