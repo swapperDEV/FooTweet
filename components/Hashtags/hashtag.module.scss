@@ -1,67 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
 .wrapper {
-    width: 100%;
-    font-family: 'Roboto', sans-serif;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #3C424B;
-    .search {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        input {
-            outline: none;
-            padding-right: 10px;
-            background-color: transparent;
-            color: white;
-            border: 1px solid transparent;
-            font-size: 18px;
-            width: 160px;
-        }
-        padding-bottom: 15px;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #3c424b;
+  .search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input {
+      outline: none;
+      padding-right: 10px;
+      background-color: transparent;
+      color: white;
+      border: 1px solid transparent;
+      font-size: 18px;
+      width: 160px;
     }
-    .popular {
-        .popularWrap {
-            height: 205px;
-            overflow: hidden;
-        }
-        .wrapperonce {
-            max-height: 1000px;
-            overflow: hidden;
-        }
-        div {
-            p {
-                font-size: 20px;
-            }
-            b {
-                color: gray;
-            }
-            padding: 10px;
-            border-bottom: 1px solid lightgray;
-        }
-        .more {
-            margin-top: 10px;
-            color: gray;
-            text-align: center;
-        }
+    padding-bottom: 15px;
+  }
+  .popular {
+    .popularWrap {
+      height: 205px;
+      overflow: hidden;
     }
+    .wrapperonce {
+      max-height: 1000px;
+      overflow: hidden;
+    }
+    div {
+      p {
+        font-size: 20px;
+      }
+      b {
+        color: gray;
+      }
+      padding: 10px;
+      border-bottom: 1px solid lightgray;
+    }
+    .more {
+      margin-top: 10px;
+      color: gray;
+      text-align: center;
+    }
+  }
 }
 .divHashtag {
-    transition: 0.1s ease;
+  transition: 0.1s ease;
 }
 .divHashtag:hover {
-    cursor: pointer;
-    color: lightgray;
+  cursor: pointer;
+  color: lightgray;
 }
 
-
 @media (max-width: 1000px) {
-    .wrapper {
-        margin-right: 0px;
-        .serch {
-            .input {
-                width: 80%;
-            }
-        }
+  .wrapper {
+    margin-right: 0px;
+    .serch {
+      .input {
+        width: 80%;
+      }
     }
+  }
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  svg {
+    margin: 10px auto 10px auto;
+  }
 }

@@ -1,39 +1,46 @@
-export type CommentProps = {
-    comment: {
-        likes: Array<string>
-        commentId: string,
-        comment: String,
-        creatorName: string,
-        commentReply: Array<Object>
-        creatorId: string,
-    }
-    post: {
-        data: {
-            interaction: {
-                likes: Array<string>
-                comments: Array<any>
-            }
-            metaData: {
-                postId: string
-            }
-        }
-    }
-    fbCtx: {
-        currentUser: {
-            uid: string,
-        }
-    }
-    userCtx: {
-        data: {
-            username: String
-        }
-    },
-    deleteComment: Function
-}
+import { PostDataType } from "./post";
 
-export type table = {
-    commentId: string,
-    creatorId: string,
-    commentReply: Array<String>,
-    replyId: String,
-}
+export type CommentProps = {
+  comment: {
+    likes: Array<string>;
+    commentId: string;
+    comment: string;
+    creatorName: string;
+    commentReply: Array<ReplyTypes>;
+    creatorId: string;
+  };
+  post: PostDataType;
+  fbCtx: {
+    currentUser: {
+      uid: string;
+    };
+  };
+  userCtx: {
+    data: {
+      username: string;
+    };
+  };
+  deleteComment: Function;
+};
+
+export type tableParent = {
+  commentId: string;
+  creatorId: string;
+  commentReply: Array<string>;
+  replyId: string;
+};
+export type tableChildren = {
+  replyId: string;
+};
+
+export type ReplyTypes = {
+  creatorName: string;
+  comment: string;
+  replyId: string;
+  creatorId: string;
+  createDate: number;
+};
+
+export type CommentTableType = {
+  commentId: string;
+};

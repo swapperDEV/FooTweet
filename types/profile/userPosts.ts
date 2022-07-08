@@ -1,9 +1,12 @@
-export type PostsProps = {
-  requirements?: string;
-  requirementsType?: string;
+export type UserPostProps = {
+  userData: {
+    username: string;
+    name: string;
+  };
+  id: string;
 };
-
-export type PostData = {
+export type PostList = Array<PostTypes>;
+export type PostTypes = {
   metaData: {
     createDate: number;
     postId: string;
@@ -20,16 +23,8 @@ export type PostData = {
     username: string;
   };
   interaction: {
-    comments: Array<any>;
+    comments: Array<string>;
     likes: Array<string>;
   };
   retweets: Array<string>;
-};
-export type PostListType = {
-  data: PostData;
-  id: string;
-};
-
-export type PostType = {
-  data: PostData;
 };

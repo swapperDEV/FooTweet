@@ -1,3 +1,3 @@
-export type avatarProps = {
-    userID: string
+export interface IAvatarProps {
+  userID: string | undefined;
 }
