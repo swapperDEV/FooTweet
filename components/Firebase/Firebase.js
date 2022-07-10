@@ -6,9 +6,9 @@ import { FirebaseContext } from "../../store/firebase-context";
 import { signOut } from "firebase/auth";
 import "firebase/firestore";
 import ImageStyle from "./firebase.module.scss";
-import UserProvider from "./UserProvider";
+import { UserProvider } from "./UserProvider";
 
-const Firebase = (props) => {
+export const Firebase = (props) => {
   const [currentUser, setCurrentUser] = useState();
   const [registerDataState, setDataState] = useState();
   const [canLogged, setCanLogged] = useState(false);
@@ -23,7 +23,6 @@ const Firebase = (props) => {
       setCanLogged(true);
     });
   });
-  //TO CHANGE -> NAMES OF PARAMS.
   const setData = (data1, data2, data3) => {
     console.log(data1, data2, data3);
     setDataState({
@@ -60,5 +59,3 @@ const Firebase = (props) => {
     </>
   );
 };
-
-export default Firebase;

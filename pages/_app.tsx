@@ -1,9 +1,9 @@
-import Firebase from "../components/Firebase/Firebase";
 import Script from "next/script";
 import "../styles/content.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Head from "next/head";
 import { AppProps } from "next/app";
+import { Firebase } from "../components/Firebase/Firebase";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
