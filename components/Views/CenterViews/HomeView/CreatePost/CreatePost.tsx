@@ -1,14 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { FirebaseContext } from "../../../../../store/firebase-context";
 import createPostStyles from "./createpost.module.scss";
-import Image from "next/image";
-import testAvatar from "../../../../../assets/meta.png";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
-import { setDoc, doc, getFirestore, getDoc } from "firebase/firestore";
+import { setDoc, doc, getFirestore } from "firebase/firestore";
 import { generateCode } from "../../../../../functions/generateCode";
 import { UserDataContext } from "../../../../../store/userData-context";
 import { getDate } from "../../../../../functions/getDate";
-import { FaGlobeEurope as FaGlobe } from "@react-icons/all-files/fa/FaGlobeEurope";
 import { FaImage } from "@react-icons/all-files/fa/FaImage";
 import { FaWindowClose } from "@react-icons/all-files/fa/FaWindowClose";
 import { FaHashtag } from "@react-icons/all-files/fa/FaHashtag";

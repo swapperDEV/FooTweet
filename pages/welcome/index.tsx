@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FirebaseContext } from "../../store/firebase-context";
-import SignComponent from "../../components/Signup/Signup";
+import { SignupComponent } from "../../components/Signup/Signup";
 import Router from "next/router";
 import WelcomeComponent from "../../components/Welcome/Welcome";
 import UnAuthRoute from "../../routes/UnAuthRoute";

@@ -5,11 +5,7 @@ import { getAuth } from "firebase/auth";
 import { FirebaseContext } from "../../store/firebase-context";
 import { signOut } from "firebase/auth";
 import "firebase/firestore";
-import { getDate } from "../../functions/getDate";
-import { getFirestore } from "firebase/firestore";
-import Image from "next/image";
 import ImageStyle from "./firebase.module.scss";
-import logo from "../../assets/logo.png";
 import UserProvider from "./UserProvider";
 
 export const Firebase = (props) => {

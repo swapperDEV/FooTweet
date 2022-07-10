@@ -11,7 +11,6 @@ import "react-toastify/dist/ReactToastify.css";
 export const UserProvider = (props) => {
   const FirebaseCtx = useContext(FirebaseContext);
   const [isLoaded, changeIsLoaded] = useState(false);
-  const UserCtx = useContext(UserDataContext);
   const [userData, setUserData] = useState({
     email: "Error",
     notifications: [],
