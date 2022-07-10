@@ -62,7 +62,6 @@ export const NotificationsView = () => {
             "You dont have any notifications"
           )}
         </div>
-        <p className={notifyStyles.bottom}>View all</p>
       </div>
     </div>
   );

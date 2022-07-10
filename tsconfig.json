@@ -20,7 +20,8 @@
     "**/*.ts",
     "**/*.tsx",
     "components/Firebase/Firebase.tsxx",
-    "components/Firebase/UserProvider.js"
+    "components/Firebase/UserProvider.tsx",
+    "hooks/useUser.jsx"
   ],
   "exclude": ["node_modules"]
 }
