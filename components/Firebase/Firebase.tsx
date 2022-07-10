@@ -7,51 +7,42 @@ import { signOut } from "firebase/auth";
 import "firebase/firestore";
 import ImageStyle from "./firebase.module.scss";
 import { UserProvider } from "./UserProvider";
+import { useFirebase } from "../../hooks/useFirebase";
+import { User } from "@firebase/auth-types";
 
-export const Firebase = (props) => {
-  const [currentUser, setCurrentUser] = useState();
-  const [registerDataState, setDataState] = useState();
-  const [canLogged, setCanLogged] = useState(false);
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth();
-  const signOutUser = () => {
-    return signOut(auth);
-  };
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      setCanLogged(true);
-    });
-  });
-  const setData = (data1, data2, data3) => {
-    console.log(data1, data2, data3);
-    setDataState({
-      data1,
-      data2,
-      data3,
-    });
-  };
-  const resetRegisterData = () => {
-    setDataState();
-  };
-
+type FirebaseProps = {
+  children: JSX.Element;
+};
+export const Firebase = ({ children }: FirebaseProps) => {
+  const {
+    currentUser,
+    setCurrentUser,
+    registerDataState,
+    resetRegisterData,
+    setData,
+    canLogged,
+    auth,
+    app,
+    signOutUser,
+  } = useFirebase();
   return (
     <>
       <FirebaseContext.Provider
         value={{
           registerData: registerDataState,
           resetRegisterData: () => resetRegisterData(),
-          setRegisterData: (x, y, z) => setData(x, y, z),
+          setRegisterData: (x: string, y: string, z: string) =>
+            setData(x, y, z),
           canLogged: canLogged,
           auth: auth,
           app: app,
           currentUser: currentUser,
-          setCurrentUser: (x) => setCurrentUser(x),
+          setCurrentUser: (x: User) => setCurrentUser(x),
           signOutUser: () => signOutUser(),
         }}
       >
         {canLogged ? (
-          <UserProvider>{props.children}</UserProvider>
+          <UserProvider>{children}</UserProvider>
         ) : (
           <div className={ImageStyle.wrapper}></div>
         )}
