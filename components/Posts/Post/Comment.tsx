@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
 import postStyles from "../post.module.scss";
-import Avatar from "../../Avatar/Avatar";
+import { Avatar } from "../../Avatar/Avatar";
 import { FaHeart } from "@react-icons/all-files/fa/FaHeart";
 import { FaComment } from "@react-icons/all-files/fa/FaComment";
 import { FaTrash } from "@react-icons/all-files/fa/FaTrash";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
 import { getDate } from "../../../functions/getDate";
-import Reply from "./Reply";
+import { Reply } from "./Reply";
 import { Id, toast } from "react-toastify";
 import { sendNotify } from "../../../functions/sendNotify";
 import {
@@ -17,7 +17,7 @@ import {
   tableParent,
 } from "../../../types/post/comment";
 
-const Comment = ({
+export const Comment = ({
   comment,
   post,
   fbCtx,
@@ -210,5 +210,3 @@ const Comment = ({
     </>
   );
 };
-
-export default Comment;

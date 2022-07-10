@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import About from "../../components/About/About";
+import { About } from "../../components/About/About";
 export default function Home() {
   return (
     <>

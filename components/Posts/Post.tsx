@@ -5,18 +5,18 @@ import postStyles from "./post.module.scss";
 import { FirebaseContext } from "../../store/firebase-context";
 import { getFirestore, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import Router from "next/router";
-import Options from "./Post/Options";
-import Avatar from "../Avatar/Avatar";
-import Hashtags from "./Post/Hashtags";
-import ImagePreview from "./Post/ImagePreview";
-import PostDescription from "./Post/PostDescription";
+import { Options } from "./Post/Options";
+import { Avatar } from "../Avatar/Avatar";
+import { Hashtags } from "./Post/Hashtags";
+import { ImagePreview } from "./Post/ImagePreview";
+import { PostDescription } from "./Post/PostDescription";
 import Comments from "./Post/Comments";
 import { useRouter } from "next/router";
 import { UserDataContext } from "../../store/userData-context";
 import { getTime } from "../../functions/getTime";
 import { PostProps } from "../../types/post/post";
 
-const Post = ({ data, type, avatar }: PostProps) => {
+export const Post = ({ data, type, avatar }: PostProps) => {
   const [widgetClass, changeWidgetClass] = useState(postStyles.settingsWidget);
   let [time, changeTime] = useState(0);
   const [pType, changeType] = useState(type);
@@ -129,4 +129,3 @@ const Post = ({ data, type, avatar }: PostProps) => {
     </div>
   );
 };
-export default Post;

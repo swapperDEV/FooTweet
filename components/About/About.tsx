@@ -1,10 +1,10 @@
 import React from "react";
-import Wrapper from "../Wrapper/Wrapper";
+import { Wrapper } from "../Wrapper/Wrapper";
 import aboutStyle from "./about.module.scss";
 import Image from "next/image";
 import Router from "next/router";
 import Logo from "../../assets/logo.png";
-const About = () => {
+export const About = () => {
   const redirectBack = () => {
     Router.push("/");
   };
@@ -52,4 +52,3 @@ const About = () => {
     </>
   );
 };
-export default About;

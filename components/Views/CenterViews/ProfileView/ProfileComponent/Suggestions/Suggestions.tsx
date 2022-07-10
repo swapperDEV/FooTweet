@@ -1,13 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  doc,
-  getDocs,
-  getFirestore,
-  collection,
-  updateDoc,
-} from "firebase/firestore";
+import { getDocs, getFirestore, collection } from "firebase/firestore";
 import suggestionStyle from "./suggestion.module.scss";
-import Avatar from "../../../../../Avatar/Avatar";
+import { Avatar } from "../../../../../Avatar/Avatar";
 import { followUser as followUserFunction } from "../../../../../../functions/followUser";
 import { UserDataContext } from "../../../../../../store/userData-context";
 import { Loader } from "../../../../../Loader/Loader";

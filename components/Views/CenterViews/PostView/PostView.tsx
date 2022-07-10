@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import viewStyles from "../../styles/view.module.scss";
-import Post from "../../../Posts/Post";
+import { Post } from "../../../Posts/Post";
 import { useRouter } from "next/router";
 import { getFirestore, doc, getDoc, onSnapshot } from "firebase/firestore";
 import Router from "next/router";

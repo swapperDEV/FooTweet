@@ -3,8 +3,8 @@ import postStyles from "./userposts.module.scss";
 import { getUserTweets } from "../../../../../../functions/getUserTweets";
 import { getUserRetweets } from "../../../../../../functions/getUserRetweets";
 import { FaRetweet } from "@react-icons/all-files/fa/FaRetweet";
-import Post from "../../../../../Posts/Post";
-import Avatar from "../../../../../Avatar/Avatar";
+import { Post } from "../../../../../Posts/Post";
+import { Avatar } from "../../../../../Avatar/Avatar";
 import {
   UserPostProps,
   PostList,

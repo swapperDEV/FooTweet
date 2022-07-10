@@ -8,7 +8,7 @@ import Router from "next/dist/client/router";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../assets/logo.png";
-import Wrapper from "../Wrapper/Wrapper";
+import { Wrapper } from "../Wrapper/Wrapper";
 import { getFirestore, getDoc, doc, setDoc } from "firebase/firestore";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
@@ -16,7 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ModalOptions } from "../../types/modal";
 import { UsersType } from "../../types/signup";
 
-const SignupComponent = () => {
+export const SignupComponent = () => {
   const FirebaseCtx = useContext(FirebaseContext);
   const { auth, app, currentUser, database } = FirebaseCtx;
   const emailRef = useRef<HTMLInputElement>(null);
@@ -182,4 +182,3 @@ const SignupComponent = () => {
     </>
   );
 };
-export default SignupComponent;

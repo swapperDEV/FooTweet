@@ -1,7 +1,7 @@
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
 import { getUserData } from "../../../../functions/getUserData";
-import Avatar from "../../../Avatar/Avatar";
+import { Avatar } from "../../../Avatar/Avatar";
 import searchStyles from "./searchwords.module.scss";
 interface IFindedUserProps {
   username: string;

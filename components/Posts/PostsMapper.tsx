@@ -7,7 +7,7 @@ import {
   getFirestore,
   onSnapshot,
 } from "firebase/firestore";
-import Post from "./Post";
+import { Post } from "./Post";
 import {
   PostsProps,
   PostListType,
@@ -15,7 +15,7 @@ import {
   PostType,
 } from "../../types/post/postsmapper";
 
-const Posts = ({ requirements, requirementsType }: PostsProps) => {
+export const Posts = ({ requirements, requirementsType }: PostsProps) => {
   const [posts, setPosts] = useState<Array<PostListType>>([]);
   const [newPosts, setNewPosts] = useState<Array<PostListType>>([]);
   const mappedPostByHashtag = (postList: Array<PostListType>, type: string) => {
@@ -137,4 +137,3 @@ const Posts = ({ requirements, requirementsType }: PostsProps) => {
     </div>
   );
 };
-export default Posts;

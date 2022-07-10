@@ -6,7 +6,7 @@ import avatarStyles from "./avatar.module.scss";
 import Router from "next/router";
 import { IAvatarProps } from "../../types/avatar";
 
-const Avatar = ({ userID }: IAvatarProps) => {
+export const Avatar = ({ userID }: IAvatarProps) => {
   const storage = getStorage();
   const db = getFirestore();
   const [image, setImage] = useState("");
@@ -46,4 +46,3 @@ const Avatar = ({ userID }: IAvatarProps) => {
     </>
   );
 };
-export default Avatar;

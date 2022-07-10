@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import searchStyles from "./searchwords.module.scss";
-import Posts from "../../../Posts/PostsMapper";
+import { Posts } from "../../../Posts/PostsMapper";
 import { useRouter } from "next/router";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { FindedUser } from "./FindedUser";

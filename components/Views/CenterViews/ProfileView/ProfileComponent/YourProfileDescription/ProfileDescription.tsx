@@ -11,7 +11,7 @@ import { FaEquals } from "@react-icons/all-files/fa/FaEquals";
 import { unfollowUser } from "../../../../../../functions/unfollowUser";
 import { followUser } from "../../../../../../functions/followUser";
 import Router from "next/router";
-import Avatar from "../../../../../Avatar/Avatar";
+import { Avatar } from "../../../../../Avatar/Avatar";
 
 type ProfileProps = {
   updateUserData: Function;

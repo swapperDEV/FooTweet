@@ -6,7 +6,7 @@ import Router from "next/router";
 import { PostTypes, HashtagOptions } from "../../types/hashtags";
 import { Loader } from "../Loader/Loader";
 
-const Hashtags = () => {
+export const Hashtags = () => {
   const hashtagSearchRef = useRef<HTMLInputElement>(null);
   const [allHashtag, setAllHashtag] = useState(false);
   const [mappedHashtagList, setMappedHashtagList] = useState([{}]);
@@ -111,4 +111,3 @@ const Hashtags = () => {
     </div>
   );
 };
-export default Hashtags;

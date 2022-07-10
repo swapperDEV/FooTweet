@@ -9,7 +9,7 @@ import Router from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../assets/logo.png";
-import Wrapper from "../Wrapper/Wrapper";
+import { Wrapper } from "../Wrapper/Wrapper";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -26,7 +26,7 @@ const options: ModalOptions = {
   progress: undefined,
 };
 
-const LoginComponent = () => {
+export const LoginComponent = () => {
   const FirebaseCtx = useContext(FirebaseContext);
   const [resetPass, setResetPass] = useState(false);
   const { auth } = FirebaseCtx;
@@ -169,4 +169,3 @@ const LoginComponent = () => {
     </>
   );
 };
-export default LoginComponent;

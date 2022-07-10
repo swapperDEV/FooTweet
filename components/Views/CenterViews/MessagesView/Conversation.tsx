@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { getUserData } from "../../../../functions/getUserData";
 import Router from "next/router";
-import Avatar from "../../../Avatar/Avatar";
+import { Avatar } from "../../../Avatar/Avatar";
 import { UserDataContext } from "../../../../store/userData-context";
 
 type ConversationProps = {

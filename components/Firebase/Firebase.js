@@ -12,7 +12,7 @@ import ImageStyle from "./firebase.module.scss";
 import logo from "../../assets/logo.png";
 import UserProvider from "./UserProvider";
 
-const Firebase = (props) => {
+export const Firebase = (props) => {
   const [currentUser, setCurrentUser] = useState();
   const [registerDataState, setDataState] = useState();
   const [canLogged, setCanLogged] = useState(false);
@@ -64,5 +64,3 @@ const Firebase = (props) => {
     </>
   );
 };
-
-export default Firebase;

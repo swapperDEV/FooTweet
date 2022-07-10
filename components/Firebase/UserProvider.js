@@ -8,7 +8,7 @@ import { getStorage, ref as sRef, getDownloadURL } from "firebase/storage";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const UserProvider = (props) => {
+export const UserProvider = (props) => {
   const FirebaseCtx = useContext(FirebaseContext);
   const [isLoaded, changeIsLoaded] = useState(false);
   const UserCtx = useContext(UserDataContext);
@@ -124,4 +124,3 @@ const UserProvider = (props) => {
     </>
   );
 };
-export default UserProvider;

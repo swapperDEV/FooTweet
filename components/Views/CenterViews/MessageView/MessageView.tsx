@@ -18,7 +18,7 @@ import { UserDataContext } from "../../../../store/userData-context";
 import { getUserData } from "../../../../functions/getUserData";
 import { FaInfo } from "@react-icons/all-files/fa/FaInfo";
 import Router from "next/router";
-import Avatar from "../../../Avatar/Avatar";
+import { Avatar } from "../../../Avatar/Avatar";
 import { UserType } from "../../../../types/usertype";
 
 type ConversationOptions = {

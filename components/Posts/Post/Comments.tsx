@@ -1,6 +1,6 @@
 import React from "react";
 import postStyles from "../post.module.scss";
-import Comment from "./Comment";
+import { Comment } from "./Comment";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
 import { getDate } from "../../../functions/getDate";
 import { useRef } from "react";
@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { sendNotify } from "../../../functions/sendNotify";
 import { CommentsProps } from "../../../types/post/comments";
 
-const Comments = ({
+export const Comments = ({
   type,
   post,
   fbCtx,

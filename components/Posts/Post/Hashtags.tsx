@@ -2,7 +2,7 @@ import React from "react";
 import postStyles from "../post.module.scss";
 import { HashtagsProps } from "../../../types/post/hashtags";
 
-const Hashtags = ({ post }: HashtagsProps) => {
+export const Hashtags = ({ post }: HashtagsProps) => {
   return (
     <>
       <div className={postStyles.description}>
@@ -16,4 +16,3 @@ const Hashtags = ({ post }: HashtagsProps) => {
     </>
   );
 };
-export default Hashtags;

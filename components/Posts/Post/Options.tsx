@@ -12,7 +12,7 @@ import { sendNotify } from "../../../functions/sendNotify";
 import { OptionProps } from "../../../types/post/options";
 import postStyles from "./../post.module.scss";
 
-const Options = ({
+export const Options = ({
   post,
   fbCtx,
   openCommentCreate,
@@ -183,4 +183,3 @@ const Options = ({
     </>
   );
 };
-export default Options;
