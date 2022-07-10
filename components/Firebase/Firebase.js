@@ -8,7 +8,7 @@ import "firebase/firestore";
 import ImageStyle from "./firebase.module.scss";
 import UserProvider from "./UserProvider";
 
-export const Firebase = (props) => {
+const Firebase = (props) => {
   const [currentUser, setCurrentUser] = useState();
   const [registerDataState, setDataState] = useState();
   const [canLogged, setCanLogged] = useState(false);
@@ -60,3 +60,5 @@ export const Firebase = (props) => {
     </>
   );
 };
+
+export default Firebase;
