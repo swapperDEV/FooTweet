@@ -138,7 +138,7 @@ export const Options = ({
       <div className={postStyles.options}>
         <div>
           <FaComment
-            onClick={() => openCommentCreate()}
+            onClick={openCommentCreate}
             className={
               commentCreateView ? postStyles.commentActive : postStyles.none
             }
@@ -152,10 +152,10 @@ export const Options = ({
               : postStyles.none
           }
         >
-          <FaHeart onClick={() => handleLikePost()} /> {likesNumber.length}
+          <FaHeart onClick={() => handleLikePost} /> {likesNumber.length}
         </div>
         <div>
-          <FaOpenid onClick={() => redirectToPost()} />
+          <FaOpenid onClick={() => redirectToPost} />
         </div>
         <div>
           <FaRetweet
