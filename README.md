@@ -17,4 +17,4 @@
 # 💻 Instalation
 - Download files by **git clone _repository-name_**
 - Use **npm i**
-- Use **npm start**
+- Use **npm run dev**
