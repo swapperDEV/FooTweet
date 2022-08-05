@@ -18,3 +18,4 @@
 - Download files by **git clone _repository-name_**
 - Use **npm i**
 - Use **npm run dev**
+_______________________________________
